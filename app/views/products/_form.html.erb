@@ -1,42 +1,47 @@
 <%= form_with(model: product, local: true) do |form| %>
   <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-      <ul>
-        <% product.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+    <p>新增失敗，請確認：</p>
+    <% product.errors.full_messages.each do |message| %>
+      <div class="alert alert-secondary" role="alert">
+        <%= message %>
+      </div>
+    <% end %>
   <% end %>
 
-  <div class="field">
-    <%= form.label :brand_id %>
-    <%= form.collection_select :brand_id, Brand.order(:name), :id, :name %>
+  <div class="form-group">
+    <%= form.label "品牌名稱" %>
+    <%= form.collection_select :brand_id, Brand.order(:name), :id, :name,{}, {:class=> "form-control"} %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label "名稱" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
+  <div class="form-group">
+    <%= form.label "服務/價錢" %>
   <% if @services && @services.any? %>
     <% @services.each do |service| %>
       <% if @current_services && @current_services.include?(service) %>
-        <%= check_box_tag "service_ids[]", service.id, true,  class: 'radio-checkbox' %>
+        <div class="form-check">
+        <%= check_box_tag "service_ids[]", service.id, true,  class: 'radio-checkbox form-check-input' %>
         <%= label_tag( "#{service.name}") %>
-        <%= text_field_tag "prices[#{service.id}]", Price.find_by(service_id: service.id, product_id: product.id).price %>
+        <%= text_field_tag "prices[#{service.id}]", Price.find_by(service_id: service.id, product_id: product.id).price, class: "form-control" %>
+        </div>
       <% else %>
-        <%= check_box_tag "service_ids[]", service.id, false,  class: 'radio-checkbox' %>
+        <div class="form-check">
+        <%= check_box_tag "service_ids[]", service.id, false,  class: 'radio-checkbox form-check-input' %>
         <%= label_tag( "#{service.name}") %>
-        <%= text_field_tag "prices[#{service.id}]" %>
+        <%= text_field_tag "prices[#{service.id}]", "請輸入價錢", class: "form-control" %>
+        </div>
       <% end %>
     <% end %>
   <% else %>
     <p>p.s.沒有可選擇的服務，請至服務管理頁面新增服務</p>
   <% end%>
-  <div class="actions">
-    <%= form.submit "提交" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "提交", class: "btn btn-success" %>
   </div>
 <% end %>
