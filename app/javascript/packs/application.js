@@ -158,7 +158,9 @@ function toGauranteeScopeHtml (text) {
 function toImagesHtml (images) {
   html = ""
   images.forEach(image => {
-    html += `<img src="${image.value}" border="0" alt="" width="792" style="display:block;margin-left:auto;margin- right:auto;" align="absmiddle"></img>`
+    if (image.value.length > 0) {
+      html += `<img src="${image.value}" border="0" alt="" width="792" style="display:block;margin-left:auto;margin- right:auto;" align="absmiddle"></img>`
+    }
   })
   return html
 }
