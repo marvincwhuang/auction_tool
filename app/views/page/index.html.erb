@@ -1,0 +1,106 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-8">拍賣資料檢索</h1>
+		<ol>
+			<li><%= link_to "新增品牌", new_brand_path %></li>
+			<li><%= link_to "新增服務選項", services_path %></li>
+			<li><%= link_to "新增產品", new_product_path %></li>
+		</ol>
+		
+
+  </div>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+			<h3>
+				品牌
+			</h3>
+      <div class="list-group">
+        <% @brands.each do |brand| %>
+				<div class="row">
+					<div class="col-md-9">
+						<% if @current_brand.id.to_s == brand.id.to_s %>
+							<%= link_to "#{brand.name}", 
+								root_path(brand_id: brand.id), 
+								class: "list-group-item list-group-item-action active"
+							%>
+						<% else %>
+							<%= link_to "#{brand.name}", 
+								root_path(brand_id: brand.id), 
+								class: "list-group-item list-group-item-action" 
+							%>
+						<% end %>
+					</div>
+					<div class="col-md-3">
+						<div class="btn-group" role="group">
+							<%= button_to "編輯", edit_brand_path(brand), method: :get, class: "btn btn-info btn-sm"%>
+							<%= button_to "刪除", brand, method: :delete, data: { confirm: '你確定要刪除？' }, class: "btn btn-danger btn-sm"%>
+						</div>
+					</div>
+				</div>
+        <% end %>
+      </div>
+		</div>
+		<div class="col-md-4">
+			<h3>
+				產品型號
+			</h3>
+			<div class="list-group">
+        <% @products.each do |product| %>
+					<div class="row">
+						<div class="col-md-9">
+							<% if @current_product.id.to_s == product.id.to_s %>
+								<%= link_to "#{product.name}", root_path(brand_id: product.brand_id, product_id: product.id), class: "list-group-item list-group-item-action active" %>
+							<% else %>
+								<%= link_to "#{product.name}", root_path(brand_id: product.brand_id, product_id: product.id), class: "list-group-item list-group-item-action" %>
+							<% end %>
+						</div>
+						<div class="col-md-3">
+							<div class="btn-group" role="group">
+								<%= button_to "編輯", edit_product_path(product), method: :get, class: "btn btn-info btn-sm"%>
+								<%= button_to "刪除", product, method: :delete, data: { confirm: '你確定要刪除？' }, class: "btn btn-danger btn-sm"%>
+							</div>
+						</div>
+					</div>					
+        <% end %>
+			</div> 
+		</div>
+		<div class="col-md-4">
+			<h3>
+				服務與價格
+			</h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>
+							服務
+						</th>
+						<th>
+							價格
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @services.each_with_index do |service, index| %>
+					<tr>
+						<td>
+							<%= index + 1 %>
+						</td>
+						<td>
+							<%= service[:name] %>
+						</td>
+						<td>
+							<%= service[:price] %>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table> 
+		</div>
+	</div>
+</div>
