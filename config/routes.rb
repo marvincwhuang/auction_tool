@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :services
   root to: 'page#index'
   post '/products/:id', to: 'products#update'
+  get '/convertor', to: 'page#convertor'
 
   resources :products
   resources :brands

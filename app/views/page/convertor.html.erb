@@ -1,0 +1,98 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-8">HTML轉換工具</h1>
+		<%= link_to "資料檢索頁面", root_path, class: 'btn btn-info' %>
+  </div>
+</div>
+
+<form>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">目前強打優惠</label>
+    <textarea class="form-control" id="" rows="3"></textarea>
+  </div>
+  <div class="form-group">
+    <label id="productDescriptionTitle">產品介紹</label>
+    <input class="form-control" type="text" placeholder="<%= @default_default_product_title %>" value="<%= @default_default_product_title %>">
+    <textarea class="form-control" id="productDescription" rows="6"><%= @default_product_descriptuon_text %></textarea>
+  </div>
+  <div class="form-group">
+    <label id="availableSpecTitle">適用型號</label>
+    <input class="form-control" type="text" placeholder="<%= @deafault_available_spec_title %>" value="<%= @deafault_available_spec_title %>">
+    <textarea class="form-control" id="availableSpec" rows="6"><%= @deafault_available_spec_text %>
+    </textarea>
+  </div>
+  <div class="form-group">
+    <label id="marketplaceDetailTitle">賣場細節</label>
+    <textarea class="form-control" id="marketplaceDetail" rows="6"><%= @default_marketplace_detail_text %></textarea>
+  </div>
+  <div class="form-group">
+    <label id="warningTitle">注意事項</label>
+    <textarea class="form-control" id="warning" rows="6"><%= @default_warning_text %></textarea>
+  </div>
+  <div class="form-group">
+    <label id="gauranteeTitle">商品保固</label>
+    <textarea class="form-control" id="gaurantee" rows="6"><%= @default_gaurantee_text %></textarea>
+  </div>
+  <div class="form-group">
+    <label id="gauranteeScopeTitle">保固範圍</label>
+    <textarea class="form-control" id="gauranteeScope" rows="6"><%= @default_gaurantee_scope_text %></textarea>
+  </div>
+  <div class="form-group">
+    <label id="noticeForUseTitle">使用須知</label>
+    <textarea class="form-control" id="noticeForUse" rows="6"><%= @notice_for_use_text %></textarea>
+  </div>
+  <div class="form-group">
+    <label id="productDeclarationTitle">商品說明</label>
+    <textarea class="form-control" id="productDeclaration" rows="3"><%= @product_declaration_text %></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>圖片1</label>
+    <input 
+      class="image"
+      placeholder="https://example.com"
+    >
+    <label>圖片2</label>
+    <input 
+      class="image"
+      placeholder="https://example.com"
+    >
+    <label>圖片3</label>
+    <input 
+      class="image"
+      placeholder="https://example.com"
+    >
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">加購區</label>
+    <input class="form-control buyMoreProductName" type="text" placeholder="商品1">
+    <input 
+      class="form-control buyMoreProductUrl"
+      placeholder="商品1網址"
+    >
+    <input class="form-control buyMoreProductName" type="text" placeholder="商品2">
+    <input 
+      class="form-control buyMoreProductUrl"
+      placeholder="商品2網址"
+    >
+    <input class="form-control buyMoreProductName" type="text" placeholder="商品3">
+    <input 
+      class="form-control buyMoreProductUrl"
+      placeholder="商品3網址"
+    >
+    <input class="form-control buyMoreProductName" type="text" placeholder="商品4">
+    <input 
+      class="form-control buyMoreProductUrl"
+      placeholder="商品4網址"
+    >
+  </div>
+  <button class="btn btn-primary mb-2" id="convertBtn">開始轉換HTML</button>
+</form>
+
+<h2>預覽</h2>
+
+    <div id="resultHtml"></div>
+
+<h2>HTML原始碼</h2>
+
+    <div id="resultHtmlCode" style="border: 1px solid"></div>
