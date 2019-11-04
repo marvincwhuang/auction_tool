@@ -1,0 +1,45 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  highlight: MyString
+  product_description_title: MyString
+  product_description_text: MyText
+  available_spec_title: MyString
+  available_spec: MyText
+  marketplace_detail: MyText
+  warning: MyText
+  gaurantee: MyText
+  gaurantee_scope: MyText
+  notice_for_use: MyText
+  product_declaration: MyText
+  image_1: MyString
+  image_2: MyString
+  buy_more_product_1: MyString
+  buy_more_product_url_1: 
+  buy_more_product_url_2: MyString
+  buy_more_product_3: MyString
+  buy_more_product_url_3: MyString
+  buy_more_product_4: MyString
+  buy_more_product_url_4: MyString
+
+two:
+  highlight: MyString
+  product_description_title: MyString
+  product_description_text: MyText
+  available_spec_title: MyString
+  available_spec: MyText
+  marketplace_detail: MyText
+  warning: MyText
+  gaurantee: MyText
+  gaurantee_scope: MyText
+  notice_for_use: MyText
+  product_declaration: MyText
+  image_1: MyString
+  image_2: MyString
+  buy_more_product_1: MyString
+  buy_more_product_url_1: 
+  buy_more_product_url_2: MyString
+  buy_more_product_3: MyString
+  buy_more_product_url_3: MyString
+  buy_more_product_4: MyString
+  buy_more_product_url_4: MyString

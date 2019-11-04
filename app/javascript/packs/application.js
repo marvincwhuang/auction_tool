@@ -10,8 +10,8 @@ window.onload = function() {
     $('#summernote').summernote({
       lang: 'zh-TW'
     });
-    var markupStr = '<h2>hello world</h2>';
-    $('#summernote').summernote('code', markupStr);
+    // var markupStr = '<h2>hello world</h2>';
+    // $('#summernote').summernote('code', markupStr);
   });
 
   const convertBtn = document.getElementById("convertBtn")

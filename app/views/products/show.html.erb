@@ -1,0 +1,105 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-8"><%= @product.name %></h1>
+  </div>
+</div>
+
+<h2>預覽</h2>
+<div id="resultHtml" style="border: 1px solid"></div>
+
+<h2>HTML原始碼</h2>
+<div id="resultHtmlCode" style="border: 1px solid"></div>
+<button class="btn btn-primary mb-2" id="convertBtn">產生HTML</button>
+
+
+<%= form_with(model: @product, local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label "目前強打優惠" %>
+    <%= form.text_area :highlight, id: "summernote", name: "editordata" %>
+  </div>
+  <div class="form-group">
+    <%= form.label "產品介紹", id: "productDescriptionTitle"%>
+    <%= 
+      form.text_field :product_description_title, class: "form-control", placeholder: @default_default_product_title, value: @default_default_product_title
+    %>
+    <%= 
+      form.text_area :product_description, class: "form-control", id: "productDescription", rows: "6", value: @default_product_description_text 
+    %>
+  </div>
+  <div class="form-group">
+    <%= form.label "適用型號", id: "availableSpecTitle"%>
+    <%= 
+      form.text_field :available_spec_title, class: "form-control", placeholder: @deafault_available_spec_title, value: @deafault_available_spec_title
+    %>
+    <%= 
+      form.text_area :available_spec, class: "form-control", id: "availableSpec", rows: "6", value: @deafault_available_spec_text 
+    %>  
+  </div>
+  <div class="form-group">
+    <%= form.label "賣場細節", id: "marketplaceDetailTitle"%>
+    <%= 
+      form.text_area :marketplace_detail, class: "form-control", id: "marketplaceDetail", rows: "6", value: @default_marketplace_detail_text
+    %>  
+  </div>
+  <div class="form-group">
+    <%= form.label "注意事項", id: "warningTitle"%>
+    <%= 
+      form.text_area :warning, class: "form-control", id: "warning", rows: "6", value: @default_warning_text
+    %>
+  </div>
+  <div class="form-group">
+    <%= form.label "商品保固", id: "gauranteeTitle"%>
+    <%= 
+      form.text_area :gaurantee, class: "form-control", id: "gaurantee", rows: "6", value: @default_gaurantee_text
+    %>
+  </div>
+  <div class="form-group">
+    <%= form.label "保固範圍", id: "gauranteeScopeTitle"%>
+    <%= 
+      form.text_area :gaurantee_scope, class: "form-control", id: "gauranteeScope", rows: "6", value: @default_gaurantee_scope_text
+    %>
+  </div>
+  <div class="form-group">
+    <%= form.label "使用須知", id: "noticeForUseTitle"%>
+    <%= 
+      form.text_area :notice_for_use, class: "form-control", id: "noticeForUse", rows: "6", value: @notice_for_use_text
+    %>
+  </div>
+  <div class="form-group">
+    <%= form.label "商品說明", id: "productDeclarationTitle"%>
+    <%= 
+      form.text_area :product_declaration, class: "form-control", id: "productDeclaration", rows: "6", value: @product_declaration_text 
+    %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "圖片1" %>
+    <%= form.text_field :image_1, class: "image", placeholder:"https://example.com" %>
+    <%= form.label "圖片2" %>
+    <%= form.text_field :image_2, class: "image", placeholder:"https://example.com" %>
+    <%= form.label "圖片3" %>
+    <%= form.text_field :image_3, class: "image", placeholder:"https://example.com" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "加購區", id: "productDeclarationTitle"%>
+
+    <%= form.text_field :buy_more_product_1, class: "form-control buyMoreProductName", placeholder:"商品1" %>
+    <%= form.text_field :buy_more_product_url_1, class: "form-control buyMoreProductUrl", placeholder:"商品1網址" %>
+
+    <%= form.text_field :buy_more_product_2, class: "form-control buyMoreProductName", placeholder:"商品2" %>
+    <%= form.text_field :buy_more_product_url_2, class: "form-control buyMoreProductUrl", placeholder:"商品1網址" %>
+
+    <%= form.text_field :buy_more_product_3, class: "form-control buyMoreProductName", placeholder:"商品3" %>
+    <%= form.text_field :buy_more_product_url_3, class: "form-control buyMoreProductUrl", placeholder:"商品1網址" %>
+
+    <%= form.text_field :buy_more_product_4, class: "form-control buyMoreProductName", placeholder:"商品4" %>
+    <%= form.text_field :buy_more_product_url_4, class: "form-control buyMoreProductUrl", placeholder:"商品1網址" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "保存HTML", class: "btn btn-success" %>
+  </div>
+<% end %>
+
+		<%= link_to "回首頁", root_path, class: 'btn btn-info' %>
