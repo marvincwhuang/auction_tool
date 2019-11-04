@@ -12,11 +12,11 @@
   <%= link_to "編輯HTML", "/products/#{@product.id}/edit_yahoo_html", class: 'btn btn-success' %>
   <%= link_to "回首頁", root_path, class: 'btn btn-info' %>
   <div id="resultHtml" style="border: 1px solid"></div>
+  <h2>HTML原始碼</h2>
+  <div id="resultHtmlCode" style="border: 1px solid"></div>
 
 <div id="hiddenForm" style="display:none;">
 <%= form_with(model: @product, local: true) do |form| %>
-  <h2>HTML原始碼</h2>
-  <div id="resultHtmlCode" style="border: 1px solid"></div>
   <div class="form-group">
     <%= form.label "目前強打優惠" %>
     <%= form.text_area :highlight, id: "summernote", name: "editordata", value: @highlight %>

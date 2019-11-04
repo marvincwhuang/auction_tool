@@ -8,7 +8,7 @@
 
 <%= form_with(model: @product, url: {action: "update_yahoo_html"}, html: {method: 'patch'} , local: true) do |form| %>
   <button class="btn btn-primary mb-2" id="convertBtn">預覽HTML</button>
-  <%= form.submit "儲存更新, class: "btn btn-success" %>
+  <%= form.submit "儲存更新", class: "btn btn-success" %>
   <%= link_to "回首頁", root_path, class: 'btn btn-info' %>
   <div id="resultHtml" style="border: 1px solid"></div>
 

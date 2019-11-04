@@ -9,6 +9,9 @@
   </div>
 </div>
 
+	<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash #{key}", style: "color:red;" %>
+	<% end %>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-4">

@@ -14,6 +14,8 @@ window.onload = function() {
     // $('#summernote').summernote('code', markupStr);
   });
 
+  $(".flash" ).fadeOut(3000);
+
   const convertBtn = document.getElementById("convertBtn")
   convertBtn.addEventListener('click', (e)=>{
     e.preventDefault()

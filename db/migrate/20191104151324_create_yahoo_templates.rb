@@ -23,7 +23,7 @@ class CreateYahooTemplates < ActiveRecord::Migration[6.0]
       t.string :buy_more_product_url_3
       t.string :buy_more_product_4
       t.string :buy_more_product_url_4
-      t.references :product, null: false, foreign_key: true
+      t.references :product, null: false, foreign_key: true, on_delete: :cascade
 
       t.timestamps
     end

@@ -54,10 +54,16 @@ class BrandsController < ApplicationController
   # DELETE /brands/1
   # DELETE /brands/1.json
   def destroy
-    @brand.destroy
-    respond_to do |format|
-      format.html { redirect_to root_url, notice: 'Brand was successfully destroyed.' }
-      format.json { head :no_content }
+    if @brand.products.empty?
+      @brand.destroy
+      respond_to do |format|
+        format.html { redirect_to root_url, notice: 'Brand was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to request.referer, alert: '現有商品屬於此品牌，無法刪除!' }
+      end
     end
   end
 
