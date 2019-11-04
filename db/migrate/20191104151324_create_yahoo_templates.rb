@@ -25,7 +25,7 @@ class CreateYahooTemplates < ActiveRecord::Migration[6.0]
       t.string :buy_more_product_url_4
       t.references :product, null: false, foreign_key: true
 
-      t.timestampsrails
+      t.timestamps
     end
   end
 end
