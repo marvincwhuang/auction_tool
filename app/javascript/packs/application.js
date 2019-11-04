@@ -4,11 +4,22 @@ window.onload = function() {
   //   console.log(e.target.value)
   // })
   
+  //WYSIWYG
+  $(document).ready(function() {
+    $('#summernote').summernote();
+    $('#summernote').summernote({
+      lang: 'zh-TW'
+    });
+  });
+
   const convertBtn = document.getElementById("convertBtn")
   convertBtn.addEventListener('click', (e)=>{
     e.preventDefault()
 
     clearHtmlPreview()
+
+    // get WYSIWYG content
+    var hightlight = $('#summernote').summernote('code');
 
     // 產品介紹
     const productDescriptionTitle = document.getElementById("productDescriptionTitle").textContent
@@ -57,6 +68,7 @@ window.onload = function() {
     const buyMoreProductHtml          = toBuyMoreProductHtml()
 
     const resultHtml = 
+      hightlight + 
       productDescriptionTitleHtml + 
       productDescriptionHtml + 
       availableSpecTitleHtml +

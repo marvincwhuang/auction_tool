@@ -8,7 +8,7 @@
 <form>
   <div class="form-group">
     <label for="exampleFormControlTextarea1">目前強打優惠</label>
-    <textarea class="form-control" id="" rows="3"></textarea>
+    <textarea id="summernote" name="editordata"></textarea>
   </div>
   <div class="form-group">
     <label id="productDescriptionTitle">產品介紹</label>
@@ -86,13 +86,13 @@
       placeholder="商品4網址"
     >
   </div>
-  <button class="btn btn-primary mb-2" id="convertBtn">開始轉換HTML</button>
+  <button class="btn btn-primary mb-2" id="convertBtn">產生HTML</button>
+  <button class="btn btn-success mb-2">保存</button>
+
 </form>
 
 <h2>預覽</h2>
-
-    <div id="resultHtml"></div>
+<div id="resultHtml" style="border: 1px solid"></div>
 
 <h2>HTML原始碼</h2>
-
-    <div id="resultHtmlCode" style="border: 1px solid"></div>
+<div id="resultHtmlCode" style="border: 1px solid"></div>
