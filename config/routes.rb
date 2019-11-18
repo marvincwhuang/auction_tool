@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :services
   root to: 'page#index'
   post '/products/:id', to: 'products#update'
   get '/products/:id/new_yahoo_html', to: 'products#new_yahoo_html'
@@ -10,6 +9,5 @@ Rails.application.routes.draw do
 
   resources :products
   resources :brands
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :services
 end

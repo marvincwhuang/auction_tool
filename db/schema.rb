@@ -40,9 +40,11 @@ ActiveRecord::Schema.define(version: 2019_11_04_151324) do
   end
 
   create_table "services", force: :cascade do |t|
+    t.bigint "brand_id", null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["brand_id"], name: "index_services_on_brand_id"
   end
 
   create_table "yahoo_templates", force: :cascade do |t|
@@ -77,5 +79,6 @@ ActiveRecord::Schema.define(version: 2019_11_04_151324) do
   add_foreign_key "prices", "products"
   add_foreign_key "prices", "services"
   add_foreign_key "products", "brands"
+  add_foreign_key "services", "brands"
   add_foreign_key "yahoo_templates", "products"
 end

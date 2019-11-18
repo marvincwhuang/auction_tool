@@ -2,7 +2,7 @@ class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
 
   def index
-    @services = Service.all
+    @services = Service.all.order("brand_id")
   end
 
   def show
@@ -68,6 +68,6 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:name, :product_id, :price)
+      params.require(:service).permit(:name, :product_id, :price, :brand_id)
     end
 end
