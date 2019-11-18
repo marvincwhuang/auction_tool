@@ -1,11 +1,34 @@
-window.onload = function() {
+window.onload = function () {
   // const productDescription = document.getElementById("productDescription")
   // productDescription.addEventListener('change', (e)=>{
   //   console.log(e.target.value)
   // })
-  
+  // brand selector
+  const brandSelector = document.getElementById('brand_selector')
+  const defaultSelected = brandSelector.firstElementChild.value
+  const selected = brandSelector.options[brandSelector.selectedIndex].value
+  const serviceItems = document.querySelectorAll('.service_item')
+
+  const currentSelected = selected ? selected : defaultSelected
+  serviceItems.forEach(item => {
+    if (item.getAttribute('brand_id') == currentSelected) {
+      item.style.display = 'block'
+    } else {
+      item.style.display = 'none'
+    }
+  })
+  brandSelector.addEventListener('change', (e) => {
+    serviceItems.forEach(item => {
+      if (item.getAttribute('brand_id') == e.target.value.toString()) {
+        item.style.display = 'block'
+      } else {
+        item.style.display = 'none'
+      }
+    })
+  })
+
   //WYSIWYG
-  $(document).ready(function() {
+  $(document).ready(function () {
     $('#summernote').summernote();
     $('#summernote').summernote({
       lang: 'zh-TW'
@@ -14,10 +37,10 @@ window.onload = function() {
     // $('#summernote').summernote('code', markupStr);
   });
 
-  $(".flash" ).fadeOut(3000);
+  $(".flash").fadeOut(3000);
 
   const convertBtn = document.getElementById("convertBtn")
-  convertBtn.addEventListener('click', (e)=>{
+  convertBtn.addEventListener('click', (e) => {
     e.preventDefault()
 
     clearHtmlPreview()
@@ -30,22 +53,22 @@ window.onload = function() {
     const productDescription = document.getElementById("productDescription").textContent
     // 適用型號規格
     const availableSpecTitle = document.getElementById("availableSpecTitle").textContent
-    const availableSpec = document.getElementById("availableSpec").textContent 
+    const availableSpec = document.getElementById("availableSpec").textContent
     // 賣場細節
     // const marketplaceDetailTitle = document.getElementById("marketplaceDetailTitle").textContent
-    const marketplaceDetail = document.getElementById("marketplaceDetail").textContent 
+    const marketplaceDetail = document.getElementById("marketplaceDetail").textContent
     // 注意事項
     const warningTitle = document.getElementById("warningTitle").textContent
-    const warning = document.getElementById("warning").textContent 
+    const warning = document.getElementById("warning").textContent
     // 商品保固
     const gauranteeTitle = document.getElementById("gauranteeTitle").textContent
-    const gaurantee = document.getElementById("gaurantee").textContent 
+    const gaurantee = document.getElementById("gaurantee").textContent
     // 保固範圍
     const gauranteeScopeTitle = document.getElementById("gauranteeScopeTitle").textContent
-    const gauranteeScope = document.getElementById("gauranteeScope").textContent 
+    const gauranteeScope = document.getElementById("gauranteeScope").textContent
     // 使用須知 noticeForUse
     const noticeForUseTitle = document.getElementById("noticeForUseTitle").textContent
-    const noticeForUse = document.getElementById("noticeForUse").textContent 
+    const noticeForUse = document.getElementById("noticeForUse").textContent
     // 商品說明 productDeclarationTitle
     const productDeclarationTitle = document.getElementById("productDeclarationTitle").textContent
     const productDeclaration = document.getElementById("productDeclaration").textContent
@@ -54,27 +77,27 @@ window.onload = function() {
 
     // output
     const productDescriptionTitleHtml = toproductDescriptionTitleHtml(productDescriptionTitle)
-    const productDescriptionHtml      = toproductDescriptionHtml(productDescription)
-    const availableSpecTitleHtml      = toAvailableSpecTitleHtml(availableSpecTitle)
-    const availableSpecHtml           = toAvailableSpecHtml(availableSpec)
-    const marketplaceDetailHtml       = toMarketplaceDetailHtml(marketplaceDetail)
-    const warningTitleHtml            = toWarningTitleHtml(warningTitle)
-    const warningHtml                 = toWarningHtml(warning)
-    const gauranteeTitleHtml          = toGauranteeTitleHtml(gauranteeTitle)
-    const gauranteeHtml               = toGauranteeHtml(gaurantee)
-    const gauranteeScopeTitleHtml     = toGauranteeScopeTitleHtml(gauranteeScopeTitle)
-    const gauranteeScopeHtml          = toGauranteeScopeHtml(gauranteeScope)
-    const noticeForUseTitleHtml       = toGauranteeScopeTitleHtml(noticeForUseTitle)
-    const noticeForUseHtml            = toGauranteeScopeHtml(noticeForUse)
+    const productDescriptionHtml = toproductDescriptionHtml(productDescription)
+    const availableSpecTitleHtml = toAvailableSpecTitleHtml(availableSpecTitle)
+    const availableSpecHtml = toAvailableSpecHtml(availableSpec)
+    const marketplaceDetailHtml = toMarketplaceDetailHtml(marketplaceDetail)
+    const warningTitleHtml = toWarningTitleHtml(warningTitle)
+    const warningHtml = toWarningHtml(warning)
+    const gauranteeTitleHtml = toGauranteeTitleHtml(gauranteeTitle)
+    const gauranteeHtml = toGauranteeHtml(gaurantee)
+    const gauranteeScopeTitleHtml = toGauranteeScopeTitleHtml(gauranteeScopeTitle)
+    const gauranteeScopeHtml = toGauranteeScopeHtml(gauranteeScope)
+    const noticeForUseTitleHtml = toGauranteeScopeTitleHtml(noticeForUseTitle)
+    const noticeForUseHtml = toGauranteeScopeHtml(noticeForUse)
     const productDeclarationTitleHtml = toGauranteeScopeTitleHtml(productDeclarationTitle)
-    const productDeclarationHtml      = toGauranteeScopeHtml(productDeclaration)
-    const imagesHtml                  = toImagesHtml(images)
-    const buyMoreProductHtml          = toBuyMoreProductHtml()
+    const productDeclarationHtml = toGauranteeScopeHtml(productDeclaration)
+    const imagesHtml = toImagesHtml(images)
+    const buyMoreProductHtml = toBuyMoreProductHtml()
 
-    const resultHtml = 
-      hightlight + 
-      productDescriptionTitleHtml + 
-      productDescriptionHtml + 
+    const resultHtml =
+      hightlight +
+      productDescriptionTitleHtml +
+      productDescriptionHtml +
       availableSpecTitleHtml +
       availableSpecHtml +
       marketplaceDetailHtml +
@@ -92,16 +115,16 @@ window.onload = function() {
       buyMoreProductHtml
 
     // generate result 
-    generateHtmlPreview (resultHtml)
+    generateHtmlPreview(resultHtml)
     generateHtmlCode(resultHtml)
   })
 }
 
-function toproductDescriptionTitleHtml (text) {
+function toproductDescriptionTitleHtml(text) {
   return `<p><strong><span style='color: #ff0000;'>${text}</span></strong></p>`
 }
 
-function toproductDescriptionHtml (text) {
+function toproductDescriptionHtml(text) {
   const elements = text.split(/\n/)
   var html = ""
   elements.forEach(el => {
@@ -110,11 +133,11 @@ function toproductDescriptionHtml (text) {
   return html
 }
 
-function toAvailableSpecTitleHtml (text) {
+function toAvailableSpecTitleHtml(text) {
   return `<h3><span><strong>${text}</strong></span></h3>`
 }
 
-function toAvailableSpecHtml (text) {
+function toAvailableSpecHtml(text) {
   const elements = text.split(/\n/)
   var html = ""
   elements.forEach(el => {
@@ -123,7 +146,7 @@ function toAvailableSpecHtml (text) {
   return html
 }
 
-function toMarketplaceDetailHtml (text) {
+function toMarketplaceDetailHtml(text) {
   const elements = text.split(/\n/)
   var html = ""
   elements.forEach(el => {
@@ -132,11 +155,11 @@ function toMarketplaceDetailHtml (text) {
   return html
 }
 
-function toWarningTitleHtml (text) {
+function toWarningTitleHtml(text) {
   return `<h3><span style="color: #ff6600;">${text}</span><br />`
 }
 
-function toWarningHtml (text) {
+function toWarningHtml(text) {
   const elements = text.split(/\n/)
   var html = ""
   elements.forEach(el => {
@@ -145,11 +168,11 @@ function toWarningHtml (text) {
   return html
 }
 
-function toGauranteeTitleHtml (text) {
+function toGauranteeTitleHtml(text) {
   return `<h3><span style="color: #ff0000;">${text}</span><h3>`
 }
 
-function toGauranteeHtml (text) {
+function toGauranteeHtml(text) {
   const elements = text.split(/\n/)
   var html = ""
   elements.forEach(el => {
@@ -158,11 +181,11 @@ function toGauranteeHtml (text) {
   return html
 }
 
-function toGauranteeScopeTitleHtml (text) {
+function toGauranteeScopeTitleHtml(text) {
   return `<h3><span>${text}</span></h3>`
 }
 
-function toGauranteeScopeHtml (text) {
+function toGauranteeScopeHtml(text) {
   const elements = text.split(/\n/)
   var html = ""
   elements.forEach(el => {
@@ -171,7 +194,7 @@ function toGauranteeScopeHtml (text) {
   return html
 }
 
-function toImagesHtml (images) {
+function toImagesHtml(images) {
   html = ""
   images.forEach(image => {
     if (image.value.length > 0) {
@@ -196,19 +219,14 @@ function clearHtmlPreview() {
   resultHtmlBlock.innerHTML = ""
 }
 
-function generateHtmlPreview (resultHtml) {
+function generateHtmlPreview(resultHtml) {
   var htmlObject = document.createElement('div')
   htmlObject.innerHTML = resultHtml
   const resultHtmlBlock = document.getElementById("resultHtml")
   resultHtmlBlock.appendChild(htmlObject)
-} 
+}
 
-function generateHtmlCode (resultHtml) {
+function generateHtmlCode(resultHtml) {
   const resultHtmlCodeBlock = document.getElementById("resultHtmlCode")
   resultHtmlCodeBlock.innerText = resultHtml
-} 
-
-// 全新品
-// 電薪製造地:韓國 
-// 商品組裝地:中國
-// 寄送與到貨天數:直寄，3天到貨
+}
