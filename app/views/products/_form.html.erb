@@ -32,7 +32,7 @@
         <div class="form-check">
         <%= check_box_tag "service_ids[]", service.id, false,  class: 'radio-checkbox form-check-input' %>
         <%= label_tag( "#{service.name}") %>
-        <%= text_field_tag "prices[#{service.id}]", "請輸入價錢", class: "form-control" %>
+        <%= text_field_tag "prices[#{service.id}]", nil, class: "form-control", placeholder: "請輸入價錢" %>
         </div>
       <% end %>
     <% end %>
