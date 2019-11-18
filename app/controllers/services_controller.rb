@@ -1,14 +1,10 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
 
-  # GET /services
-  # GET /services.json
   def index
     @services = Service.all
   end
 
-  # GET /services/1
-  # GET /services/1.json
   def show
   end
 

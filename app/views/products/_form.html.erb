@@ -20,28 +20,33 @@
 
   <div class="form-group">
     <%= form.label "服務/價錢" %>
-  <% if @services && @services.any? %>
-    <% @services.each do |service| %>
-      <% if @current_services && @current_services.include?(service) %>
-        <div class="form-check">
-        <%= check_box_tag "service_ids[]", service.id, true,  class: 'radio-checkbox form-check-input' %>
-        <%= label_tag( "#{service.name}") %>
-        <%= text_field_tag "prices[#{service.id}]", Price.find_by(service_id: service.id, product_id: product.id).price, class: "form-control" %>
-        </div>
+
+    <div class="row">
+      <% if @services && @services.any? %>
+        <% @services.each do |service| %>
+
+          <% if @current_services && @current_services.include?(service) %>
+            <div class="form-check col-md-4" style="padding: 15px;">
+              <%= check_box_tag "service_ids[]", service.id, true,  class: 'radio-checkbox form-check-input' %>
+              <%= label_tag( "#{service.name}") %>
+              <%= text_field_tag "prices[#{service.id}]", Price.find_by(service_id: service.id, product_id: product.id).price, class: "form-control" %>
+            </div>
+          <% else %>
+            <div class="form-check col-md-4" style="padding: 15px;">
+              <%= check_box_tag "service_ids[]", service.id, false,  class: 'radio-checkbox form-check-input' %>
+              <%= label_tag( "#{service.name}") %>
+              <%= text_field_tag "prices[#{service.id}]", nil, class: "form-control", placeholder: "請輸入價錢" %>
+            </div>
+          <% end %>
+        <% end %>
       <% else %>
-        <div class="form-check">
-        <%= check_box_tag "service_ids[]", service.id, false,  class: 'radio-checkbox form-check-input' %>
-        <%= label_tag( "#{service.name}") %>
-        <%= text_field_tag "prices[#{service.id}]", nil, class: "form-control", placeholder: "請輸入價錢" %>
-        </div>
-      <% end %>
-    <% end %>
-  <% else %>
-    <p>p.s.沒有可選擇的服務，請至服務管理頁面新增服務</p>
-  <% end%>
+        <p>p.s.沒有可選擇的服務，請至服務管理頁面新增服務</p>
+      
+    <% end%>
+    </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group col-md-12">
     <%= form.submit "提交", class: "btn btn-success" %>
   </div>
 <% end %>

@@ -115,7 +115,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    @services = Service.all
+    @services = Service.all.order("name")
     service_ids = @product.prices.map {|price| price.service_id}
     @current_services = Service.find(service_ids)
   end
