@@ -3,29 +3,33 @@ window.onload = function () {
   // productDescription.addEventListener('change', (e)=>{
   //   console.log(e.target.value)
   // })
+
+
   // brand selector
   const brandSelector = document.getElementById('brand_selector')
-  const defaultSelected = brandSelector.firstElementChild.value
-  const selected = brandSelector.options[brandSelector.selectedIndex].value
-  const serviceItems = document.querySelectorAll('.service_item')
+  if (brandSelector) {
+    const defaultSelected = brandSelector.firstElementChild.value
+    const selected = brandSelector.options[brandSelector.selectedIndex].value
+    const serviceItems = document.querySelectorAll('.service_item')
 
-  const currentSelected = selected ? selected : defaultSelected
-  serviceItems.forEach(item => {
-    if (item.getAttribute('brand_id') == currentSelected) {
-      item.style.display = 'block'
-    } else {
-      item.style.display = 'none'
-    }
-  })
-  brandSelector.addEventListener('change', (e) => {
+    const currentSelected = selected ? selected : defaultSelected
     serviceItems.forEach(item => {
-      if (item.getAttribute('brand_id') == e.target.value.toString()) {
+      if (item.getAttribute('brand_id') == currentSelected) {
         item.style.display = 'block'
       } else {
         item.style.display = 'none'
       }
     })
-  })
+    brandSelector.addEventListener('change', (e) => {
+      serviceItems.forEach(item => {
+        if (item.getAttribute('brand_id') == e.target.value.toString()) {
+          item.style.display = 'block'
+        } else {
+          item.style.display = 'none'
+        }
+      })
+    })
+  }
 
   //WYSIWYG
   $(document).ready(function () {
@@ -40,84 +44,86 @@ window.onload = function () {
   $(".flash").fadeOut(3000);
 
   const convertBtn = document.getElementById("convertBtn")
-  convertBtn.addEventListener('click', (e) => {
-    e.preventDefault()
+  if (convertBtn) {
+    convertBtn.addEventListener('click', (e) => {
+      e.preventDefault()
 
-    clearHtmlPreview()
+      clearHtmlPreview()
 
-    // get WYSIWYG content
-    var hightlight = $('#summernote').summernote('code');
+      // get WYSIWYG content
+      var hightlight = $('#summernote').summernote('code');
 
-    // 產品介紹
-    const productDescriptionTitle = document.getElementById("productDescriptionTitle").textContent
-    const productDescription = document.getElementById("productDescription").textContent
-    // 適用型號規格
-    const availableSpecTitle = document.getElementById("availableSpecTitle").textContent
-    const availableSpec = document.getElementById("availableSpec").textContent
-    // 賣場細節
-    // const marketplaceDetailTitle = document.getElementById("marketplaceDetailTitle").textContent
-    const marketplaceDetail = document.getElementById("marketplaceDetail").textContent
-    // 注意事項
-    const warningTitle = document.getElementById("warningTitle").textContent
-    const warning = document.getElementById("warning").textContent
-    // 商品保固
-    const gauranteeTitle = document.getElementById("gauranteeTitle").textContent
-    const gaurantee = document.getElementById("gaurantee").textContent
-    // 保固範圍
-    const gauranteeScopeTitle = document.getElementById("gauranteeScopeTitle").textContent
-    const gauranteeScope = document.getElementById("gauranteeScope").textContent
-    // 使用須知 noticeForUse
-    const noticeForUseTitle = document.getElementById("noticeForUseTitle").textContent
-    const noticeForUse = document.getElementById("noticeForUse").textContent
-    // 商品說明 productDeclarationTitle
-    const productDeclarationTitle = document.getElementById("productDeclarationTitle").textContent
-    const productDeclaration = document.getElementById("productDeclaration").textContent
-    // images
-    const images = document.querySelectorAll(".image")
+      // 產品介紹
+      const productDescriptionTitle = document.getElementById("productDescriptionTitle").textContent
+      const productDescription = document.getElementById("productDescription").textContent
+      // 適用型號規格
+      const availableSpecTitle = document.getElementById("availableSpecTitle").textContent
+      const availableSpec = document.getElementById("availableSpec").textContent
+      // 賣場細節
+      // const marketplaceDetailTitle = document.getElementById("marketplaceDetailTitle").textContent
+      const marketplaceDetail = document.getElementById("marketplaceDetail").textContent
+      // 注意事項
+      const warningTitle = document.getElementById("warningTitle").textContent
+      const warning = document.getElementById("warning").textContent
+      // 商品保固
+      const gauranteeTitle = document.getElementById("gauranteeTitle").textContent
+      const gaurantee = document.getElementById("gaurantee").textContent
+      // 保固範圍
+      const gauranteeScopeTitle = document.getElementById("gauranteeScopeTitle").textContent
+      const gauranteeScope = document.getElementById("gauranteeScope").textContent
+      // 使用須知 noticeForUse
+      const noticeForUseTitle = document.getElementById("noticeForUseTitle").textContent
+      const noticeForUse = document.getElementById("noticeForUse").textContent
+      // 商品說明 productDeclarationTitle
+      const productDeclarationTitle = document.getElementById("productDeclarationTitle").textContent
+      const productDeclaration = document.getElementById("productDeclaration").textContent
+      // images
+      const images = document.querySelectorAll(".image")
 
-    // output
-    const productDescriptionTitleHtml = toproductDescriptionTitleHtml(productDescriptionTitle)
-    const productDescriptionHtml = toproductDescriptionHtml(productDescription)
-    const availableSpecTitleHtml = toAvailableSpecTitleHtml(availableSpecTitle)
-    const availableSpecHtml = toAvailableSpecHtml(availableSpec)
-    const marketplaceDetailHtml = toMarketplaceDetailHtml(marketplaceDetail)
-    const warningTitleHtml = toWarningTitleHtml(warningTitle)
-    const warningHtml = toWarningHtml(warning)
-    const gauranteeTitleHtml = toGauranteeTitleHtml(gauranteeTitle)
-    const gauranteeHtml = toGauranteeHtml(gaurantee)
-    const gauranteeScopeTitleHtml = toGauranteeScopeTitleHtml(gauranteeScopeTitle)
-    const gauranteeScopeHtml = toGauranteeScopeHtml(gauranteeScope)
-    const noticeForUseTitleHtml = toGauranteeScopeTitleHtml(noticeForUseTitle)
-    const noticeForUseHtml = toGauranteeScopeHtml(noticeForUse)
-    const productDeclarationTitleHtml = toGauranteeScopeTitleHtml(productDeclarationTitle)
-    const productDeclarationHtml = toGauranteeScopeHtml(productDeclaration)
-    const imagesHtml = toImagesHtml(images)
-    const buyMoreProductHtml = toBuyMoreProductHtml()
+      // output
+      const productDescriptionTitleHtml = toproductDescriptionTitleHtml(productDescriptionTitle)
+      const productDescriptionHtml = toproductDescriptionHtml(productDescription)
+      const availableSpecTitleHtml = toAvailableSpecTitleHtml(availableSpecTitle)
+      const availableSpecHtml = toAvailableSpecHtml(availableSpec)
+      const marketplaceDetailHtml = toMarketplaceDetailHtml(marketplaceDetail)
+      const warningTitleHtml = toWarningTitleHtml(warningTitle)
+      const warningHtml = toWarningHtml(warning)
+      const gauranteeTitleHtml = toGauranteeTitleHtml(gauranteeTitle)
+      const gauranteeHtml = toGauranteeHtml(gaurantee)
+      const gauranteeScopeTitleHtml = toGauranteeScopeTitleHtml(gauranteeScopeTitle)
+      const gauranteeScopeHtml = toGauranteeScopeHtml(gauranteeScope)
+      const noticeForUseTitleHtml = toGauranteeScopeTitleHtml(noticeForUseTitle)
+      const noticeForUseHtml = toGauranteeScopeHtml(noticeForUse)
+      const productDeclarationTitleHtml = toGauranteeScopeTitleHtml(productDeclarationTitle)
+      const productDeclarationHtml = toGauranteeScopeHtml(productDeclaration)
+      const imagesHtml = toImagesHtml(images)
+      const buyMoreProductHtml = toBuyMoreProductHtml()
 
-    const resultHtml =
-      hightlight +
-      productDescriptionTitleHtml +
-      productDescriptionHtml +
-      availableSpecTitleHtml +
-      availableSpecHtml +
-      marketplaceDetailHtml +
-      warningTitleHtml +
-      warningHtml +
-      gauranteeTitleHtml +
-      gauranteeHtml +
-      gauranteeScopeTitleHtml +
-      gauranteeScopeHtml +
-      noticeForUseTitleHtml +
-      noticeForUseHtml +
-      productDeclarationTitleHtml +
-      productDeclarationHtml +
-      imagesHtml +
-      buyMoreProductHtml
+      const resultHtml =
+        hightlight +
+        productDescriptionTitleHtml +
+        productDescriptionHtml +
+        availableSpecTitleHtml +
+        availableSpecHtml +
+        marketplaceDetailHtml +
+        warningTitleHtml +
+        warningHtml +
+        gauranteeTitleHtml +
+        gauranteeHtml +
+        gauranteeScopeTitleHtml +
+        gauranteeScopeHtml +
+        noticeForUseTitleHtml +
+        noticeForUseHtml +
+        productDeclarationTitleHtml +
+        productDeclarationHtml +
+        imagesHtml +
+        buyMoreProductHtml
 
-    // generate result 
-    generateHtmlPreview(resultHtml)
-    generateHtmlCode(resultHtml)
-  })
+      // generate result 
+      generateHtmlPreview(resultHtml)
+      generateHtmlCode(resultHtml)
+    })
+  }
 }
 
 function toproductDescriptionTitleHtml(text) {
