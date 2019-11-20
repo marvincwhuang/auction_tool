@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_04_151324) do
+ActiveRecord::Schema.define(version: 2019_11_20_132605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,26 @@ ActiveRecord::Schema.define(version: 2019_11_04_151324) do
     t.index ["brand_id"], name: "index_services_on_brand_id"
   end
 
+  create_table "templates", force: :cascade do |t|
+    t.string "column_one"
+    t.text "column_a_items", default: [], array: true
+    t.text "column_b_items", default: [], array: true
+    t.text "column_c_items_1", default: [], array: true
+    t.text "column_c_items_2", default: [], array: true
+    t.text "column_d_items_1", default: [], array: true
+    t.text "column_d_items_2", default: [], array: true
+    t.text "column_e_items", default: [], array: true
+    t.text "column_f_items", default: [], array: true
+    t.text "column_g_items", default: [], array: true
+    t.text "column_h_items", default: [], array: true
+    t.text "column_i_items", default: [], array: true
+    t.text "column_j_items", default: [], array: true
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_templates_on_product_id"
+  end
+
   create_table "yahoo_templates", force: :cascade do |t|
     t.string "highlight"
     t.string "product_description_title"
@@ -80,5 +100,6 @@ ActiveRecord::Schema.define(version: 2019_11_04_151324) do
   add_foreign_key "prices", "services"
   add_foreign_key "products", "brands"
   add_foreign_key "services", "brands"
+  add_foreign_key "templates", "products"
   add_foreign_key "yahoo_templates", "products"
 end

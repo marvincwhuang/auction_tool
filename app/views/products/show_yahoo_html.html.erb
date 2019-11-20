@@ -22,7 +22,6 @@
     <%= form.text_area :highlight, id: "summernote", name: "editordata", value: @highlight %>
   </div>
   <div class="form-group">
-    <%= form.label "產品介紹", id: "productDescriptionTitle"%>
     <%= 
       form.text_field :product_description_title, class: "form-control", placeholder: @product_title, value: @product_description_title
     %>
@@ -31,7 +30,6 @@
     %>
   </div>
   <div class="form-group">
-    <%= form.label "適用型號", id: "availableSpecTitle"%>
     <%= 
       form.text_field :available_spec_title, class: "form-control", placeholder: @available_spec_title, value: @available_spec_title
     %>
@@ -40,7 +38,6 @@
     %>  
   </div>
   <div class="form-group">
-    <%= form.label "賣場細節", id: "marketplaceDetailTitle"%>
     <%= 
       form.text_area :marketplace_detail, class: "form-control", id: "marketplaceDetail", rows: "6", value: @marketplace_detail
     %>  

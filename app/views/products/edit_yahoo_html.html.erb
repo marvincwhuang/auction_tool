@@ -20,29 +20,37 @@
     <%= form.text_area :highlight, id: "summernote", name: "editordata", value: @highlight %>
   </div>
   <div class="form-group">
-    <%= form.label "產品介紹", id: "productDescriptionTitle"%>
-    <%= 
-      form.text_field :product_description_title, class: "form-control", placeholder: @product_title, value: @product_title
-    %>
     <%= 
       form.text_area :product_description, class: "form-control", id: "productDescription", rows: "6", value: @product_description 
     %>
   </div>
   <div class="form-group">
-    <%= form.label "適用型號", id: "availableSpecTitle"%>
-    <%= 
-      form.text_field :available_spec_title, class: "form-control", placeholder: @available_spec_title, value: @available_spec_title
-    %>
     <%= 
       form.text_area :available_spec, class: "form-control", id: "availableSpec", rows: "6", value: @available_spec 
     %>  
   </div>
   <div class="form-group">
-    <%= form.label "賣場細節", id: "marketplaceDetailTitle"%>
     <%= 
       form.text_area :marketplace_detail, class: "form-control", id: "marketplaceDetail", rows: "6", value: @marketplace_detail
-    %>  
+    %>
   </div>
+
+  <div class="form-group">
+    <%= form.label "加購區", id: "productDeclarationTitle"%>
+
+    <%= form.text_field :buy_more_product_1, class: "form-control buyMoreProductName", placeholder:"商品1", value: @buy_more_product_1 %>
+    <%= form.text_field :buy_more_product_url_1, class: "form-control buyMoreProductUrl", placeholder:"商品1網址", value: @buy_more_product_url_1 %>
+
+    <%= form.text_field :buy_more_product_2, class: "form-control buyMoreProductName", placeholder:"商品2", value: @buy_more_product_2 %>
+    <%= form.text_field :buy_more_product_url_2, class: "form-control buyMoreProductUrl", placeholder:"商品1網址", value: @buy_more_product_url_2 %>
+
+    <%= form.text_field :buy_more_product_3, class: "form-control buyMoreProductName", placeholder:"商品3", value: @buy_more_product_3 %>
+    <%= form.text_field :buy_more_product_url_3, class: "form-control buyMoreProductUrl", placeholder:"商品1網址", value: @buy_more_product_url_3 %>
+
+    <%= form.text_field :buy_more_product_4, class: "form-control buyMoreProductName", placeholder:"商品4", value: @buy_more_product_4 %>
+    <%= form.text_field :buy_more_product_url_4, class: "form-control buyMoreProductUrl", placeholder:"商品1網址", value: @buy_more_product_url_4 %>
+  </div>
+
   <div class="form-group">
     <%= form.label "注意事項", id: "warningTitle"%>
     <%= 
@@ -76,27 +84,11 @@
 
   <div class="form-group">
     <%= form.label "圖片1" %>
-    <%= form.text_field :image_1, class: "image", placeholder:"https://example.com", value: "https://picsum.photos/200" %>
+    <%= form.text_field :image_1, class: "image", placeholder:"https://example.com", value: @image_1 %><br>
     <%= form.label "圖片2" %>
-    <%= form.text_field :image_2, class: "image", placeholder:"https://example.com", value: "https://picsum.photos/200" %>
+    <%= form.text_field :image_2, class: "image", placeholder:"https://example.com", value: @image_2 %><br>
     <%= form.label "圖片3" %>
-    <%= form.text_field :image_3, class: "image", placeholder:"https://example.com", value: "https://picsum.photos/200" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label "加購區", id: "productDeclarationTitle"%>
-
-    <%= form.text_field :buy_more_product_1, class: "form-control buyMoreProductName", placeholder:"商品1", value: "商品1" %>
-    <%= form.text_field :buy_more_product_url_1, class: "form-control buyMoreProductUrl", placeholder:"商品1網址", value: "https://tw.yahoo.com/" %>
-
-    <%= form.text_field :buy_more_product_2, class: "form-control buyMoreProductName", placeholder:"商品2", value: "商品2" %>
-    <%= form.text_field :buy_more_product_url_2, class: "form-control buyMoreProductUrl", placeholder:"商品1網址", value: "https://tw.yahoo.com/" %>
-
-    <%= form.text_field :buy_more_product_3, class: "form-control buyMoreProductName", placeholder:"商品3", value: "商品3" %>
-    <%= form.text_field :buy_more_product_url_3, class: "form-control buyMoreProductUrl", placeholder:"商品1網址", value: "https://tw.yahoo.com/" %>
-
-    <%= form.text_field :buy_more_product_4, class: "form-control buyMoreProductName", placeholder:"商品4", value: "商品4" %>
-    <%= form.text_field :buy_more_product_url_4, class: "form-control buyMoreProductUrl", placeholder:"商品1網址", value: "https://tw.yahoo.com/" %>
+    <%= form.text_field :image_3, class: "image", placeholder:"https://example.com", value: @image_3 %><br>
   </div>
 <% end %>
 

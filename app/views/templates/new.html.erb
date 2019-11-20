@@ -1,0 +1,117 @@
+<h2>建立範本</h2>
+<div id="createTemplatePage"></div>
+<form>
+  <div class="form-group">
+    <input class="form-control" type="text" name="template_name" placeholder="範本名稱">
+  </div>
+  <div class="form-group">
+    <input type="text" id= "summernote" name="editor_data"><br>
+  </div>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="product_description" placeholder="產品介紹" rows="6"></textarea>
+  </div>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="available_spec" placeholder="適用型號" rows="6"></textarea>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-xs-3">
+      <input class="form-control" type="text" name="information1_title" placeholder="保固期限">
+    </div>
+    <div class="form-group col-xs-9">
+      <input class="form-control" type="text" name="information1_content" placeholder="...">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-xs-3">
+      <input class="form-control" type="text" name="information2_title" placeholder="促銷活動"">
+    </div>
+    <div class="form-group col-xs-9">
+      <input class="form-control" type="text" name="information2_content" placeholder="...">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-xs-3">
+      <input class="form-control" type="text" name="information3_title" placeholder="產品特點">
+    </div>
+    <div class="form-group col-xs-9">
+      <input class="form-control" type="text" name="information3_content" placeholder="...">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-xs-3">
+      <input class="form-control" type="text" name="information4_title" placeholder="適用範圍">
+    </div>
+    <div class="form-group col-xs-9">
+      <input class="form-control" type="text" name="information4_content" placeholder="..."">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-xs-3">
+      <input class="form-control" type="text" name="information5_title" placeholder="珍愛地球">
+    </div>
+    <div class="form-group col-xs-9">
+      <input class="form-control" type="text" name="information5_content" placeholder="...">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-xs-3">
+      <input class="form-control" type="text" name="information6_title" placeholder="貼心提醒">
+    </div>
+    <div class="form-group col-xs-9">
+      <input class="form-control" type="text" name="information6_content" placeholder="...">
+    </div>
+  </div>
+  <h3>加購區</h3>
+  <div class="form-row">
+    <div class="form-group">
+      <button id="addBuyMoreItemButton" class="btn btn-info">＋</button>
+      <button id="removeBuyMoreItemButton" class="btn btn-danger">-</button>
+    </div>
+  </div>
+  <div id="buyMoreItemsArea">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <input class="form-control" type="text" name="buyMoreItem-1" placeholder="商品1">
+      </div>
+      <div class="form-group col-md-9">
+        <input class="form-control" type="text" name="buyMoreItem-1" placeholder="商品網址1">
+      </div>
+    </div>
+  </div>
+  <h3>商品保固</h3>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="col2" placeholder="商品保固" rows="6"></textarea>
+  </div>
+  <h3>保固範圍</h3>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="col2" placeholder="商品保固" rows="6"></textarea>
+  </div>
+  <h3>使用須知</h3>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="col2" placeholder="商品保固" rows="6"></textarea>
+  </div>
+  <h3>商品說明</h3>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="col2" placeholder="商品保固" rows="6"></textarea>
+  </div>
+  <h3>圖片區</h3>
+  <div class="form-row">
+    <div class="form-group">
+      <button id="addImageButton" class="btn btn-info">＋</button>
+      <button id="removeImageButton" class="btn btn-danger">-</button>
+    </div>
+  </div>
+  <div id="ImagesArea">
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="image-${i+1}">圖片1</label>
+        <input class="form-control" type="text" name="col3-1" placeholder="商品網址1">
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <a href="#" class="btn btn-primary" target="_blank">預覽html</a>
+    <input class="btn btn-success" type="submit" value="儲存範本"">
+  </div>
+</form>

@@ -1,238 +1,256 @@
-window.onload = function () {
-  // const productDescription = document.getElementById("productDescription")
-  // productDescription.addEventListener('change', (e)=>{
-  //   console.log(e.target.value)
-  // })
+// This file is automatically compiled by Webpack, along with any other files
+// present in this directory. You're encouraged to place your actual application logic in
+// a relevant structure within app/javascript and only use these pack files to reference
+// that code so it'll be compiled.
+
+// require("turbolinks").start()
+// require("@rails/activestorage").start()
+// require("channels")
 
 
-  // brand selector
-  const brandSelector = document.getElementById('brand_selector')
-  if (brandSelector) {
-    const defaultSelected = brandSelector.firstElementChild.value
-    const selected = brandSelector.options[brandSelector.selectedIndex].value
-    const serviceItems = document.querySelectorAll('.service_item')
+// Uncomment to copy all static images under ../images to the output folder and reference
+// them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
+// or the `imagePath` JavaScript helper below.
+//
+// const images = require.context('../images', true)
+// const imagePath = (name) => images(name, true)
+require('./templates/new')
 
-    const currentSelected = selected ? selected : defaultSelected
-    serviceItems.forEach(item => {
-      if (item.getAttribute('brand_id') == currentSelected) {
-        item.style.display = 'block'
-      } else {
-        item.style.display = 'none'
-      }
-    })
-    brandSelector.addEventListener('change', (e) => {
-      serviceItems.forEach(item => {
-        if (item.getAttribute('brand_id') == e.target.value.toString()) {
-          item.style.display = 'block'
-        } else {
-          item.style.display = 'none'
-        }
-      })
-    })
-  }
+// window.onload = function () {
+//   // const productDescription = document.getElementById("productDescription")
+//   // productDescription.addEventListener('change', (e)=>{
+//   //   console.log(e.target.value)
+//   // })
 
-  //WYSIWYG
-  $(document).ready(function () {
-    $('#summernote').summernote();
-    $('#summernote').summernote({
-      lang: 'zh-TW'
-    });
-    // var markupStr = '<h2>hello world</h2>';
-    // $('#summernote').summernote('code', markupStr);
-  });
 
-  $(".flash").fadeOut(3000);
+//   // brand selector
+//   const brandSelector = document.getElementById('brand_selector')
+//   if (brandSelector) {
+//     const defaultSelected = brandSelector.firstElementChild.value
+//     const selected = brandSelector.options[brandSelector.selectedIndex].value
+//     const serviceItems = document.querySelectorAll('.service_item')
 
-  const convertBtn = document.getElementById("convertBtn")
-  if (convertBtn) {
-    convertBtn.addEventListener('click', (e) => {
-      e.preventDefault()
+//     const currentSelected = selected ? selected : defaultSelected
+//     serviceItems.forEach(item => {
+//       if (item.getAttribute('brand_id') == currentSelected) {
+//         item.style.display = 'block'
+//       } else {
+//         item.style.display = 'none'
+//       }
+//     })
+//     brandSelector.addEventListener('change', (e) => {
+//       serviceItems.forEach(item => {
+//         if (item.getAttribute('brand_id') == e.target.value.toString()) {
+//           item.style.display = 'block'
+//         } else {
+//           item.style.display = 'none'
+//         }
+//       })
+//     })
+//   }
 
-      clearHtmlPreview()
+//   //WYSIWYG
+//   $(document).ready(function () {
+//     $('#summernote').summernote();
+//     $('#summernote').summernote({
+//       lang: 'zh-TW'
+//     });
+//     // var markupStr = '<h2>hello world</h2>';
+//     // $('#summernote').summernote('code', markupStr);
+//   });
 
-      // get WYSIWYG content
-      var hightlight = $('#summernote').summernote('code');
+//   $(".flash").fadeOut(3000);
 
-      // 產品介紹
-      const productDescriptionTitle = document.getElementById("productDescriptionTitle").textContent
-      const productDescription = document.getElementById("productDescription").textContent
-      // 適用型號規格
-      const availableSpecTitle = document.getElementById("availableSpecTitle").textContent
-      const availableSpec = document.getElementById("availableSpec").textContent
-      // 賣場細節
-      // const marketplaceDetailTitle = document.getElementById("marketplaceDetailTitle").textContent
-      const marketplaceDetail = document.getElementById("marketplaceDetail").textContent
-      // 注意事項
-      const warningTitle = document.getElementById("warningTitle").textContent
-      const warning = document.getElementById("warning").textContent
-      // 商品保固
-      const gauranteeTitle = document.getElementById("gauranteeTitle").textContent
-      const gaurantee = document.getElementById("gaurantee").textContent
-      // 保固範圍
-      const gauranteeScopeTitle = document.getElementById("gauranteeScopeTitle").textContent
-      const gauranteeScope = document.getElementById("gauranteeScope").textContent
-      // 使用須知 noticeForUse
-      const noticeForUseTitle = document.getElementById("noticeForUseTitle").textContent
-      const noticeForUse = document.getElementById("noticeForUse").textContent
-      // 商品說明 productDeclarationTitle
-      const productDeclarationTitle = document.getElementById("productDeclarationTitle").textContent
-      const productDeclaration = document.getElementById("productDeclaration").textContent
-      // images
-      const images = document.querySelectorAll(".image")
+//   const convertBtn = document.getElementById("convertBtn")
+//   if (convertBtn) {
+//     convertBtn.addEventListener('click', (e) => {
+//       e.preventDefault()
 
-      // output
-      const productDescriptionTitleHtml = toproductDescriptionTitleHtml(productDescriptionTitle)
-      const productDescriptionHtml = toproductDescriptionHtml(productDescription)
-      const availableSpecTitleHtml = toAvailableSpecTitleHtml(availableSpecTitle)
-      const availableSpecHtml = toAvailableSpecHtml(availableSpec)
-      const marketplaceDetailHtml = toMarketplaceDetailHtml(marketplaceDetail)
-      const warningTitleHtml = toWarningTitleHtml(warningTitle)
-      const warningHtml = toWarningHtml(warning)
-      const gauranteeTitleHtml = toGauranteeTitleHtml(gauranteeTitle)
-      const gauranteeHtml = toGauranteeHtml(gaurantee)
-      const gauranteeScopeTitleHtml = toGauranteeScopeTitleHtml(gauranteeScopeTitle)
-      const gauranteeScopeHtml = toGauranteeScopeHtml(gauranteeScope)
-      const noticeForUseTitleHtml = toGauranteeScopeTitleHtml(noticeForUseTitle)
-      const noticeForUseHtml = toGauranteeScopeHtml(noticeForUse)
-      const productDeclarationTitleHtml = toGauranteeScopeTitleHtml(productDeclarationTitle)
-      const productDeclarationHtml = toGauranteeScopeHtml(productDeclaration)
-      const imagesHtml = toImagesHtml(images)
-      const buyMoreProductHtml = toBuyMoreProductHtml()
+//       clearHtmlPreview()
 
-      const resultHtml =
-        hightlight +
-        productDescriptionTitleHtml +
-        productDescriptionHtml +
-        availableSpecTitleHtml +
-        availableSpecHtml +
-        marketplaceDetailHtml +
-        warningTitleHtml +
-        warningHtml +
-        gauranteeTitleHtml +
-        gauranteeHtml +
-        gauranteeScopeTitleHtml +
-        gauranteeScopeHtml +
-        noticeForUseTitleHtml +
-        noticeForUseHtml +
-        productDeclarationTitleHtml +
-        productDeclarationHtml +
-        imagesHtml +
-        buyMoreProductHtml
+//       // get WYSIWYG content
+//       var hightlight = $('#summernote').summernote('code');
 
-      // generate result 
-      generateHtmlPreview(resultHtml)
-      generateHtmlCode(resultHtml)
-    })
-  }
-}
+//       // 產品介紹
+//       const productDescriptionTitle = document.getElementById("productDescriptionTitle").textContent
+//       const productDescription = document.getElementById("productDescription").textContent
+//       // 適用型號規格
+//       const availableSpecTitle = document.getElementById("availableSpecTitle").textContent
+//       const availableSpec = document.getElementById("availableSpec").textContent
+//       // 賣場細節
+//       // const marketplaceDetailTitle = document.getElementById("marketplaceDetailTitle").textContent
+//       const marketplaceDetail = document.getElementById("marketplaceDetail").textContent
+//       // 注意事項
+//       const warningTitle = document.getElementById("warningTitle").textContent
+//       const warning = document.getElementById("warning").textContent
+//       // 商品保固
+//       const gauranteeTitle = document.getElementById("gauranteeTitle").textContent
+//       const gaurantee = document.getElementById("gaurantee").textContent
+//       // 保固範圍
+//       const gauranteeScopeTitle = document.getElementById("gauranteeScopeTitle").textContent
+//       const gauranteeScope = document.getElementById("gauranteeScope").textContent
+//       // 使用須知 noticeForUse
+//       const noticeForUseTitle = document.getElementById("noticeForUseTitle").textContent
+//       const noticeForUse = document.getElementById("noticeForUse").textContent
+//       // 商品說明 productDeclarationTitle
+//       const productDeclarationTitle = document.getElementById("productDeclarationTitle").textContent
+//       const productDeclaration = document.getElementById("productDeclaration").textContent
+//       // images
+//       const images = document.querySelectorAll(".image")
 
-function toproductDescriptionTitleHtml(text) {
-  return `<p><strong><span style='color: #ff0000;'>${text}</span></strong></p>`
-}
+//       // output
+//       const productDescriptionTitleHtml = toproductDescriptionTitleHtml(productDescriptionTitle)
+//       const productDescriptionHtml = toproductDescriptionHtml(productDescription)
+//       const availableSpecTitleHtml = toAvailableSpecTitleHtml(availableSpecTitle)
+//       const availableSpecHtml = toAvailableSpecHtml(availableSpec)
+//       const marketplaceDetailHtml = toMarketplaceDetailHtml(marketplaceDetail)
+//       const warningTitleHtml = toWarningTitleHtml(warningTitle)
+//       const warningHtml = toWarningHtml(warning)
+//       const gauranteeTitleHtml = toGauranteeTitleHtml(gauranteeTitle)
+//       const gauranteeHtml = toGauranteeHtml(gaurantee)
+//       const gauranteeScopeTitleHtml = toGauranteeScopeTitleHtml(gauranteeScopeTitle)
+//       const gauranteeScopeHtml = toGauranteeScopeHtml(gauranteeScope)
+//       const noticeForUseTitleHtml = toGauranteeScopeTitleHtml(noticeForUseTitle)
+//       const noticeForUseHtml = toGauranteeScopeHtml(noticeForUse)
+//       const productDeclarationTitleHtml = toGauranteeScopeTitleHtml(productDeclarationTitle)
+//       const productDeclarationHtml = toGauranteeScopeHtml(productDeclaration)
+//       const imagesHtml = toImagesHtml(images)
+//       const buyMoreProductHtml = toBuyMoreProductHtml()
 
-function toproductDescriptionHtml(text) {
-  const elements = text.split(/\n/)
-  var html = ""
-  elements.forEach(el => {
-    html += `<p><span>${el}</span></p>`
-  })
-  return html
-}
+//       const resultHtml =
+//         hightlight +
+//         productDescriptionTitleHtml +
+//         productDescriptionHtml +
+//         availableSpecTitleHtml +
+//         availableSpecHtml +
+//         marketplaceDetailHtml +
+//         warningTitleHtml +
+//         warningHtml +
+//         gauranteeTitleHtml +
+//         gauranteeHtml +
+//         gauranteeScopeTitleHtml +
+//         gauranteeScopeHtml +
+//         noticeForUseTitleHtml +
+//         noticeForUseHtml +
+//         productDeclarationTitleHtml +
+//         productDeclarationHtml +
+//         imagesHtml +
+//         buyMoreProductHtml
 
-function toAvailableSpecTitleHtml(text) {
-  return `<h3><span><strong>${text}</strong></span></h3>`
-}
+//       // generate result 
+//       generateHtmlPreview(resultHtml)
+//       generateHtmlCode(resultHtml)
+//     })
+//   }
+// }
 
-function toAvailableSpecHtml(text) {
-  const elements = text.split(/\n/)
-  var html = ""
-  elements.forEach(el => {
-    html += `<p><span><strong>${el}</strong></span></p>`
-  })
-  return html
-}
+// function toproductDescriptionTitleHtml(text) {
+//   return `<p><strong><span style='color: #ff0000;'>${text}</span></strong></p>`
+// }
 
-function toMarketplaceDetailHtml(text) {
-  const elements = text.split(/\n/)
-  var html = ""
-  elements.forEach(el => {
-    html += `<p><span>${el}</span></p>`
-  })
-  return html
-}
+// function toproductDescriptionHtml(text) {
+//   const elements = text.split(/\n/)
+//   var html = ""
+//   elements.forEach(el => {
+//     html += `<p><span>${el}</span></p>`
+//   })
+//   return html
+// }
 
-function toWarningTitleHtml(text) {
-  return `<h3><span style="color: #ff6600;">${text}</span><br />`
-}
+// function toAvailableSpecTitleHtml(text) {
+//   return `<h3><span><strong>${text}</strong></span></h3>`
+// }
 
-function toWarningHtml(text) {
-  const elements = text.split(/\n/)
-  var html = ""
-  elements.forEach(el => {
-    html += `<p><strong>${el}</strong></p>`
-  })
-  return html
-}
+// function toAvailableSpecHtml(text) {
+//   const elements = text.split(/\n/)
+//   var html = ""
+//   elements.forEach(el => {
+//     html += `<p><span><strong>${el}</strong></span></p>`
+//   })
+//   return html
+// }
 
-function toGauranteeTitleHtml(text) {
-  return `<h3><span style="color: #ff0000;">${text}</span><h3>`
-}
+// function toMarketplaceDetailHtml(text) {
+//   const elements = text.split(/\n/)
+//   var html = ""
+//   elements.forEach(el => {
+//     html += `<p><span>${el}</span></p>`
+//   })
+//   return html
+// }
 
-function toGauranteeHtml(text) {
-  const elements = text.split(/\n/)
-  var html = ""
-  elements.forEach(el => {
-    html += `<h3><strong>${el}</strong></h3>`
-  })
-  return html
-}
+// function toWarningTitleHtml(text) {
+//   return `<h3><span style="color: #ff6600;">${text}</span><br />`
+// }
 
-function toGauranteeScopeTitleHtml(text) {
-  return `<h3><span>${text}</span></h3>`
-}
+// function toWarningHtml(text) {
+//   const elements = text.split(/\n/)
+//   var html = ""
+//   elements.forEach(el => {
+//     html += `<p><strong>${el}</strong></p>`
+//   })
+//   return html
+// }
 
-function toGauranteeScopeHtml(text) {
-  const elements = text.split(/\n/)
-  var html = ""
-  elements.forEach(el => {
-    html += `<h3><strong>${el}</strong></h3>`
-  })
-  return html
-}
+// function toGauranteeTitleHtml(text) {
+//   return `<h3><span style="color: #ff0000;">${text}</span><h3>`
+// }
 
-function toImagesHtml(images) {
-  html = ""
-  images.forEach(image => {
-    if (image.value.length > 0) {
-      html += `<img src="${image.value}" border="0" alt="" width="792" style="display:block;margin-left:auto;margin- right:auto;" align="absmiddle"></img>`
-    }
-  })
-  return html
-}
+// function toGauranteeHtml(text) {
+//   const elements = text.split(/\n/)
+//   var html = ""
+//   elements.forEach(el => {
+//     html += `<h3><strong>${el}</strong></h3>`
+//   })
+//   return html
+// }
 
-function toBuyMoreProductHtml() {
-  const buyMoreProductNames = Array.from(document.querySelectorAll('.buyMoreProductName')).map(el => el.value)
-  const buyMoreProductUrls = Array.from(document.querySelectorAll('.buyMoreProductUrl')).map(el => el.value)
-  let html = ""
-  for (i = 0; i < buyMoreProductNames.length; i++) {
-    html += `<div><b><a rel="nofollow" href="${buyMoreProductUrls[i]}">${buyMoreProductNames[i]}</a></b></div><div><br></div>`
-  }
-  return html
-}
+// function toGauranteeScopeTitleHtml(text) {
+//   return `<h3><span>${text}</span></h3>`
+// }
 
-function clearHtmlPreview() {
-  const resultHtmlBlock = document.getElementById("resultHtml")
-  resultHtmlBlock.innerHTML = ""
-}
+// function toGauranteeScopeHtml(text) {
+//   const elements = text.split(/\n/)
+//   var html = ""
+//   elements.forEach(el => {
+//     html += `<h3><strong>${el}</strong></h3>`
+//   })
+//   return html
+// }
 
-function generateHtmlPreview(resultHtml) {
-  var htmlObject = document.createElement('div')
-  htmlObject.innerHTML = resultHtml
-  const resultHtmlBlock = document.getElementById("resultHtml")
-  resultHtmlBlock.appendChild(htmlObject)
-}
+// function toImagesHtml(images) {
+//   html = ""
+//   images.forEach(image => {
+//     if (image.value.length > 0) {
+//       html += `<img src="${image.value}" border="0" alt="" width="792" style="display:block;margin-left:auto;margin- right:auto;" align="absmiddle"></img>`
+//     }
+//   })
+//   return html
+// }
 
-function generateHtmlCode(resultHtml) {
-  const resultHtmlCodeBlock = document.getElementById("resultHtmlCode")
-  resultHtmlCodeBlock.innerText = resultHtml
-}
+// function toBuyMoreProductHtml() {
+//   const buyMoreProductNames = Array.from(document.querySelectorAll('.buyMoreProductName')).map(el => el.value)
+//   const buyMoreProductUrls = Array.from(document.querySelectorAll('.buyMoreProductUrl')).map(el => el.value)
+//   let html = ""
+//   for (i = 0; i < buyMoreProductNames.length; i++) {
+//     html += `<div><b><a rel="nofollow" href="${buyMoreProductUrls[i]}">${buyMoreProductNames[i]}</a></b></div><div><br></div>`
+//   }
+//   return html
+// }
+
+// function clearHtmlPreview() {
+//   const resultHtmlBlock = document.getElementById("resultHtml")
+//   resultHtmlBlock.innerHTML = ""
+// }
+
+// function generateHtmlPreview(resultHtml) {
+//   var htmlObject = document.createElement('div')
+//   htmlObject.innerHTML = resultHtml
+//   const resultHtmlBlock = document.getElementById("resultHtml")
+//   resultHtmlBlock.appendChild(htmlObject)
+// }
+
+// function generateHtmlCode(resultHtml) {
+//   const resultHtmlCodeBlock = document.getElementById("resultHtmlCode")
+//   resultHtmlCodeBlock.innerText = resultHtml
+// }
