@@ -25,5 +25,51 @@ class TemplatesController < ApplicationController
   end
 
   def create
+    @template = Template.new(template_params)
+    @template.product_descriptions = params[:product_descriptions].split("\r\n") if params[:product_descriptions]
+    @template.available_specs = params[:available_specs].split("\r\n") if params[:available_specs]
+    @template.information_titles = params[:information_titles]
+    @template.information_contents = params[:information_contents]
+    @template.buy_more_items = params[:buy_more_items]
+    @template.buy_more_item_urls = params[:buy_more_item_urls]
+    @template.image_urls = params[:image_urls]
+    @template.warning = params[:warning].split("\r\n") if params[:warning]
+    @template.gaurantee = params[:gaurantee].split("\r\n") if params[:gaurantee]
+    @template.gaurantee_scope = params[:gaurantee_scope].split("\r\n") if params[:gaurantee_scope]
+    @template.notice_for_use = params[:notice_for_use].split("\r\n") if params[:notice_for_use]
+    @template.product_declaration = params[:product_declaration].split("\r\n") if params[:product_declaration]
+    @template.image_urls = params[:image_urls]
+
+    respond_to do |format|
+      if @template.save
+        format.html { redirect_to root_path, notice: "已成功建立模板-#{@template.template_name}" }
+      else
+        format.html { render :new }
+      end
+    end
+  end
+
+  private
+  def set_template
+    @template = Template.find(params[:id])
+  end
+
+  def template_params
+    params.permit(
+      :template_name,
+      :editor_data,
+      :product_descriptions,
+      :available_specs,
+      :information_titles,
+      :information_contents,
+      :buy_more_items,
+      :buy_more_item_urls,
+      :warning,
+      :gaurantee,
+      :gaurantee_scope,
+      :notice_for_use,
+      :product_declaration,
+      :image_urls
+    )
   end
 end

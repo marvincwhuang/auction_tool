@@ -48,23 +48,22 @@ ActiveRecord::Schema.define(version: 2019_11_20_132605) do
   end
 
   create_table "templates", force: :cascade do |t|
-    t.string "column_one"
-    t.text "column_a_items", default: [], array: true
-    t.text "column_b_items", default: [], array: true
-    t.text "column_c_items_1", default: [], array: true
-    t.text "column_c_items_2", default: [], array: true
-    t.text "column_d_items_1", default: [], array: true
-    t.text "column_d_items_2", default: [], array: true
-    t.text "column_e_items", default: [], array: true
-    t.text "column_f_items", default: [], array: true
-    t.text "column_g_items", default: [], array: true
-    t.text "column_h_items", default: [], array: true
-    t.text "column_i_items", default: [], array: true
-    t.text "column_j_items", default: [], array: true
-    t.bigint "product_id", null: false
+    t.string "template_name"
+    t.string "editor_data"
+    t.text "product_descriptions", default: [], array: true
+    t.text "available_specs", default: [], array: true
+    t.text "information_titles", default: [], array: true
+    t.text "information_contents", default: [], array: true
+    t.text "buy_more_items", default: [], array: true
+    t.text "buy_more_item_urls", default: [], array: true
+    t.text "warning", default: [], array: true
+    t.text "gaurantee", default: [], array: true
+    t.text "gaurantee_scope", default: [], array: true
+    t.text "notice_for_use", default: [], array: true
+    t.text "product_declaration", default: [], array: true
+    t.text "image_urls", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_templates_on_product_id"
   end
 
   create_table "yahoo_templates", force: :cascade do |t|
@@ -100,6 +99,5 @@ ActiveRecord::Schema.define(version: 2019_11_20_132605) do
   add_foreign_key "prices", "services"
   add_foreign_key "products", "brands"
   add_foreign_key "services", "brands"
-  add_foreign_key "templates", "products"
   add_foreign_key "yahoo_templates", "products"
 end

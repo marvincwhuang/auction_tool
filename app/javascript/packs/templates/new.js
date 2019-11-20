@@ -52,10 +52,10 @@ function setBuyMoreItem(count) {
   for (i = 0; i < count; i++) {
     content = content + `
     <div class="form-group col-md-3">
-      <input class="form-control" type="text" name="buyMoreItem-${i+1}" placeholder="商品${i+1}">
+      <input class="form-control" type="text" name="buy_more_items[]" placeholder="商品${i+1}">
     </div>
     <div class="form-group col-md-9">
-      <input class="form-control" type="text" name="buyMoreItem-${i+1}" placeholder="商品網址${i+1}">
+      <input class="form-control" type="text" name="buy_more_item_urls[]" placeholder="商品網址${i+1}">
     </div>
     `
   }
@@ -70,7 +70,7 @@ function setImageItem(count) {
     content = content + `
     <div class="form-group col-md-12">
       <label for="image-${i+1}">圖片${i+1}</label>
-      <input class="form-control" type="text" name="image-${i+1}" placeholder="圖片網址${i+1}">
+      <input class="form-control" type="text" name="image_urls[]" placeholder="圖片網址${i+1}">
     </div>
     `
   }
