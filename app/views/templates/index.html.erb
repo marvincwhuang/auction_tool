@@ -1,0 +1,26 @@
+<h2>範本</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">範本名稱</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @templates.each_with_index do |template, key| %>
+      <tr>
+        <th scope="row"><%= key + 1 %></th>
+        <td><%= template.template_name %></td>
+        <td>  
+          <div class="btn-group" role="group">
+          <%= link_to '預覽', edit_template_path(template), class: "btn btn-info" %>
+          <%= button_to '刪除', template, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '回管理主頁', root_path, class: "btn btn-primary" %>

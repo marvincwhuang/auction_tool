@@ -1,4 +1,10 @@
 class TemplatesController < ApplicationController
+  before_action :set_template, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @templates = Template.all
+  end
+
   def new
     @default_name = "範例1"
     @editor_data = "<h2><span style='background-color: rgb(255, 255, 0);'>目前強打優惠</span></h2>"
@@ -22,6 +28,9 @@ class TemplatesController < ApplicationController
     @gaurantee_scope = "．電池待機時間因使用日久縮短乃屬正常狀況，待機時 間縮短不屬保固範圍內。\n．請搭配原廠或本店銷售之充電器使用，若因使用它牌 充電器導致過充或電池故障，恕無法列入保固。\n．其它人為或外力因素等不當使 用均不予保固。\n．商品需貼有本店之保固貼紙始享有保固，保固貼紙損毀者不予 保固。\n"
     @notice_for_use = "．電池請在充飽後續充1~2小時，可達最佳使用容量。\n．為確保電池能使用較長壽命，建議電池顯示低電量時再進行充電，充電時間請 勿超過24小時。\n．電池如長時間不使用，建議至少每個月將電池做充放電一次， 以免電壓過低導致無法充電。\n．請勿使用輸出電流過高的充電器進行充電，以免電造成電池澎漲或低電壓。"
     @product_declaration = "版本多種，收到的商品可能與照片不同，恕無法因版本 不同而要求退換貨。"
+    @buy_more_items = ["商品1", "商品2", "商品3"]
+    @buy_more_item_urls = ["https://tw.yahoo.com/","https://tw.yahoo.com/", "https://tw.yahoo.com/"]
+    @image_urls = ["https://picsum.photos/200", "https://picsum.photos/200", "https://picsum.photos/200"]
   end
 
   def create
@@ -47,6 +56,31 @@ class TemplatesController < ApplicationController
         format.html { render :new }
       end
     end
+  end
+
+  def edit
+    @default_name = @template.template_name
+    @editor_data = @template.editor_data
+    @product_description = @template.product_descriptions.join("\r\n")
+    @available_spec = @template.available_specs.join("\r\n")
+    @information1_title = @template.information_titles[0]
+    @information2_title = @template.information_titles[1]
+    @information3_title = @template.information_titles[2]
+    @information4_title = @template.information_titles[3]
+    @information5_title = @template.information_titles[4]
+    @information6_title = @template.information_titles[5]
+    @information1_content = @template.information_contents[0]
+    @information2_content = @template.information_contents[1]
+    @information3_content = @template.information_contents[2]
+    @information4_content = @template.information_contents[3]
+    @information5_content = @template.information_contents[4]
+    @information6_content = @template.information_contents[5]
+    @warning = @template.warning.join("\r\n")
+    @gaurantee = @template.gaurantee.join("\r\n")
+    @gaurantee_scope = @template.gaurantee_scope.join("\r\n")
+    @notice_for_use = @template.notice_for_use.join("\r\n")
+    @product_declaration = @template.product_declaration.join("\r\n")
+    @image_urls = @template.image_urls
   end
 
   private

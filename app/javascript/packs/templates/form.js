@@ -1,7 +1,7 @@
-let buyMoreItemsCount = 1
-let ImagesCount = 1
-
 window.onload = function () {
+  let buyMoreItemsCount = document.querySelectorAll(".buy_more_item").length
+  let ImagesCount = document.querySelectorAll(".image_url").length
+
   const createTemplatePage = document.getElementById('createTemplatePage')
   if (!createTemplatePage) {
     return null

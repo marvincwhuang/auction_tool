@@ -1,0 +1,129 @@
+<div id="createTemplatePage"></div>
+<%= form_with(model: @template, url: {action: "create"}, html: {method: 'post'} , local: true) do |form| %>
+  <div class="form-group">
+    <input class="form-control" type="text" name="template_name" placeholder="範本名稱" value="<%= @default_name  %>">
+  </div>
+  <div class="form-group">
+    <textarea type="text" id= "summernote" name="editor_data"><%= @editor_data %></textarea>
+  </div>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="product_description" placeholder="產品介紹" rows="6"><%= @product_description %></textarea>
+  </div>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="available_spec" placeholder="適用型號" rows="6"><%= @available_spec %></textarea>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-xs-3">
+      <input class="form-control" type="text" name="information_titles[]" placeholder="訊息1" value="<%= @information1_title %>">
+    </div>
+    <div class="form-group col-xs-9">
+      <input class="form-control" type="text" name="information_contents[]" placeholder="訊息1內容" value="<%= @information1_content %>">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-xs-3">
+      <input class="form-control" type="text" name="information_titles[]" placeholder="訊息2" value="<%= @information2_title %>">
+    </div>
+    <div class="form-group col-xs-9">
+      <input class="form-control" type="text" name="information_contents[]" placeholder="訊息2內容" value="<%= @information2_content %>">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-xs-3">
+      <input class="form-control" type="text" name="information_titles[]" placeholder="訊息3" value="<%= @information3_title %>">
+    </div>
+    <div class="form-group col-xs-9">
+      <input class="form-control" type="text" name="information_contents[]" placeholder="訊息3內容" value="<%= @information3_content %>">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-xs-3">
+      <input class="form-control" type="text" name="information_titles[]" placeholder="訊息4" value="<%= @information4_title %>">
+    </div>
+    <div class="form-group col-xs-9">
+      <input class="form-control" type="text" name="information_contents[]" placeholder="訊息4內容" value="<%= @information4_content %>">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-xs-3">
+      <input class="form-control" type="text" name="information_titles[]" placeholder="訊息5" value="<%= @information5_title %>">
+    </div>
+    <div class="form-group col-xs-9">
+      <input class="form-control" type="text" name="information_contents[]" placeholder="訊息5內容" value="<%= @information5_content %>">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-xs-3">
+      <input class="form-control" type="text" name="information_titles[]" placeholder="訊息6" value="<%= @information6_title %>">
+    </div>
+    <div class="form-group col-xs-9">
+      <input class="form-control" type="text" name="information_contents[]" placeholder="訊息6內容" value="<%= @information6_content %>">
+    </div>
+  </div>
+  <h3>加購區</h3>
+  <div class="form-row">
+    <div class="form-group">
+      <button id="addBuyMoreItemButton" class="btn btn-info">＋</button>
+      <button id="removeBuyMoreItemButton" class="btn btn-danger">-</button>
+    </div>
+  </div>
+  <div id="buyMoreItemsArea">
+    <div class="form-row">
+      <% @buy_more_items.each_with_index do |item, index| %>
+      <div class="form-group col-md-3 buy_more_item">
+        <input class="form-control" type="text" name="buy_more_items[]" placeholder="商品1" value="<%= item %>">
+      </div>
+      <div class="form-group col-md-9">
+        <input class="form-control" type="text" name="buy_more_item_urls[]" placeholder="商品網址1" value="<%=  @buy_more_item_urls[index] %>" >
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <h3>注意事項</h3>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="warning" placeholder="注意事項" rows="6"><%= @warning %></textarea>
+  </div>
+  <h3>商品保固</h3>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="gaurantee" placeholder="商品保固" rows="6"><%= @gaurantee %></textarea>
+  </div>
+  <h3>保固範圍</h3>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="gaurantee_scope" placeholder="保固範圍" rows="6"><%= @gaurantee_scope %></textarea>
+  </div>
+  <h3>使用須知</h3>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="notice_for_use" placeholder="使用須知" rows="6"><%= @notice_for_use %></textarea>
+  </div>
+  <h3>商品說明</h3>
+  <div class="form-group">
+    <textarea class="form-control" type="text" name="product_declaration" placeholder="商品說明" rows="6"><%= @product_declaration %></textarea>
+  </div>
+  <h3>圖片區</h3>
+  <div class="form-row">
+    <div class="form-group">
+      <button id="addImageButton" class="btn btn-info">＋</button>
+      <button id="removeImageButton" class="btn btn-danger">-</button>
+    </div>
+  </div>
+  <div id="ImagesArea">
+    <div class="form-row">
+      <% @image_urls.each_with_index do |url, i| %>
+      <div class="form-group col-md-12 image_url">
+        <label for="image-<%= i+1 %>">圖片<%= i+1 %></label>
+        <input class="form-control" type="text" name="image_urls[]" placeholder="商品網址<%= i+1 %>" value="<%= url %>">
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <a href="#" id="previewButton" class="btn btn-primary" target="_blank">預覽html</a>
+    <%= form.submit "儲存範本", class: "btn btn-success" %>
+  </div>
+<% end %>
+
+<div id="preview">
+  <h3>Yahoo</h3>
+  <%= render "templates/yahoo" %>
+</div>
