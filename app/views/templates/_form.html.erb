@@ -67,17 +67,17 @@
       <button id="removeBuyMoreItemButton" class="btn btn-danger">-</button>
     </div>
   </div>
-  <div id="buyMoreItemsArea">
-    <div class="form-row">
-      <% @buy_more_items.each_with_index do |item, index| %>
-      <div class="form-group col-md-3 buy_more_item">
-        <input class="form-control" type="text" name="buy_more_items[]" placeholder="商品1" value="<%= item %>">
+  <div id="buyMoreItemsArea" class="form-row">
+    <% @buy_more_items.each_with_index do |item, index| %>
+    <div class="buy_more_item">
+      <div class="form-group col-md-3">
+        <input class="form-control" type="text" name="buy_more_items[]" placeholder="商品<%= index+1 %>" value="<%= item %>">
       </div>
       <div class="form-group col-md-9">
-        <input class="form-control" type="text" name="buy_more_item_urls[]" placeholder="商品網址1" value="<%=  @buy_more_item_urls[index] %>" >
+        <input class="form-control" type="text" name="buy_more_item_urls[]" placeholder="商品網址<%= index+1 %>" value="<%=  @buy_more_item_urls[index] %>" >
       </div>
-      <% end %>
     </div>
+    <% end %>
   </div>
   <h3>注意事項</h3>
   <div class="form-group">
@@ -106,15 +106,15 @@
       <button id="removeImageButton" class="btn btn-danger">-</button>
     </div>
   </div>
-  <div id="ImagesArea">
-    <div class="form-row">
-      <% @image_urls.each_with_index do |url, i| %>
-      <div class="form-group col-md-12 image_url">
-        <label for="image-<%= i+1 %>">圖片<%= i+1 %></label>
-        <input class="form-control" type="text" name="image_urls[]" placeholder="商品網址<%= i+1 %>" value="<%= url %>">
-      </div>
-      <% end %>
+  <div id="ImagesArea" class="form-row">
+    <% @image_urls.each_with_index do |url, i| %>
+    <div class="image_item">
+    <div class="form-group col-md-12">
+      <label for="image-<%= i+1 %>">圖片<%= i+1 %></label>
+      <input class="form-control" type="text" name="image_urls[]" placeholder="商品網址<%= i+1 %>" value="<%= url %>">
     </div>
+    </div>
+    <% end %>
   </div>
 
   <div>
