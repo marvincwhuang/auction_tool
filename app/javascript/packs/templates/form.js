@@ -2,7 +2,7 @@ window.onload = function () {
   let buyMoreItemsCount = document.querySelectorAll(".buy_more_item").length
   let ImagesCount = document.querySelectorAll(".image_item").length
   const createTemplatePage = document.getElementById('createTemplatePage')
-  if (!createTemplatePage) {
+  if (!templateForm) {
     return null
   }
 

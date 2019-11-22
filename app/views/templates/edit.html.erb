@@ -1,2 +1,19 @@
 <h2>編輯範本</h2>
 <%= render 'templates/form', template: @template %>
+<%= content_tag :div, id: "template_data", data: {
+  template_name: @template_name,
+  editor_data: @editor_data,
+  product_descriptions: @product_descriptions,
+  available_specs: @available_specs,
+  information_titles: @information_titles,
+  information_contents: @information_contents,
+  buy_more_items: @buy_more_items,
+  buy_more_item_urls: @buy_more_item_urls,
+  warning: @warning,
+  gaurantee: @gaurantee,
+  gaurantee_scope: @gaurantee_scope,
+  notice_for_use: @notice_for_use,
+  product_declaration: @product_declaration,
+  image_urls: @image_urls
+} do %>
+<% end %>

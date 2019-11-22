@@ -59,22 +59,26 @@ class TemplatesController < ApplicationController
   end
 
   def edit
-    @default_name = @template.template_name
+    @template_name = @template.template_name
     @editor_data = @template.editor_data
     @product_description = @template.product_descriptions.join("\r\n")
+    @product_descriptions = @template.product_descriptions
     @available_spec = @template.available_specs.join("\r\n")
-    @information1_title = @template.information_titles[0]
-    @information2_title = @template.information_titles[1]
-    @information3_title = @template.information_titles[2]
-    @information4_title = @template.information_titles[3]
-    @information5_title = @template.information_titles[4]
-    @information6_title = @template.information_titles[5]
-    @information1_content = @template.information_contents[0]
-    @information2_content = @template.information_contents[1]
-    @information3_content = @template.information_contents[2]
-    @information4_content = @template.information_contents[3]
-    @information5_content = @template.information_contents[4]
-    @information6_content = @template.information_contents[5]
+    @available_specs = @template.available_specs
+    @information_titles = @template.information_titles
+    @information1_title = @information_titles[0]
+    @information2_title = @information_titles[1]
+    @information3_title = @information_titles[2]
+    @information4_title = @information_titles[3]
+    @information5_title = @information_titles[4]
+    @information6_title = @information_titles[5]
+    @information_contents = @template.information_contents
+    @information1_content = @information_contents[0]
+    @information2_content = @information_contents[1]
+    @information3_content = @information_contents[2]
+    @information4_content = @information_contents[3]
+    @information5_content = @information_contents[4]
+    @information6_content = @information_contents[5]
     @warning = @template.warning.join("\r\n")
     @gaurantee = @template.gaurantee.join("\r\n")
     @gaurantee_scope = @template.gaurantee_scope.join("\r\n")

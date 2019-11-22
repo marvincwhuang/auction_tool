@@ -1,7 +1,7 @@
-<div id="createTemplatePage"></div>
+<div id="templateForm"></div>
 <%= form_with(model: template, local: true) do |form| %>
   <div class="form-group">
-    <input class="form-control" type="text" name="template_name" placeholder="範本名稱" value="<%= @default_name  %>">
+    <input class="form-control" type="text" name="template_name" placeholder="範本名稱" value="<%= @template_name  %>">
   </div>
   <div class="form-group">
     <textarea type="text" id= "summernote" name="editor_data"><%= @editor_data %></textarea>
