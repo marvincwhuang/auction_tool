@@ -80,7 +80,36 @@ class TemplatesController < ApplicationController
     @gaurantee_scope = @template.gaurantee_scope.join("\r\n")
     @notice_for_use = @template.notice_for_use.join("\r\n")
     @product_declaration = @template.product_declaration.join("\r\n")
+    @buy_more_items = @template.buy_more_items
+    @buy_more_item_urls = @template.buy_more_item_urls
     @image_urls = @template.image_urls
+  end
+
+  def update
+    @template.template_name
+    @template.product_descriptions = params[:product_description].split("\r\n") if params[:product_description]
+    @template.available_specs = params[:available_spec].split("\r\n") if params[:available_spec]
+    @template.information_titles = params[:information_titles]
+    @template.information_contents = params[:information_contents]
+    @template.buy_more_items = params[:buy_more_items]
+    @template.buy_more_item_urls = params[:buy_more_item_urls]
+    @template.image_urls = params[:image_urls]
+    @template.warning = params[:warning].split("\r\n") if params[:warning]
+    @template.gaurantee = params[:gaurantee].split("\r\n") if params[:gaurantee]
+    @template.gaurantee_scope = params[:gaurantee_scope].split("\r\n") if params[:gaurantee_scope]
+    @template.notice_for_use = params[:notice_for_use].split("\r\n") if params[:notice_for_use]
+    @template.product_declaration = params[:product_declaration].split("\r\n") if params[:product_declaration]
+    @template.image_urls = params[:image_urls]
+
+    respond_to do |format|
+      if @template.save
+        format.html { redirect_to templates_path, notice: 'template was successfully updated.' }
+        format.json { render :show, status: :ok, location: @template }
+      else
+        format.html { render :edit }
+        format.json { render json: @template.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private

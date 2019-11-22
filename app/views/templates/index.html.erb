@@ -14,7 +14,7 @@
         <td><%= template.template_name %></td>
         <td>  
           <div class="btn-group" role="group">
-          <%= link_to '預覽', edit_template_path(template), class: "btn btn-info" %>
+          <%= link_to '編輯', edit_template_path(template), class: "btn btn-info" %>
           <%= button_to '刪除', template, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
           </div>
         </td>
