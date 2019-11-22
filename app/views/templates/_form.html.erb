@@ -1,7 +1,10 @@
 <div id="templateForm"></div>
 <%= form_with(model: template, local: true) do |form| %>
   <div class="form-group">
-    <input class="form-control" type="text" name="template_name" placeholder="範本名稱" value="<%= @template_name  %>">
+    <%= select_tag(:category, options_for_select(['yahoo', 'ruten'], @category), class: 'form-control') %>
+  </div>
+  <div class="form-group">
+    <input class="form-control" type="text" name="template_name" placeholder="範本名稱" value="<%= @template_name %>">
   </div>
   <div class="form-group">
     <textarea type="text" id= "summernote" name="editor_data"><%= @editor_data %></textarea>
@@ -118,6 +121,6 @@
   </div>
 
   <div>
-    <%= form.submit "儲存範本", class: "btn btn-success" %>
+    <%= form.submit "提交", class: "btn btn-success" %>
   </div>
 <% end %>

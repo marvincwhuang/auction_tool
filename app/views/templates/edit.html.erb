@@ -1,28 +1,4 @@
+<%= link_to "回首頁", root_path, class: 'btn btn-info' %>
 <h2>編輯範本</h2>
 <%= render 'templates/form', template: @template %>
-<%= content_tag :div, id: "template_data", data: {
-  template_name: @template_name,
-  editor_data: @editor_data,
-  product_descriptions: @product_descriptions,
-  available_specs: @available_specs,
-  information_titles: @information_titles,
-  information_contents: @information_contents,
-  buy_more_items: @buy_more_items,
-  buy_more_item_urls: @buy_more_item_urls,
-  warning: @warning,
-  gaurantee: @gaurantee,
-  gaurantee_scope: @gaurantee_scope,
-  notice_for_use: @notice_for_use,
-  product_declaration: @product_declaration,
-  image_urls: @image_urls
-} do %>
-<% end %>
-
-<a href="#" id="preview" class="btn btn-primary">預覽html</a>
-
-<div id="preview">
-  <h2>Yahoo</h2>
-  <div id="previewYahoo"></div>
-  <h2>Ruten</h2>
-  <div id="previewRuten"></div>
-</div>
+<%= render 'templates/preview'  %>

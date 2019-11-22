@@ -2,10 +2,11 @@ class TemplatesController < ApplicationController
   before_action :set_template, only: [:show, :edit, :update, :destroy]
 
   def index
-    @templates = Template.all
+    @templates = Template.all.order(:id)
   end
 
   def new
+    @template = Template.new
     @default_name = "範例1"
     @editor_data = "<h2><span style='background-color: rgb(255, 255, 0);'>目前強打優惠</span></h2>"
     @product_description = "全新品\n電薪製造地:韓國\n商品組裝地:中國\n寄送與到貨天數:直寄，3天到貨"
@@ -35,8 +36,9 @@ class TemplatesController < ApplicationController
 
   def create
     @template = Template.new(template_params)
-    @template.product_descriptions = params[:product_descriptions].split("\r\n") if params[:product_descriptions]
-    @template.available_specs = params[:available_specs].split("\r\n") if params[:available_specs]
+    @template.template_name = params[:template_name]
+    @template.product_descriptions = params[:product_description].split("\r\n") if params[:product_description]
+    @template.available_specs = params[:available_spec].split("\r\n") if params[:available_spec]
     @template.information_titles = params[:information_titles]
     @template.information_contents = params[:information_contents]
     @template.buy_more_items = params[:buy_more_items]
@@ -48,10 +50,11 @@ class TemplatesController < ApplicationController
     @template.notice_for_use = params[:notice_for_use].split("\r\n") if params[:notice_for_use]
     @template.product_declaration = params[:product_declaration].split("\r\n") if params[:product_declaration]
     @template.image_urls = params[:image_urls]
+    @template.category = params[:category]
 
     respond_to do |format|
       if @template.save
-        format.html { redirect_to root_path, notice: "已成功建立模板-#{@template.template_name}" }
+        format.html { redirect_to templates_path, notice: "已成功建立模板-#{@template.template_name}" }
       else
         format.html { render :new }
       end
@@ -87,10 +90,11 @@ class TemplatesController < ApplicationController
     @buy_more_items = @template.buy_more_items
     @buy_more_item_urls = @template.buy_more_item_urls
     @image_urls = @template.image_urls
+    @category = @template.category
   end
 
   def update
-    @template.template_name
+    @template.template_name = params[:template_name]
     @template.product_descriptions = params[:product_description].split("\r\n") if params[:product_description]
     @template.available_specs = params[:available_spec].split("\r\n") if params[:available_spec]
     @template.information_titles = params[:information_titles]
@@ -104,6 +108,7 @@ class TemplatesController < ApplicationController
     @template.notice_for_use = params[:notice_for_use].split("\r\n") if params[:notice_for_use]
     @template.product_declaration = params[:product_declaration].split("\r\n") if params[:product_declaration]
     @template.image_urls = params[:image_urls]
+    @template.category = params[:category]
 
     respond_to do |format|
       if @template.save
@@ -113,6 +118,17 @@ class TemplatesController < ApplicationController
         format.html { render :edit }
         format.json { render json: @template.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    if @template.destroy
+      respond_to do |format|
+        format.html { redirect_to templates_url, notice: 'template was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      puts "error"
     end
   end
 
@@ -136,7 +152,8 @@ class TemplatesController < ApplicationController
       :gaurantee_scope,
       :notice_for_use,
       :product_declaration,
-      :image_urls
+      :image_urls,
+      :category
     )
   end
 end
