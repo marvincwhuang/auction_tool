@@ -1,4 +1,3 @@
-window.onload = function () {
   $(document).ready(function () {
     $('#summernote').summernote()
     $('#summernote').summernote({
@@ -33,36 +32,129 @@ window.onload = function () {
     previewYahoo.innerHTML = yahooHtml
     previewRuten.innerHTML = rutenHtml
   })
-}
 
-function generateYahooTemplate() {
-  // get WYSIWYG content
-  let html = ''
-  html += $('#summernote').summernote('code')
-  html += `<div><font color="#ff0000" size="5"><b>產品介紹</b></font></div>`
-  // 產品介紹
-  const productDescription = document.getElementsByName("product_description")[0].value
-  const productDescriptionList = productDescription.split(/\n/)
-  productDescriptionList.forEach(el => {
-    html += `<div><font size="3"><b>${el}</b></font></div>`
-  })
-  html += `<div><font size="5"><b><br></b></font></div>`
-  html += `<div><font color="#ff0000" size="5"><b>適用型號</b></font></div>`
-  // available spec
-  const available_spec = document.getElementById("available_spec")[0].value
-  return html
-}
 
-function generateRutenTemplate() {
-  let html = ''
-  html += $('#summernote').summernote('code')
+  function generateYahooTemplate() {
+    const productDescription = document.getElementsByName("product_description")[0].value
+    const availableSpec = document.getElementsByName("available_spec")[0].value
+    const informationTitles = [...document.getElementsByName('information_titles[]')].map(el => el.value)
+    const informationContents = [...document.getElementsByName('information_contents[]')].map(el => el.value)
+    const informationItems = informationTitles.map((el, i) => {
+      return el + informationContents[i]
+    }).join('\n')
+    const buyMoreItems = [...document.getElementsByName('buy_more_items[]')].map(el => el.value)
+    const buyMoreItemUrls = [...document.getElementsByName('buy_more_item_urls[]')].map(el => el.value)
+    const warning = document.getElementsByName("warning")[0].value
+    const gaurantee = document.getElementsByName("gaurantee")[0].value
+    const gaurantee_scope = document.getElementsByName("gaurantee_scope")[0].value
+    const notice_for_use = document.getElementsByName("notice_for_use")[0].value
+    const product_declaration = document.getElementsByName("product_declaration")[0].value
+    const imageUrls = [...document.getElementsByName("image_urls[]")].map(el => el.value)
 
-  return html
-}
+    console.log(product_declaration)
 
-function clearHtmlPreview() {
-  const previewYahoo = document.getElementById('previewYahoo')
-  const previewRuten = document.getElementById('previewRuten')
-  previewYahoo.innerHTML = ""
-  previewRuten.innerHTML = ""
-}
+    let html = '' +
+      $('#summernote').summernote('code') +
+      generateTitleHtml('產品介紹') +
+      generateItemHtml(productDescription) +
+      genrateSpeaceHtml() +
+      generateTitleHtml('適用型號') +
+      generateItemHtml(availableSpec) +
+      generateTitleHtml('商品說明') +
+      generateItemHtml(informationItems) +
+      genrateSpeaceHtml() +
+      generateTitleHtml('一定要買') +
+      generateProductLinkHtml(buyMoreItems, buyMoreItemUrls) +
+      genrateSpeaceHtml() +
+      generateTitleHtml('注意事項') +
+      generateItemHtml(warning) +
+      genrateSpeaceHtml()
+
+    if (gaurantee !== "") {
+      let content =
+        generateTitleHtml('商品保固') +
+        generateItemHtml(gaurantee) +
+        genrateSpeaceHtml()
+      html += content
+    }
+
+    if (gaurantee_scope !== "") {
+      let content =
+        generateTitleHtml('保固範圍') +
+        generateItemHtml(gaurantee_scope) +
+        genrateSpeaceHtml()
+      html += content
+    }
+
+    if (notice_for_use !== "") {
+      let content =
+        generateTitleHtml('使用須知') +
+        generateItemHtml(notice_for_use) +
+        genrateSpeaceHtml()
+      html += content
+    }
+
+    if (product_declaration !== "") {
+      let content =
+        generateTitleHtml('商品說明') +
+        generateItemHtml(product_declaration) +
+        genrateSpeaceHtml()
+      html += content
+    }
+
+    html += generateImageHtml(imageUrls)
+
+    return html
+  }
+
+  function generateRutenTemplate() {
+    let html = ''
+    html += $('#summernote').summernote('code')
+
+    return html
+  }
+
+  function clearHtmlPreview() {
+    const previewYahoo = document.getElementById('previewYahoo')
+    const previewRuten = document.getElementById('previewRuten')
+    previewYahoo.innerHTML = ""
+    previewRuten.innerHTML = ""
+  }
+
+
+  function generateTitleHtml(title) {
+    return `<div><font color="#ff0000" size="5"><b>${title}</b></font></div>`
+  }
+
+  function generateItemHtml(content) {
+    let html = ''
+    const list = content.split(/\n/)
+    list.forEach(el => {
+      html += `<div><font size="3"><b>${el}</b></font></div>`
+    })
+    return html
+  }
+
+  function genrateSpeaceHtml() {
+    return `<div><font size="5"><b><br></b></font></div>`
+  }
+
+  function generateOneItemHtml(content) {
+    return `<div><font size="3"><b>${content}</b></font></div>`
+  }
+
+  function generateProductLinkHtml(items, urls) {
+    let html = ''
+    items.forEach((item, i) => {
+      html += `<div><font color="#ff0000" size="5"><b><a href="${urls[i]}">${item}</a></b></font></div>`
+    })
+    return html
+  }
+
+  function generateImageHtml(urls) {
+    let html = ''
+    urls.forEach(url => {
+      html += `<div style="text-align:center;"><img src="${url}" width="60%"></div>`
+    })
+    return html
+  }

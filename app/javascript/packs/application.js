@@ -14,8 +14,11 @@
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-require('./templates/form')
-require('./templates/preview')
+window.onload = function () {
+
+  require('./templates/form')
+  require('./templates/preview')
+}
 
 // window.onload = function () {
 //   // const productDescription = document.getElementById("productDescription")
