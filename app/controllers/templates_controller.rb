@@ -1,5 +1,5 @@
 class TemplatesController < ApplicationController
-  before_action :set_template, only: [:edit, :update, :destroy]
+  before_action :set_template, only: [:show, :edit, :update, :destroy]
 
   def index
     if params[:product_id]
@@ -8,6 +8,40 @@ class TemplatesController < ApplicationController
     else
      @templates = Template.order(:id).select{|template| template.product_id == nil}
     end
+  end
+
+  def show
+    @product = Product.find(params[:product_id]) if params[:product_id]
+    @template_name = @template.template_name
+    @editor_data = @template.editor_data
+    @product_description = @template.product_descriptions.join("\r\n")
+    @product_descriptions = @template.product_descriptions
+    @available_spec = @template.available_specs.join("\r\n")
+    @available_specs = @template.available_specs
+    @information_titles = @template.information_titles
+    @information1_title = @information_titles[0] if @information_titles
+    @information2_title = @information_titles[1] if @information_titles
+    @information3_title = @information_titles[2] if @information_titles
+    @information4_title = @information_titles[3] if @information_titles
+    @information5_title = @information_titles[4] if @information_titles
+    @information6_title = @information_titles[5] if @information_titles
+    @information_contents = @template.information_contents
+    @information1_content = @information_contents[0] if @information_titles
+    @information2_content = @information_contents[1] if @information_titles
+    @information3_content = @information_contents[2] if @information_titles
+    @information4_content = @information_contents[3] if @information_titles
+    @information5_content = @information_contents[4] if @information_titles
+    @information6_content = @information_contents[5] if @information_titles
+    @warning = @template.warning.join("\r\n")
+    @gaurantee = @template.gaurantee.join("\r\n")
+    @gaurantee_scope = @template.gaurantee_scope.join("\r\n")
+    @notice_for_use = @template.notice_for_use.join("\r\n")
+    @product_declaration = @template.product_declaration.join("\r\n")
+    @buy_more_items = @template.buy_more_items
+    @buy_more_item_urls = @template.buy_more_item_urls
+    @image_urls = @template.image_urls
+    @category = @template.category
+    
   end
 
   def new

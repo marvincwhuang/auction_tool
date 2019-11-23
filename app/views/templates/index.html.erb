@@ -16,7 +16,17 @@
     <% @templates.each_with_index do |template, key| %>
       <tr>
         <th scope="row"><%= key + 1 %></th>
-        <td><%= template.template_name %></td>
+        <td>
+          <% if params[:product_id] %>
+            <%= link_to product_template_path(@product, template) do %>
+              <%= template.template_name %>
+            <% end %>
+          <% else %>
+            <%= link_to template_path(template) do %>
+              <%= template.template_name %>
+            <% end %>
+          <% end %>
+        </td>
         <td>  
           <div class="btn-group" role="group">
           <% if @product %>
