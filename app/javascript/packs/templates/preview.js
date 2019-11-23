@@ -5,6 +5,14 @@ $(document).ready(function () {
   })
 })
 
+const removePreview = document.getElementById('removePreview')
+if (removePreview) {
+  removePreview.addEventListener('click', (e) => {
+    e.preventDefault()
+    clearHtmlPreview()
+  })
+}
+
 const preview = document.getElementById('preview')
 if (preview) {
   preview.addEventListener('click', (e) => {
@@ -12,7 +20,6 @@ if (preview) {
     clearHtmlPreview()
     const previewYahoo = document.getElementById('previewYahoo')
     const previewRuten = document.getElementById('previewRuten')
-    const sourceCodeRuten = document.getElementById('sourceCodeRuten')
     if (previewYahoo) {
       let yahooHtml = generateYahooTemplate()
       previewYahoo.innerHTML = yahooHtml
@@ -171,11 +178,15 @@ function generateRutenTemplate() {
 function clearHtmlPreview() {
   const previewYahoo = document.getElementById('previewYahoo')
   const previewRuten = document.getElementById('previewRuten')
+  const sourceCodeYahoo = document.getElementById('sourceCodeYahoo')
+  const sourceCodeRuten = document.getElementById('sourceCodeRuten')
   if (previewYahoo) {
     previewYahoo.innerHTML = ""
+    sourceCodeYahoo.innerHTML = ""
   }
   if (previewRuten) {
     previewRuten.innerHTML = ""
+    sourceCodeRuten.innerHTML = ""
   }
 }
 
