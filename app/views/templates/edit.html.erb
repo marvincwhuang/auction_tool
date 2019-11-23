@@ -1,4 +1,8 @@
-<%= link_to "回首頁", root_path, class: 'btn btn-info' %>
+<% if params[:product_id] %>
+  <%= link_to "返回", product_templates_path, class: 'btn btn-info' %>
+<% else %>
+  <%= link_to "返回", templates_path, class: 'btn btn-info' %>
+<% end %>
 <h2>編輯範本</h2>
 <%= render 'templates/form', template: @template %>
 <%= render 'templates/preview'  %>

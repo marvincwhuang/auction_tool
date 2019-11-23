@@ -62,9 +62,11 @@ ActiveRecord::Schema.define(version: 2019_11_22_201757) do
     t.text "notice_for_use", default: [], array: true
     t.text "product_declaration", default: [], array: true
     t.text "image_urls", default: [], array: true
+    t.bigint "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "category"
+    t.index ["product_id"], name: "index_templates_on_product_id"
   end
 
   create_table "yahoo_templates", force: :cascade do |t|
@@ -100,5 +102,6 @@ ActiveRecord::Schema.define(version: 2019_11_22_201757) do
   add_foreign_key "prices", "services"
   add_foreign_key "products", "brands"
   add_foreign_key "services", "brands"
+  add_foreign_key "templates", "products"
   add_foreign_key "yahoo_templates", "products"
 end

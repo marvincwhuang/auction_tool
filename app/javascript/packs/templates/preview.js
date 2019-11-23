@@ -6,18 +6,27 @@ $(document).ready(function () {
 })
 
 const preview = document.getElementById('preview')
-preview.addEventListener('click', (e) => {
-  e.preventDefault()
-  clearHtmlPreview()
-  const previewYahoo = document.getElementById('previewYahoo')
-  const previewRuten = document.getElementById('previewRuten')
-  let yahooHtml = generateYahooTemplate()
-  let rutenHtml = generateRutenTemplate()
-  previewYahoo.innerHTML = yahooHtml
-  previewRuten.innerHTML = rutenHtml
-})
-
-
+if (preview) {
+  preview.addEventListener('click', (e) => {
+    e.preventDefault()
+    clearHtmlPreview()
+    const previewYahoo = document.getElementById('previewYahoo')
+    const previewRuten = document.getElementById('previewRuten')
+    const sourceCodeRuten = document.getElementById('sourceCodeRuten')
+    if (previewYahoo) {
+      let yahooHtml = generateYahooTemplate()
+      previewYahoo.innerHTML = yahooHtml
+      const sourceCodeYahoo = document.getElementById('sourceCodeYahoo')
+      sourceCodeYahoo.innerText = yahooHtml
+    }
+    if (previewRuten) {
+      let rutenHtml = generateRutenTemplate()
+      previewRuten.innerHTML = rutenHtml
+      const sourceCodeRuten = document.getElementById('sourceCodeRuten')
+      sourceCodeRuten.innerText = rutenHtml
+    }
+  })
+}
 
 function generateYahooTemplate() {
   const productDescription = document.getElementsByName("product_description")[0].value
@@ -162,8 +171,12 @@ function generateRutenTemplate() {
 function clearHtmlPreview() {
   const previewYahoo = document.getElementById('previewYahoo')
   const previewRuten = document.getElementById('previewRuten')
-  previewYahoo.innerHTML = ""
-  previewRuten.innerHTML = ""
+  if (previewYahoo) {
+    previewYahoo.innerHTML = ""
+  }
+  if (previewRuten) {
+    previewRuten.innerHTML = ""
+  }
 }
 
 

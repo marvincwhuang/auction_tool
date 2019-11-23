@@ -1,8 +1,13 @@
 <a href="#" id="preview" class="btn btn-primary">預覽html</a>
 
 <div id="preview">
-  <h2>Yahoo</h2>
+  <% if @category && @category == 'yahoo'  %>
+  <h2>Yahoo HTML</h2>
   <div id="previewYahoo"></div>
-  <h2>Ruten</h2>
+  <div id="sourceCodeYahoo""></div>
+  <%  else %>
+  <h2>Ruten HTML</h2>
   <div id="previewRuten"></div>
+  <div id="sourceCodeRuten"></div>
+  <%  end %>
 </div>

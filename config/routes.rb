@@ -6,8 +6,13 @@ Rails.application.routes.draw do
   get '/products/:id/edit_yahoo_html', to: 'products#edit_yahoo_html'
   post '/products/:id/create_yahoo_html', to: 'products#create_yahoo_html'
   patch '/products/:id/update_yahoo_html', to: 'products#update_yahoo_html'
+  
+  
 
-  resources :products
+  resources :products do
+    resources :templates
+    get '/templates/copy', to: 'templates#copy'
+  end
   resources :brands
   resources :services
   resources :templates

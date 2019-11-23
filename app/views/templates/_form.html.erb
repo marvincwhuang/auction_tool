@@ -1,9 +1,31 @@
 <div id="templateForm"></div>
-<%= form_with(model: template, local: true) do |form| %>
+
+<% if @templates && @templates.count > 0 %>
+<h3>*使用既有範本</h3>
+  <%= form_with(model: @product ? [@product, template] : template, local: true) do |form| %>
+    <div class="form-group">
+      <%= form.collection_select :id, @templates, :id, :template_name,{}, {:class=> "form-control", :id => "template_selector"} %>
+    </div>
+    <div class="form-group">
+      <label for="category" class="col-sm-2 form-control-label">範本名稱</label>
+      <input class="form-control" type="text" name="template_name" placeholder="範本名稱" value="<%= @template_name %>">
+    </div>
+      <%= form.submit "提交", class: "btn btn-success" %>
+  <% end %>
+<% end %>
+<% if @templates && @templates.count == 0 %>
+  <p>(目前無可用的既有範本，請手動建立)</p>
+<% end %>
+<hr>
+
+<h3>*手動編輯</h3>
+<%= form_with(model: @product ? [@product, template] : template, local: true) do |form| %>
   <div class="form-group">
+    <label for="category" class="col-sm-2 form-control-label">類別</label>
     <%= select_tag(:category, options_for_select(['yahoo', 'ruten'], @category), class: 'form-control') %>
   </div>
   <div class="form-group">
+    <label for="category" class="col-sm-2 form-control-label">範本名稱</label>
     <input class="form-control" type="text" name="template_name" placeholder="範本名稱" value="<%= @template_name %>">
   </div>
   <div class="form-group">

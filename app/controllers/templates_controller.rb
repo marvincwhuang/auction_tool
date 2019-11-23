@@ -1,12 +1,19 @@
 class TemplatesController < ApplicationController
-  before_action :set_template, only: [:show, :edit, :update, :destroy]
+  before_action :set_template, only: [:edit, :update, :destroy]
 
   def index
-    @templates = Template.all.order(:id)
+    if params[:product_id]
+      @product = Product.find(params[:product_id])
+      @templates = @product.templates
+    else
+     @templates = Template.order(:id).select{|template| template.product_id == nil}
+    end
   end
 
   def new
+    @product = Product.find(params[:product_id]) if params[:product_id]
     @template = Template.new
+    @templates = Template.order(:id).select{|template| template.product_id == nil}
     @default_name = "範例1"
     @editor_data = "<h2><span style='background-color: rgb(255, 255, 0);'>目前強打優惠</span></h2>"
     @product_description = "全新品\n電薪製造地:韓國\n商品組裝地:中國\n寄送與到貨天數:直寄，3天到貨"
@@ -35,26 +42,56 @@ class TemplatesController < ApplicationController
   end
 
   def create
-    @template = Template.new(template_params)
-    @template.template_name = params[:template_name]
-    @template.product_descriptions = params[:product_description].split("\r\n") if params[:product_description]
-    @template.available_specs = params[:available_spec].split("\r\n") if params[:available_spec]
-    @template.information_titles = params[:information_titles]
-    @template.information_contents = params[:information_contents]
-    @template.buy_more_items = params[:buy_more_items]
-    @template.buy_more_item_urls = params[:buy_more_item_urls]
-    @template.image_urls = params[:image_urls]
-    @template.warning = params[:warning].split("\r\n") if params[:warning]
-    @template.gaurantee = params[:gaurantee].split("\r\n") if params[:gaurantee]
-    @template.gaurantee_scope = params[:gaurantee_scope].split("\r\n") if params[:gaurantee_scope]
-    @template.notice_for_use = params[:notice_for_use].split("\r\n") if params[:notice_for_use]
-    @template.product_declaration = params[:product_declaration].split("\r\n") if params[:product_declaration]
-    @template.image_urls = params[:image_urls]
-    @template.category = params[:category]
+    @target_template = Template.find(params[:template][:id]) if params[:template]
+    if @target_template
+      puts "copy with #{@target_template}"
+      @product = Product.find(params[:product_id]) if params[:product_id]
+      @template = Template.new(template_params)
+      @template.editor_data = @target_template.editor_data
+      @template.template_name = params[:template_name]
+      @template.product_descriptions = @target_template.product_descriptions
+      @template.available_specs = @target_template.available_specs
+      @template.information_titles = @target_template.information_titles
+      @template.information_contents = @target_template.information_contents
+      @template.buy_more_items = @target_template.buy_more_items
+      @template.buy_more_item_urls = @target_template.buy_more_item_urls
+      @template.image_urls = @target_template.image_urls
+      @template.warning = @target_template.warning
+      @template.gaurantee = @target_template.gaurantee
+      @template.gaurantee_scope = @target_template.gaurantee_scope
+      @template.notice_for_use = @target_template.notice_for_use
+      @template.product_declaration = @target_template.product_declaration
+      @template.image_urls = @target_template.image_urls
+      @template.category = @target_template.category
+      @template.product_id = params[:product_id] if params[:product_id]
+    else
+      @product = Product.find(params[:product_id]) if params[:product_id]
+      @template = Template.new(template_params)
+      @template.template_name = params[:template_name]
+      @template.product_descriptions = params[:product_description].split("\r\n") if params[:product_description]
+      @template.available_specs = params[:available_spec].split("\r\n") if params[:available_spec]
+      @template.information_titles = params[:information_titles]
+      @template.information_contents = params[:information_contents]
+      @template.buy_more_items = params[:buy_more_items]
+      @template.buy_more_item_urls = params[:buy_more_item_urls]
+      @template.image_urls = params[:image_urls]
+      @template.warning = params[:warning].split("\r\n") if params[:warning]
+      @template.gaurantee = params[:gaurantee].split("\r\n") if params[:gaurantee]
+      @template.gaurantee_scope = params[:gaurantee_scope].split("\r\n") if params[:gaurantee_scope]
+      @template.notice_for_use = params[:notice_for_use].split("\r\n") if params[:notice_for_use]
+      @template.product_declaration = params[:product_declaration].split("\r\n") if params[:product_declaration]
+      @template.image_urls = params[:image_urls]
+      @template.category = params[:category]
+      @template.product_id = @product.id if params[:product_id]
+    end
 
     respond_to do |format|
       if @template.save
-        format.html { redirect_to templates_path, notice: "已成功建立模板-#{@template.template_name}" }
+        if @product
+          format.html { redirect_to product_templates_path, notice: "已成功建立模板-#{@template.template_name}" }
+        else
+          format.html { redirect_to templates_path, notice: "已成功建立模板-#{@template.template_name}" }
+        end
       else
         format.html { render :new }
       end
@@ -62,6 +99,7 @@ class TemplatesController < ApplicationController
   end
 
   def edit
+    @product = Product.find(params[:product_id]) if params[:product_id]
     @template_name = @template.template_name
     @editor_data = @template.editor_data
     @product_description = @template.product_descriptions.join("\r\n")
@@ -69,19 +107,19 @@ class TemplatesController < ApplicationController
     @available_spec = @template.available_specs.join("\r\n")
     @available_specs = @template.available_specs
     @information_titles = @template.information_titles
-    @information1_title = @information_titles[0]
-    @information2_title = @information_titles[1]
-    @information3_title = @information_titles[2]
-    @information4_title = @information_titles[3]
-    @information5_title = @information_titles[4]
-    @information6_title = @information_titles[5]
+    @information1_title = @information_titles[0] if @information_titles
+    @information2_title = @information_titles[1] if @information_titles
+    @information3_title = @information_titles[2] if @information_titles
+    @information4_title = @information_titles[3] if @information_titles
+    @information5_title = @information_titles[4] if @information_titles
+    @information6_title = @information_titles[5] if @information_titles
     @information_contents = @template.information_contents
-    @information1_content = @information_contents[0]
-    @information2_content = @information_contents[1]
-    @information3_content = @information_contents[2]
-    @information4_content = @information_contents[3]
-    @information5_content = @information_contents[4]
-    @information6_content = @information_contents[5]
+    @information1_content = @information_contents[0] if @information_titles
+    @information2_content = @information_contents[1] if @information_titles
+    @information3_content = @information_contents[2] if @information_titles
+    @information4_content = @information_contents[3] if @information_titles
+    @information5_content = @information_contents[4] if @information_titles
+    @information6_content = @information_contents[5] if @information_titles
     @warning = @template.warning.join("\r\n")
     @gaurantee = @template.gaurantee.join("\r\n")
     @gaurantee_scope = @template.gaurantee_scope.join("\r\n")
@@ -95,6 +133,7 @@ class TemplatesController < ApplicationController
 
   def update
     @template.template_name = params[:template_name]
+    @template.editor_data = params[:editor_data] if params[:editor_data]
     @template.product_descriptions = params[:product_description].split("\r\n") if params[:product_description]
     @template.available_specs = params[:available_spec].split("\r\n") if params[:available_spec]
     @template.information_titles = params[:information_titles]
@@ -110,26 +149,32 @@ class TemplatesController < ApplicationController
     @template.image_urls = params[:image_urls]
     @template.category = params[:category]
 
-    respond_to do |format|
-      if @template.save
-        format.html { redirect_to templates_path, notice: 'template was successfully updated.' }
-        format.json { render :show, status: :ok, location: @template }
+    if @template.save
+      if params[:product_id]
+        redirect_to product_templates_path
       else
-        format.html { render :edit }
-        format.json { render json: @template.errors, status: :unprocessable_entity }
+        redirect_to templates_path
       end
+    else
+      puts "error"
     end
   end
 
   def destroy
     if @template.destroy
-      respond_to do |format|
-        format.html { redirect_to templates_url, notice: 'template was successfully destroyed.' }
-        format.json { head :no_content }
+      if params[:product_id]
+        @product = Product.find(params[:product_id])
+        redirect_to product_templates_path(@product)
+      else
+        redirect_to templates_path
       end
     else
       puts "error"
     end
+  end
+
+  def copy
+    
   end
 
   private
@@ -153,7 +198,11 @@ class TemplatesController < ApplicationController
       :notice_for_use,
       :product_declaration,
       :image_urls,
-      :category
+      :category,
+      # :product_description,
+      # :available_spec,
+      :product_id,
+      :template
     )
   end
 end
