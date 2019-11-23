@@ -1,6 +1,6 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-8">拍賣商品服務資料＆HTML</h1>
+    <h1 class="display-8">拍賣商品服務資料</h1>
 		<ol>
 			<li><%= link_to "新增品牌", new_brand_path %></li>
 			<li><%= link_to "新增服務選項", services_path %></li>
@@ -89,7 +89,13 @@
 								服務
 							</th>
 							<th>
-								價格
+								yahoo價格
+							</th>
+							<th>
+								ruten價格
+							</th>
+							<th>
+								shopee價格
 							</th>
 						</tr>
 					</thead>
@@ -103,7 +109,13 @@
 								<%= service[:name] %>
 							</td>
 							<td>
-								<%= service[:price] %>
+								<%= service[:yahoo_price] %>
+							</td>
+							<td>
+								<%= service[:ruten_price] %>
+							</td>
+							<td>
+								<%= service[:shoppe_price] %>
 							</td>
 						</tr>
 						<% end %>

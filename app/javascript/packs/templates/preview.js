@@ -4,7 +4,7 @@ $(document).ready(function () {
     lang: 'zh-TW'
   })
 })
-
+clearHtmlPreview()
 const removePreview = document.getElementById('removePreview')
 if (removePreview) {
   removePreview.addEventListener('click', (e) => {
@@ -13,27 +13,37 @@ if (removePreview) {
   })
 }
 
-const preview = document.getElementById('preview')
-if (preview) {
-  preview.addEventListener('click', (e) => {
-    e.preventDefault()
-    clearHtmlPreview()
-    const previewYahoo = document.getElementById('previewYahoo')
-    const previewRuten = document.getElementById('previewRuten')
-    if (previewYahoo) {
-      let yahooHtml = generateYahooTemplate()
-      previewYahoo.innerHTML = yahooHtml
-      const sourceCodeYahoo = document.getElementById('sourceCodeYahoo')
-      sourceCodeYahoo.innerText = yahooHtml
-    }
-    if (previewRuten) {
-      let rutenHtml = generateRutenTemplate()
-      previewRuten.innerHTML = rutenHtml
-      const sourceCodeRuten = document.getElementById('sourceCodeRuten')
-      sourceCodeRuten.innerText = rutenHtml
-    }
-  })
+function clearHtmlPreview() {
+  const previewYahooDiv = document.getElementById('previewYahooDiv')
+  const previewRutenDiv = document.getElementById('previewRutenDiv')
+  previewYahooDiv.style.display = 'none'
+  previewRutenDiv.style.display = 'none'
 }
+
+const previewYahooBtn = document.getElementById('previewYahooBtn')
+const previewRutenBtn = document.getElementById('previewRutenBtn')
+const previewYahoo = document.getElementById('previewYahoo')
+const sourceCodeYahoo = document.getElementById('sourceCodeYahoo')
+const previewRuten = document.getElementById('previewRuten')
+const sourceCodeRuten = document.getElementById('sourceCodeRuten')
+
+previewYahooBtn.addEventListener('click', (e) => {
+  e.preventDefault()
+  clearHtmlPreview()
+  previewYahooDiv.style.display = 'block'
+  let yahooHtml = generateYahooTemplate()
+  previewYahoo.innerHTML = yahooHtml
+  sourceCodeYahoo.innerText = yahooHtml
+})
+
+previewRutenBtn.addEventListener('click', (e) => {
+  e.preventDefault()
+  clearHtmlPreview()
+  previewRutenDiv.style.display = 'block'
+  let rutenHtml = generateRutenTemplate()
+  previewRuten.innerHTML = rutenHtml
+  sourceCodeRuten.innerText = rutenHtml
+})
 
 function generateYahooTemplate() {
   const productDescription = document.getElementsByName("product_description")[0].value
@@ -113,7 +123,7 @@ function generateRutenTemplate() {
   const informationItems = informationTitles.map((el, i) => {
     return el + informationContents[i]
   }).join('\n')
-  const buyMoreItems = [...document.getElementsByName('buy_more_items[]')].map(el => el.value)
+  const buyMoreItemImageUrls = [...document.getElementsByName('buy_more_item_image_urls[]')].map(el => el.value)
   const buyMoreItemUrls = [...document.getElementsByName('buy_more_item_urls[]')].map(el => el.value)
   const warning = document.getElementsByName("warning")[0].value
   const gaurantee = document.getElementsByName("gaurantee")[0].value
@@ -132,7 +142,7 @@ function generateRutenTemplate() {
     generateItemHtml2(informationItems) +
     genrateSpaceHtml2() +
     `<div style="text-align: center;"><span style="color: #ff0000; font-size: 18pt;" color="#ff0000"><b>★★一定要買★★</b></span>` +
-    generateProductLinkHtml2(buyMoreItems, buyMoreItemUrls) +
+    generateProductLinkHtml2(buyMoreItemImageUrls, buyMoreItemUrls) +
     genrateSpaceHtml2() +
     generateTitleHtml2('注意事項') +
     generateItemHtml2(warning) +
@@ -174,22 +184,6 @@ function generateRutenTemplate() {
 
   return html
 }
-
-function clearHtmlPreview() {
-  const previewYahoo = document.getElementById('previewYahoo')
-  const previewRuten = document.getElementById('previewRuten')
-  const sourceCodeYahoo = document.getElementById('sourceCodeYahoo')
-  const sourceCodeRuten = document.getElementById('sourceCodeRuten')
-  if (previewYahoo) {
-    previewYahoo.innerHTML = ""
-    sourceCodeYahoo.innerHTML = ""
-  }
-  if (previewRuten) {
-    previewRuten.innerHTML = ""
-    sourceCodeRuten.innerHTML = ""
-  }
-}
-
 
 // yahoo
 function generateTitleHtml(title) {

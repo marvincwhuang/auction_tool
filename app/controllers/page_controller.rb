@@ -13,7 +13,7 @@ class PageController < ApplicationController
     @prices = @current_product ? Price.where(product_id: @current_product.id) : []
     @services = @prices.map do |item|
       service = Service.find(item.service_id)
-      {name: service.name, price: item.price}
+      {name: service.name, yahoo_price: item.yahoo, ruten_price: item.ruten, shoppe_price: item.shopee}
     end
   end
 end

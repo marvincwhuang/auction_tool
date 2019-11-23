@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_22_201757) do
+ActiveRecord::Schema.define(version: 2019_11_20_132605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,9 @@ ActiveRecord::Schema.define(version: 2019_11_22_201757) do
   end
 
   create_table "prices", force: :cascade do |t|
-    t.string "price"
+    t.string "yahoo"
+    t.string "ruten"
+    t.string "shopee"
     t.bigint "product_id", null: false
     t.bigint "service_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -56,6 +58,7 @@ ActiveRecord::Schema.define(version: 2019_11_22_201757) do
     t.text "information_contents", default: [], array: true
     t.text "buy_more_items", default: [], array: true
     t.text "buy_more_item_urls", default: [], array: true
+    t.text "buy_more_item_image_urls", default: [], array: true
     t.text "warning", default: [], array: true
     t.text "gaurantee", default: [], array: true
     t.text "gaurantee_scope", default: [], array: true
@@ -65,7 +68,6 @@ ActiveRecord::Schema.define(version: 2019_11_22_201757) do
     t.bigint "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "category"
     t.index ["product_id"], name: "index_templates_on_product_id"
   end
 

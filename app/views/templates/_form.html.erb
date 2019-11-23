@@ -6,10 +6,6 @@
     <div class="form-group">
       <%= form.collection_select :id, @templates, :id, :template_name,{}, {:class=> "form-control", :id => "template_selector"} %>
     </div>
-    <div class="form-group">
-      <label for="category" class="col-sm-2 form-control-label">範本名稱</label>
-      <input class="form-control" type="text" name="template_name" placeholder="範本名稱" value="<%= @template_name %>">
-    </div>
       <%= form.submit "提交", class: "btn btn-success" %>
   <% end %>
 <% end %>
@@ -21,12 +17,8 @@
 <h3>*手動編輯</h3>
 <%= form_with(model: @product ? [@product, template] : template, local: true) do |form| %>
   <div class="form-group">
-    <label for="category" class="col-sm-2 form-control-label">類別</label>
-    <%= select_tag(:category, options_for_select(['yahoo', 'ruten'], @category), class: 'form-control') %>
-  </div>
-  <div class="form-group">
-    <label for="category" class="col-sm-2 form-control-label">範本名稱</label>
-    <input class="form-control" type="text" name="template_name" placeholder="範本名稱" value="<%= @template_name %>">
+    <label for="category" class="col-sm-2 form-control-label">標題</label>
+    <input class="form-control" maxlength="60" type="text" name="template_name" placeholder="標題" value="<%= @template_name %>">
   </div>
   <div class="form-group">
     <textarea type="text" id= "summernote" name="editor_data"><%= @editor_data %></textarea>
@@ -95,11 +87,14 @@
   <div id="buyMoreItemsArea" class="form-row">
     <% @buy_more_items.each_with_index do |item, index| %>
     <div class="buy_more_item">
-      <div class="form-group col-xs-3">
+      <div class="form-group col-xs-4">
         <input class="form-control" type="text" name="buy_more_items[]" placeholder="商品<%= index+1 %>" value="<%= item %>">
       </div>
-      <div class="form-group col-xs-9">
+      <div class="form-group col-xs-4">
         <input class="form-control" type="text" name="buy_more_item_urls[]" placeholder="商品網址<%= index+1 %>" value="<%=  @buy_more_item_urls[index] %>" >
+      </div>
+      <div class="form-group col-xs-4">
+        <input class="form-control" type="text" name="buy_more_item_image_urls[]" placeholder="圖片網址<%= index+1 %>" value="<%= @buy_more_item_image_urls[index] %>" >
       </div>
     </div>
     <% end %>

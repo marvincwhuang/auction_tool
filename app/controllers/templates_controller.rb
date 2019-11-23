@@ -6,7 +6,7 @@ class TemplatesController < ApplicationController
       @product = Product.find(params[:product_id])
       @templates = @product.templates
     else
-     @templates = Template.order(:id).select{|template| template.product_id == nil}
+     @templates = Template.order(:template_name).select{|template| template.product_id == nil}
     end
   end
 
@@ -39,9 +39,8 @@ class TemplatesController < ApplicationController
     @product_declaration = @template.product_declaration.join("\r\n")
     @buy_more_items = @template.buy_more_items
     @buy_more_item_urls = @template.buy_more_item_urls
+    @buy_more_item_image_urls = @template.buy_more_item_image_urls
     @image_urls = @template.image_urls
-    @category = @template.category
-    
   end
 
   def new
@@ -72,6 +71,7 @@ class TemplatesController < ApplicationController
     @product_declaration = "版本多種，收到的商品可能與照片不同，恕無法因版本 不同而要求退換貨。"
     @buy_more_items = ["商品1", "商品2", "商品3"]
     @buy_more_item_urls = ["https://tw.yahoo.com/","https://tw.yahoo.com/", "https://tw.yahoo.com/"]
+    @buy_more_item_image_urls = ["https://picsum.photos/200", "https://picsum.photos/200", "https://picsum.photos/200"]
     @image_urls = ["https://picsum.photos/200", "https://picsum.photos/200", "https://picsum.photos/200"]
   end
 
@@ -81,14 +81,15 @@ class TemplatesController < ApplicationController
       puts "copy with #{@target_template}"
       @product = Product.find(params[:product_id]) if params[:product_id]
       @template = Template.new(template_params)
+      @template.template_name = @target_template.template_name
       @template.editor_data = @target_template.editor_data
-      @template.template_name = params[:template_name]
       @template.product_descriptions = @target_template.product_descriptions
       @template.available_specs = @target_template.available_specs
       @template.information_titles = @target_template.information_titles
       @template.information_contents = @target_template.information_contents
       @template.buy_more_items = @target_template.buy_more_items
       @template.buy_more_item_urls = @target_template.buy_more_item_urls
+      @template.buy_more_item_image_urls = @template.buy_more_item_image_urls
       @template.image_urls = @target_template.image_urls
       @template.warning = @target_template.warning
       @template.gaurantee = @target_template.gaurantee
@@ -96,7 +97,6 @@ class TemplatesController < ApplicationController
       @template.notice_for_use = @target_template.notice_for_use
       @template.product_declaration = @target_template.product_declaration
       @template.image_urls = @target_template.image_urls
-      @template.category = @target_template.category
       @template.product_id = params[:product_id] if params[:product_id]
     else
       @product = Product.find(params[:product_id]) if params[:product_id]
@@ -108,6 +108,7 @@ class TemplatesController < ApplicationController
       @template.information_contents = params[:information_contents]
       @template.buy_more_items = params[:buy_more_items]
       @template.buy_more_item_urls = params[:buy_more_item_urls]
+      @template.buy_more_item_image_urls = params[:buy_more_item_image_urls]
       @template.image_urls = params[:image_urls]
       @template.warning = params[:warning].split("\r\n") if params[:warning]
       @template.gaurantee = params[:gaurantee].split("\r\n") if params[:gaurantee]
@@ -115,7 +116,6 @@ class TemplatesController < ApplicationController
       @template.notice_for_use = params[:notice_for_use].split("\r\n") if params[:notice_for_use]
       @template.product_declaration = params[:product_declaration].split("\r\n") if params[:product_declaration]
       @template.image_urls = params[:image_urls]
-      @template.category = params[:category]
       @template.product_id = @product.id if params[:product_id]
     end
 
@@ -161,8 +161,8 @@ class TemplatesController < ApplicationController
     @product_declaration = @template.product_declaration.join("\r\n")
     @buy_more_items = @template.buy_more_items
     @buy_more_item_urls = @template.buy_more_item_urls
+    @buy_more_item_image_urls = @template.buy_more_item_image_urls
     @image_urls = @template.image_urls
-    @category = @template.category
   end
 
   def update
@@ -174,6 +174,7 @@ class TemplatesController < ApplicationController
     @template.information_contents = params[:information_contents]
     @template.buy_more_items = params[:buy_more_items]
     @template.buy_more_item_urls = params[:buy_more_item_urls]
+    @template.buy_more_item_image_urls = params[:buy_more_item_image_urls]
     @template.image_urls = params[:image_urls]
     @template.warning = params[:warning].split("\r\n") if params[:warning]
     @template.gaurantee = params[:gaurantee].split("\r\n") if params[:gaurantee]
@@ -181,7 +182,6 @@ class TemplatesController < ApplicationController
     @template.notice_for_use = params[:notice_for_use].split("\r\n") if params[:notice_for_use]
     @template.product_declaration = params[:product_declaration].split("\r\n") if params[:product_declaration]
     @template.image_urls = params[:image_urls]
-    @template.category = params[:category]
 
     if @template.save
       if params[:product_id]
@@ -226,15 +226,13 @@ class TemplatesController < ApplicationController
       :information_contents,
       :buy_more_items,
       :buy_more_item_urls,
+      :buy_more_item_image_urls,
       :warning,
       :gaurantee,
       :gaurantee_scope,
       :notice_for_use,
       :product_declaration,
       :image_urls,
-      :category,
-      # :product_description,
-      # :available_spec,
       :product_id,
       :template
     )

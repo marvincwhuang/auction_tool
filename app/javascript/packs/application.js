@@ -18,6 +18,7 @@ window.onload = function () {
 
   require('./templates/form')
   require('./templates/preview')
+  require('./services/index')
 
   $(".flash").fadeOut(3000);
 

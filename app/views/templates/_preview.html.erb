@@ -1,15 +1,17 @@
-<a href="#" id="preview" class="btn btn-primary">預覽html</a>
+<a href="#" id="previewYahooBtn" class="btn btn-primary">預覽yahoo html</a>
+<a href="#" id="previewRutenBtn" class="btn btn-success">預覽ruten html</a>
 <a href="#" id="removePreview" class="btn btn-info">取消預覽</a>
 <div id="preview">
-  <% if @category && @category == 'yahoo'  %>
-  <h2>Yahoo HTML</h2>
-  <div id="previewYahoo"></div>
-  <h3>HTML源碼</h3>
-  <div id="sourceCodeYahoo""></div>
-  <%  else %>
-  <h2>Ruten HTML</h2>
-  <div id="previewRuten"></div>
-  <h3>HTML源碼</h3>
-  <div id="sourceCodeRuten"></div>
-  <%  end %>
-</div>
+  <div id="previewYahooDiv">
+    <h2>Yahoo HTML</h2>
+    <div id="previewYahoo"></div>
+    <h3>HTML源碼</h3>
+    <div id="sourceCodeYahoo""></div>
+  </div>
+  <div id="previewRutenDiv">
+    <h2>露天 HTML</h2>
+    <div id="previewRuten"></div>
+    <h3>HTML源碼</h3>
+    <div id="sourceCodeRuten"></div>
+  </div>
+<div>
