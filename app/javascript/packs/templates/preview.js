@@ -147,7 +147,7 @@ function generateRutenTemplate() {
     generateTitleHtml2('商品說明') +
     generateItemHtml2(informationItems) +
     genrateSpaceHtml2() +
-    `<div style="text-align: center;"><span style="color: #ff0000; font-size: 18pt;" color="#ff0000"><b>★★一定要買★★</b></span>` +
+    `<div style="text-align: center;"><span style="color: #ff0000; font-size: 18pt;" color="#ff0000"><b>★★一定要買★★</b></span></div>` +
     generateProductLinkHtml2(buyMoreItemImageUrls, buyMoreItemUrls) +
     genrateSpaceHtml2() +
     generateTitleHtml2('注意事項') +
@@ -246,11 +246,21 @@ function genrateSpaceHtml2() {
 function generateProductLinkHtml2(items, urls) {
   let tableHtml = ''
   items.forEach((item, i) => {
-    tableHtml += `<td style="text-align: left;"><a href="${urls[i]}" rel="noopener"><img
-    src="${item}" border="0" alt="" width="100%"
-    height="" /></a></td>`
+    if (i % 4 == 0) {
+      tableHtml += `<tr><td style="text-align: left;"><a href="${urls[i]}" rel="noopener"><img
+      src="${item}" border="0" alt="" width="100%"
+      height="" /></a></td>`
+    } else if (i % 4 == 3) {
+      tableHtml += `<td style="text-align: left;"><a href="${urls[i]}" rel="noopener"><img
+      src="${item}" border="0" alt="" width="100%"
+      height="" /></a></td><tr>`
+    } else {
+      tableHtml += `<td style="text-align: left;"><a href="${urls[i]}" rel="noopener"><img
+      src="${item}" border="0" alt="" width="100%"
+      height="" /></a></td>`
+    }
   })
-  const html = `<table style="width: 80%; margin-left: auto; margin-right: auto;" border="3" cellpadding="0" cellspacing="0"><tfoot><tr>` + tableHtml + `</tr></tfoot></table>`
+  const html = `<table style="width: 80%; margin-left: auto; margin-right: auto;" border="3" cellpadding="0" cellspacing="0"><tfoot>` + tableHtml + `</tfoot></table>`
   return html
 }
 
