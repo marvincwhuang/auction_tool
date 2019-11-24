@@ -1,5 +1,6 @@
 const productNewPage = document.getElementById('productNewPage')
-if (productNewPage) {
+const productEditPage = document.getElementById('productEditPage')
+if (productNewPage || productEditPage) {
   const priceGroupFirstList = document.querySelectorAll('.priceGroupFirst')
   priceGroupFirstList.forEach(item => {
     item.addEventListener('change', () => {
