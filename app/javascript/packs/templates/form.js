@@ -49,12 +49,16 @@
     const buyMoreItemsArea = document.getElementById('buyMoreItemsArea')
     let node = document.createElement("div");
     node.className = 'buy_more_item'
-    node.innerHTML = `<div class="form-group col-xs-3">
-    <input class="form-control" type="text" name="buy_more_items[]" placeholder="商品${currentCount+1}">
-  </div>
-  <div class="form-group col-xs-9">
-    <input class="form-control" type="text" name="buy_more_item_urls[]" placeholder="商品網址${currentCount+1}">
-  </div>`
+    node.innerHTML = `
+    <div class="form-group col-xs-4">
+      <input class="form-control" type="text" name="buy_more_items[]" placeholder="商品${currentCount+1}">
+    </div>
+    <div class="form-group col-xs-4">
+      <input class="form-control" type="text" name="buy_more_item_urls[]" placeholder="商品網址${currentCount+1}">
+    </div>
+    <div class="form-group col-xs-4">
+      <input class="form-control" type="text" name="buy_more_item_image_urls[]" placeholder="圖片網址${currentCount+1}">
+    </div>`
     buyMoreItemsArea.appendChild(node)
   }
 

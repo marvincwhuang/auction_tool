@@ -1,12 +1,7 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-8">拍賣商品服務資料</h1>
-		<ol>
-			<li><%= link_to "新增品牌", new_brand_path %></li>
-			<li><%= link_to "新增服務選項", services_path %></li>
-			<li><%= link_to "新增產品", new_product_path %></li>
-			<li><%= link_to "管理HTML範本", templates_path %></li>
-		</ol>
+			<%= link_to "管理HTML範本", templates_path, class: "btn btn-success" %>
   </div>
 </div>
 
@@ -18,6 +13,7 @@
 		<div class="col-md-4">
 			<h3>
 				品牌
+				<%= link_to "+", new_brand_path, class: "btn btn-success" %>
 			</h3>
       <div class="list-group">
         <% @brands.each do |brand| %>
@@ -49,7 +45,8 @@
 		</div>
 		<div class="col-md-4">
 			<h3>
-				產品型號
+				商品
+				<%= link_to "+", new_product_path, class: "btn btn-success" %>
 			</h3>
 			<div class="list-group">
         <% @products.each do |product| %>
@@ -76,7 +73,8 @@
 		</div>
 			<div class="col-md-4">
 				<h3>
-					服務與價格
+					商品規格
+					<%= link_to "+", services_path, class:"btn btn-success" %>
 				</h3>
 				<table class="table">
 					<thead>

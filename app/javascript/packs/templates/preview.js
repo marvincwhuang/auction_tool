@@ -76,7 +76,8 @@ function generateYahooTemplate() {
     generateTitleHtml('商品說明') +
     generateItemHtml(informationItems) +
     genrateSpaceHtml() +
-    generateTitleHtml('一定要買') +
+    // generateTitleHtml('一定要買') +
+    `<div><font color="#ff0000" size="5"><b>一定要買</b></font></div>` +
     generateProductLinkHtml(buyMoreItems, buyMoreItemUrls) +
     genrateSpaceHtml() +
     generateTitleHtml('注意事項') +
@@ -192,20 +193,20 @@ function generateRutenTemplate() {
 
 // yahoo
 function generateTitleHtml(title) {
-  return `<div><font color="#ff0000" size="5"><b>${title}</b></font></div>`
+  return `<div><span style="color: #ff0000; font-size: 18pt;" color="#ff0000" size="5"><b>${title}</b></span></div>`
 }
 
 function generateItemHtml(content) {
   let html = ''
   const list = content.split(/\n/)
   list.forEach(el => {
-    html += `<div><font size="3"><b>${el}</b></font></div>`
+    html += `<div><span style="font-size: 14pt;"><b>${el}</b></span></div>`
   })
   return html
 }
 
 function genrateSpaceHtml() {
-  return `<div><font size="5"><b><br></b></font></div>`
+  return `<div><span style="font-size: x-large;" size="5"><b>&nbsp;</b></span></div>`
 }
 
 function generateProductLinkHtml(items, urls) {
@@ -219,7 +220,7 @@ function generateProductLinkHtml(items, urls) {
 function generateImageHtml(urls) {
   let html = ''
   urls.forEach(url => {
-    html += `<div style="text-align:center;"><img src="${url}" width="60%"></div>`
+    html += `<div style="text-align: center;"><img src="${url}" border="0" width="60%" /></div>`
   })
   return html
 }
