@@ -16,20 +16,27 @@ if (removePreview) {
 function clearHtmlPreview() {
   const previewYahooDiv = document.getElementById('previewYahooDiv')
   const previewRutenDiv = document.getElementById('previewRutenDiv')
+  const previewShopeeDiv = document.getElementById('previewShopeeDiv')
   if (previewYahooDiv) {
     previewYahooDiv.style.display = 'none'
   }
   if (previewRutenDiv) {
     previewRutenDiv.style.display = 'none'
   }
+  if (previewShopeeDiv) {
+    previewShopeeDiv.style.display = 'none'
+  }
 }
 
 const previewYahooBtn = document.getElementById('previewYahooBtn')
 const previewRutenBtn = document.getElementById('previewRutenBtn')
+const previewShopeeBtn = document.getElementById('previewShopeeBtn')
 const previewYahoo = document.getElementById('previewYahoo')
 const sourceCodeYahoo = document.getElementById('sourceCodeYahoo')
 const previewRuten = document.getElementById('previewRuten')
 const sourceCodeRuten = document.getElementById('sourceCodeRuten')
+const previewShopee = document.getElementById('previewShopee')
+const sourceCodeShopee = document.getElementById('sourceCodeShopee')
 
 if (previewYahooBtn) {
   previewYahooBtn.addEventListener('click', (e) => {
@@ -47,6 +54,14 @@ if (previewYahooBtn) {
     let rutenHtml = generateRutenTemplate()
     previewRuten.innerHTML = rutenHtml
     sourceCodeRuten.innerText = rutenHtml
+  })
+  previewShopeeBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    clearHtmlPreview()
+    previewShopeeDiv.style.display = 'block'
+    let shopeeHtml = generateShopeeTemplate()
+    previewShopee.innerHTML = shopeeHtml
+    sourceCodeShopee.innerText = shopeeHtml
   })
 }
 
@@ -73,6 +88,7 @@ function generateYahooTemplate() {
     genrateSpaceHtml() +
     generateTitleHtml('適用型號') +
     generateItemHtml(availableSpec) +
+    genrateSpaceHtml() +
     generateTitleHtml('商品說明') +
     generateItemHtml(informationItems) +
     genrateSpaceHtml() +
@@ -144,11 +160,78 @@ function generateRutenTemplate() {
     genrateSpaceHtml2() +
     generateTitleHtml2('適用型號') +
     generateItemHtml2(availableSpec) +
+    genrateSpaceHtml2() +
     generateTitleHtml2('商品說明') +
     generateItemHtml2(informationItems) +
     genrateSpaceHtml2() +
     `<div style="text-align: center;"><span style="color: #ff0000; font-size: 18pt;" color="#ff0000"><b>★★一定要買★★</b></span></div>` +
     generateProductLinkHtml2(buyMoreItemImageUrls, buyMoreItemUrls) +
+    genrateSpaceHtml2() +
+    generateTitleHtml2('注意事項') +
+    generateItemHtml2(warning) +
+    genrateSpaceHtml2()
+
+  if (gaurantee !== "") {
+    let content =
+      generateTitleHtml2('商品保固') +
+      generateItemHtml2(gaurantee) +
+      genrateSpaceHtml2()
+    html += content
+  }
+
+  if (gaurantee_scope !== "") {
+    let content =
+      generateTitleHtml2('保固範圍') +
+      generateItemHtml2(gaurantee_scope) +
+      genrateSpaceHtml2()
+    html += content
+  }
+
+  if (notice_for_use !== "") {
+    let content =
+      generateTitleHtml2('使用須知') +
+      generateItemHtml2(notice_for_use) +
+      genrateSpaceHtml2()
+    html += content
+  }
+
+  if (product_declaration !== "") {
+    let content =
+      generateTitleHtml2('商品說明') +
+      generateItemHtml2(product_declaration) +
+      genrateSpaceHtml2()
+    html += content
+  }
+
+  html += generateImageHtml2(imageUrls)
+
+  return html
+}
+
+function generateShopeeTemplate() {
+  const productDescription = document.getElementsByName("product_description")[0].value
+  const availableSpec = document.getElementsByName("available_spec")[0].value
+  const informationTitles = [...document.getElementsByName('information_titles[]')].map(el => el.value)
+  const informationContents = [...document.getElementsByName('information_contents[]')].map(el => el.value)
+  const informationItems = informationTitles.map((el, i) => {
+    return el + informationContents[i]
+  }).join('\n')
+  const warning = document.getElementsByName("warning")[0].value
+  const gaurantee = document.getElementsByName("gaurantee")[0].value
+  const gaurantee_scope = document.getElementsByName("gaurantee_scope")[0].value
+  const notice_for_use = document.getElementsByName("notice_for_use")[0].value
+  const product_declaration = document.getElementsByName("product_declaration")[0].value
+  const imageUrls = [...document.getElementsByName("image_urls[]")].map(el => el.value)
+  let html = '' +
+    $('#summernote').summernote('code') +
+    generateTitleHtml2('產品介紹') +
+    generateItemHtml2(productDescription) +
+    genrateSpaceHtml2() +
+    generateTitleHtml2('適用型號') +
+    generateItemHtml2(availableSpec) +
+    genrateSpaceHtml2() +
+    generateTitleHtml2('商品說明') +
+    generateItemHtml2(informationItems) +
     genrateSpaceHtml2() +
     generateTitleHtml2('注意事項') +
     generateItemHtml2(warning) +
