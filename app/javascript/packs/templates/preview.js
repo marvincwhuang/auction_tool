@@ -16,8 +16,12 @@ if (removePreview) {
 function clearHtmlPreview() {
   const previewYahooDiv = document.getElementById('previewYahooDiv')
   const previewRutenDiv = document.getElementById('previewRutenDiv')
-  previewYahooDiv.style.display = 'none'
-  previewRutenDiv.style.display = 'none'
+  if (previewYahooDiv) {
+    previewYahooDiv.style.display = 'none'
+  }
+  if (previewRutenDiv) {
+    previewRutenDiv.style.display = 'none'
+  }
 }
 
 const previewYahooBtn = document.getElementById('previewYahooBtn')
@@ -27,23 +31,24 @@ const sourceCodeYahoo = document.getElementById('sourceCodeYahoo')
 const previewRuten = document.getElementById('previewRuten')
 const sourceCodeRuten = document.getElementById('sourceCodeRuten')
 
-previewYahooBtn.addEventListener('click', (e) => {
-  e.preventDefault()
-  clearHtmlPreview()
-  previewYahooDiv.style.display = 'block'
-  let yahooHtml = generateYahooTemplate()
-  previewYahoo.innerHTML = yahooHtml
-  sourceCodeYahoo.innerText = yahooHtml
-})
-
-previewRutenBtn.addEventListener('click', (e) => {
-  e.preventDefault()
-  clearHtmlPreview()
-  previewRutenDiv.style.display = 'block'
-  let rutenHtml = generateRutenTemplate()
-  previewRuten.innerHTML = rutenHtml
-  sourceCodeRuten.innerText = rutenHtml
-})
+if (previewYahooBtn) {
+  previewYahooBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    clearHtmlPreview()
+    previewYahooDiv.style.display = 'block'
+    let yahooHtml = generateYahooTemplate()
+    previewYahoo.innerHTML = yahooHtml
+    sourceCodeYahoo.innerText = yahooHtml
+  })
+  previewRutenBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    clearHtmlPreview()
+    previewRutenDiv.style.display = 'block'
+    let rutenHtml = generateRutenTemplate()
+    previewRuten.innerHTML = rutenHtml
+    sourceCodeRuten.innerText = rutenHtml
+  })
+}
 
 function generateYahooTemplate() {
   const productDescription = document.getElementsByName("product_description")[0].value

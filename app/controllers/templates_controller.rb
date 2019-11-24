@@ -13,6 +13,9 @@ class TemplatesController < ApplicationController
   def show
     @product = Product.find(params[:product_id]) if params[:product_id]
     @template_name = @template.template_name
+    @product_name_yahoo = @template.product_name_yahoo
+    @product_name_ruten = @template.product_name_ruten
+    @product_name_shopee = @template.product_name_shopee
     @editor_data = @template.editor_data
     @product_description = @template.product_descriptions.join("\r\n")
     @product_descriptions = @template.product_descriptions
@@ -82,6 +85,9 @@ class TemplatesController < ApplicationController
       @product = Product.find(params[:product_id]) if params[:product_id]
       @template = Template.new(template_params)
       @template.template_name = @target_template.template_name
+      @template.product_name_yahoo = @target_template.product_name_yahoo
+      @template.product_name_ruten = @target_template.product_name_ruten
+      @template.product_name_shopee = @target_template.product_name_shopee
       @template.editor_data = @target_template.editor_data
       @template.product_descriptions = @target_template.product_descriptions
       @template.available_specs = @target_template.available_specs
@@ -102,6 +108,9 @@ class TemplatesController < ApplicationController
       @product = Product.find(params[:product_id]) if params[:product_id]
       @template = Template.new(template_params)
       @template.template_name = params[:template_name]
+      @template.product_name_yahoo = params[:product_name_yahoo]
+      @template.product_name_ruten = params[:product_name_ruten]
+      @template.product_name_shopee = params[:product_name_shopee]
       @template.product_descriptions = params[:product_description].split("\r\n") if params[:product_description]
       @template.available_specs = params[:available_spec].split("\r\n") if params[:available_spec]
       @template.information_titles = params[:information_titles]
@@ -135,6 +144,9 @@ class TemplatesController < ApplicationController
   def edit
     @product = Product.find(params[:product_id]) if params[:product_id]
     @template_name = @template.template_name
+    @product_name_yahoo = @template.product_name_yahoo
+    @product_name_ruten = @template.product_name_ruten
+    @product_name_shopee = @template.product_name_shopee
     @editor_data = @template.editor_data
     @product_description = @template.product_descriptions.join("\r\n")
     @product_descriptions = @template.product_descriptions
@@ -167,6 +179,9 @@ class TemplatesController < ApplicationController
 
   def update
     @template.template_name = params[:template_name]
+    @template.product_name_yahoo = params[:product_name_yahoo]
+    @template.product_name_ruten = params[:product_name_ruten]
+    @template.product_name_shopee = params[:product_name_shopee]
     @template.editor_data = params[:editor_data] if params[:editor_data]
     @template.product_descriptions = params[:product_description].split("\r\n") if params[:product_description]
     @template.available_specs = params[:available_spec].split("\r\n") if params[:available_spec]
@@ -219,6 +234,9 @@ class TemplatesController < ApplicationController
   def template_params
     params.permit(
       :template_name,
+      :product_name_yahoo,
+      :product_name_ruten,
+      :product_name_shopee,
       :editor_data,
       :product_descriptions,
       :available_specs,

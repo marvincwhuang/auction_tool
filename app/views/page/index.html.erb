@@ -63,7 +63,6 @@
 										<%# <%= button_to "露天html", product_path(product), method: :get, class: "btn btn-success btn-xs"%> 
 										<%= link_to "html", "/products/#{product.id}/templates", method: :index, class: "btn btn-primary btn-xs"%>
 										<%= button_to "編輯", edit_product_path(product), method: :get, class: "btn btn-info btn-xs"%>
-										<%= button_to "刪除", product, method: :delete, onclick: "return confirm('你確定要刪除嗎？')", class: "btn btn-danger btn-xs"%>
 									</div>
 								</div>
 							<% else %>

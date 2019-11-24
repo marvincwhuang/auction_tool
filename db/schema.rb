@@ -52,6 +52,9 @@ ActiveRecord::Schema.define(version: 2019_11_20_132605) do
   create_table "templates", force: :cascade do |t|
     t.string "template_name"
     t.string "editor_data"
+    t.string "product_name_yahoo"
+    t.string "product_name_ruten"
+    t.string "product_name_shopee"
     t.text "product_descriptions", default: [], array: true
     t.text "available_specs", default: [], array: true
     t.text "information_titles", default: [], array: true
@@ -71,39 +74,9 @@ ActiveRecord::Schema.define(version: 2019_11_20_132605) do
     t.index ["product_id"], name: "index_templates_on_product_id"
   end
 
-  create_table "yahoo_templates", force: :cascade do |t|
-    t.string "highlight"
-    t.string "product_description_title"
-    t.text "product_description"
-    t.string "available_spec_title"
-    t.text "available_spec"
-    t.text "marketplace_detail"
-    t.text "warning"
-    t.text "gaurantee"
-    t.text "gaurantee_scope"
-    t.text "notice_for_use"
-    t.text "product_declaration"
-    t.string "image_1"
-    t.string "image_2"
-    t.string "image_3"
-    t.string "buy_more_product_1"
-    t.string "buy_more_product_url_1"
-    t.string "buy_more_product_2"
-    t.string "buy_more_product_url_2"
-    t.string "buy_more_product_3"
-    t.string "buy_more_product_url_3"
-    t.string "buy_more_product_4"
-    t.string "buy_more_product_url_4"
-    t.bigint "product_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_yahoo_templates_on_product_id"
-  end
-
   add_foreign_key "prices", "products"
   add_foreign_key "prices", "services"
   add_foreign_key "products", "brands"
   add_foreign_key "services", "brands"
   add_foreign_key "templates", "products"
-  add_foreign_key "yahoo_templates", "products"
 end

@@ -3,6 +3,9 @@ class CreateTemplates < ActiveRecord::Migration[6.0]
     create_table :templates do |t|
       t.string :template_name
       t.string :editor_data
+      t.string :product_name_yahoo
+      t.string :product_name_ruten
+      t.string :product_name_shopee
       t.text :product_descriptions, array: true, default: []
       t.text :available_specs, array: true, default: []
       t.text :information_titles, array: true, default: []
