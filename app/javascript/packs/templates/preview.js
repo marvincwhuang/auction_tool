@@ -224,54 +224,53 @@ function generateShopeeTemplate() {
   const contact = document.getElementsByName("contact")[0].value
   const imageUrls = [...document.getElementsByName("image_urls[]")].map(el => el.value)
   let html = '' +
-    $('#summernote').summernote('code') +
-    generateTitleHtml2('產品介紹') +
-    generateItemHtml2(productDescription) +
-    genrateSpaceHtml2() +
-    generateTitleHtml2('適用型號') +
-    generateItemHtml2(availableSpec) +
-    genrateSpaceHtml2() +
-    generateTitleHtml2('商品說明') +
-    generateItemHtml2(informationItems) +
-    genrateSpaceHtml2() +
-    generateTitleHtml2('注意事項') +
-    generateItemHtml2(warning) +
-    genrateSpaceHtml2()
+    $($("#summernote").summernote("code")).text() + '\n'
+  '產品介紹\n' +
+  productDescription + '\n\n' +
+    '適用型號\n' +
+    availableSpec +
+    '\n\n' +
+    '商品說明\n' +
+    informationItems +
+    '\n\n' +
+    '注意事項\n' +
+    warning +
+    '\n\n'
 
   if (gaurantee !== "") {
     let content =
-      generateTitleHtml2('商品保固') +
-      generateItemHtml2(gaurantee) +
-      genrateSpaceHtml2()
+      '商品保固\n' +
+      gaurantee +
+      +'\n\n'
     html += content
   }
 
   if (gaurantee_scope !== "") {
     let content =
-      generateTitleHtml2('保固範圍') +
-      generateItemHtml2(gaurantee_scope) +
-      genrateSpaceHtml2()
+      '保固範圍\n' +
+      gaurantee_scope +
+      '\n\n'
     html += content
   }
 
   if (notice_for_use !== "") {
     let content =
-      generateTitleHtml2('使用須知') +
-      generateItemHtml2(notice_for_use) +
-      genrateSpaceHtml2()
+      '使用須知' +
+      notice_for_use +
+      '\n\n'
     html += content
   }
 
   if (product_declaration !== "") {
     let content =
-      generateTitleHtml2('商品說明') +
-      generateItemHtml2(product_declaration) +
-      genrateSpaceHtml2()
+      '商品說明\n' +
+      product_declaration +
+      '\n\n'
     html += content
   }
 
-  html += generateItemHtml2(contact)
-  html += genrateSpaceHtml2()
+  html += contact
+  html += '\n'
 
   return html
 }
