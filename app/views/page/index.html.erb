@@ -1,7 +1,7 @@
 <% if current_user %>
-	<%= button_to "管理員登出", destroy_user_session_path, method: :delete, data: { :no_turbolink => true },  class: "btn btn-info" %>
+	<%= button_to "管理員登出", destroy_user_session_path, method: :delete, data: { :no_turbolink => true } %>
 <% else %>
-	<%= link_to "管理員登入", new_user_session_path, class: "btn btn-success" %>
+	<%= button_to "管理員登入", new_user_session_path, method: :get %>
 <% end %>
 
 <div class="jumbotron jumbotron-fluid">
