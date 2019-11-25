@@ -3,5 +3,7 @@
   <%= content_tag :div, value, class: "flash #{key}", style: "color:red;" %>
 <% end %>
 <%= render 'form', brand: @brand %>
+<% if current_user %>
 <%= button_to "刪除", @brand, method: :delete, class: "btn btn-danger", onclick: "return confirm('你確定要刪除嗎？')"%>
+<% end %>
 <%= link_to '返回', root_path, class: "btn btn-primary"%>
