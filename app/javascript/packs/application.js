@@ -14,6 +14,17 @@
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+function CopyTextToClipboard(id) {
+  var TextRange = document.createRange();
+  TextRange.selectNode(document.getElementById(id));
+  sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(TextRange);
+  document.execCommand("copy");
+  alert("複製完成！") //此行可加可不加
+}
+
 window.onload = function () {
 
   require('./templates/form')
@@ -22,6 +33,25 @@ window.onload = function () {
   require('./services/new')
 
   $(".flash").fadeOut(3000);
+
+  const copySourceCodeYahoo = document.getElementById('copySourceCodeYahoo')
+  const copySourceCodeRuten = document.getElementById('copySourceCodeRuten')
+  const copySourceCodeShopee = document.getElementById('copySourceCodeShopee')
+  if (copySourceCodeYahoo) {
+    copySourceCodeYahoo.addEventListener('click', () => {
+      CopyTextToClipboard('sourceCodeYahoo')
+    })
+  }
+  if (copySourceCodeRuten) {
+    copySourceCodeRuten.addEventListener('click', () => {
+      CopyTextToClipboard('sourceCodeRuten')
+    })
+  }
+  if (copySourceCodeShopee) {
+    copySourceCodeShopee.addEventListener('click', () => {
+      CopyTextToClipboard('sourceCodeShopee')
+    })
+  }
 
   // brand selector
   const brandSelector = document.getElementById('brand_selector')
