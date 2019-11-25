@@ -65,7 +65,7 @@
 								<div class="col-md-3">
 									<div class="btn-group" role="group">
 										<%# <%= button_to "露天html", product_path(product), method: :get, class: "btn btn-success btn-xs"%> 
-										<%= link_to "html", "/products/#{product.id}/templates", method: :index, class: "btn btn-primary btn-xs"%>
+										<%= link_to "html", brand_product_templates_path(@current_brand, product), class: "btn btn-primary btn-xs"%>
 										<%= button_to "編輯", edit_brand_product_path(@current_brand, product), method: :get, class: "btn btn-info btn-xs"%>
 									</div>
 								</div>

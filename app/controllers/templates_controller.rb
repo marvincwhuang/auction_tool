@@ -1,7 +1,8 @@
 class TemplatesController < ApplicationController
   before_action :set_template, only: [:show, :edit, :update, :destroy]
+  before_action :set_brand
 
-  def index
+  def index    
     if params[:product_id]
       @product = Product.find(params[:product_id])
       @templates = @product.templates
@@ -137,7 +138,7 @@ class TemplatesController < ApplicationController
     respond_to do |format|
       if @template.save
         if @product
-          format.html { redirect_to product_templates_path, notice: "已成功建立模板-#{@template.template_name}" }
+          format.html { redirect_to brand_product_templates_path, notice: "已成功建立模板-#{@template.template_name}" }
         else
           format.html { redirect_to templates_path, notice: "已成功建立模板-#{@template.template_name}" }
         end
@@ -208,7 +209,7 @@ class TemplatesController < ApplicationController
     @template.contacts = params[:contact].split("\r\n") if params[:contact]
     if @template.save
       if params[:product_id]
-        redirect_to product_templates_path
+        redirect_to brand_product_templates_path
       else
         redirect_to templates_path
       end
@@ -221,7 +222,7 @@ class TemplatesController < ApplicationController
     if @template.destroy
       if params[:product_id]
         @product = Product.find(params[:product_id])
-        redirect_to product_templates_path(@product)
+        redirect_to brand_product_templates_path(@brand, @product)
       else
         redirect_to templates_path
       end
@@ -237,6 +238,10 @@ class TemplatesController < ApplicationController
   private
   def set_template
     @template = Template.find(params[:id])
+  end
+
+  def set_brand
+    @brand = Brand.find(params[:brand_id]) if params[:brand_id]
   end
 
   def template_params

@@ -2,7 +2,7 @@
 
 <% if @templates && @templates.count > 0 %>
 <h3>*使用既有範本</h3>
-  <%= form_with(model: @product ? [@product, template] : template, local: true) do |form| %>
+  <%= form_with(model: @product ? [@brand, @product, template] : template, local: true) do |form| %>
     <div class="form-group">
       <%= form.collection_select :id, @templates, :id, :template_name,{}, {:class=> "form-control", :id => "template_selector"} %>
     </div>
@@ -15,7 +15,7 @@
 <hr>
 
 <h3>*手動編輯</h3>
-<%= form_with(model: @product ? [@product, template] : template, local: true) do |form| %>
+<%= form_with(model: @product ? [@brand, @product, template] : template, local: true) do |form| %>
   <div class="form-group">
     <label for="template_name" class="col-sm-2 form-control-label">範本標題</label>
     <input class="form-control" maxlength="60" type="text" name="template_name" placeholder="範本標題" value="<%= @template_name %>">

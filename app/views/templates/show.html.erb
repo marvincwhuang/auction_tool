@@ -1,5 +1,5 @@
-<% if params[:product_id] %>
-  <%= link_to "返回", product_templates_path, class: 'btn btn-info' %>
+<% if params[:brand_id] && params[:product_id] %>
+  <%= link_to "返回", brand_product_templates_path, class: 'btn btn-info' %>
 <% else %>
   <%= link_to "返回", templates_path, class: 'btn btn-info' %>
 <% end %>
