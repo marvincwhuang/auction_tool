@@ -19,6 +19,9 @@ class TemplatesController < ApplicationController
     @editor_data = @template.editor_data
     @product_description = @template.product_descriptions.join("\r\n")
     @product_descriptions = @template.product_descriptions
+    @contact = @template.contacts.join("\r\n")
+    @contacts = @template.contacts
+    @contact = @template.contacts.join("\r\n")
     @available_spec = @template.available_specs.join("\r\n")
     @available_specs = @template.available_specs
     @information_titles = @template.information_titles
@@ -76,6 +79,7 @@ class TemplatesController < ApplicationController
     @buy_more_item_urls = ["https://tw.yahoo.com/","https://tw.yahoo.com/", "https://tw.yahoo.com/"]
     @buy_more_item_image_urls = ["https://picsum.photos/200", "https://picsum.photos/200", "https://picsum.photos/200"]
     @image_urls = ["https://picsum.photos/200", "https://picsum.photos/200", "https://picsum.photos/200"]
+    @contact ="line: test123"
   end
 
   def create
@@ -104,6 +108,7 @@ class TemplatesController < ApplicationController
       @template.product_declaration = @target_template.product_declaration
       @template.image_urls = @target_template.image_urls
       @template.product_id = params[:product_id] if params[:product_id]
+      @template.contacts = @template.contacts
     else
       @product = Product.find(params[:product_id]) if params[:product_id]
       @template = Template.new(template_params)
@@ -126,6 +131,7 @@ class TemplatesController < ApplicationController
       @template.product_declaration = params[:product_declaration].split("\r\n") if params[:product_declaration]
       @template.image_urls = params[:image_urls]
       @template.product_id = @product.id if params[:product_id]
+      @template.contacts = params[:contact].split("\r\n") if params[:contact]
     end
 
     respond_to do |format|
@@ -175,6 +181,8 @@ class TemplatesController < ApplicationController
     @buy_more_item_urls = @template.buy_more_item_urls
     @buy_more_item_image_urls = @template.buy_more_item_image_urls
     @image_urls = @template.image_urls
+    @contact = @template.contacts.join("\r\n")
+    @contacts = @template.contacts
   end
 
   def update
@@ -197,7 +205,7 @@ class TemplatesController < ApplicationController
     @template.notice_for_use = params[:notice_for_use].split("\r\n") if params[:notice_for_use]
     @template.product_declaration = params[:product_declaration].split("\r\n") if params[:product_declaration]
     @template.image_urls = params[:image_urls]
-
+    @template.contacts = params[:contact].split("\r\n") if params[:contact]
     if @template.save
       if params[:product_id]
         redirect_to product_templates_path
@@ -252,7 +260,8 @@ class TemplatesController < ApplicationController
       :product_declaration,
       :image_urls,
       :product_id,
-      :template
+      :template,
+      :contacts,
     )
   end
 end

@@ -221,6 +221,7 @@ function generateShopeeTemplate() {
   const gaurantee_scope = document.getElementsByName("gaurantee_scope")[0].value
   const notice_for_use = document.getElementsByName("notice_for_use")[0].value
   const product_declaration = document.getElementsByName("product_declaration")[0].value
+  const contact = document.getElementsByName("contact")[0].value
   const imageUrls = [...document.getElementsByName("image_urls[]")].map(el => el.value)
   let html = '' +
     $('#summernote').summernote('code') +
@@ -269,7 +270,8 @@ function generateShopeeTemplate() {
     html += content
   }
 
-  html += generateImageHtml2(imageUrls)
+  html += generateItemHtml2(contact)
+  html += genrateSpaceHtml2()
 
   return html
 }

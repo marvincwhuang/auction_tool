@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2019_11_25_121535) do
     t.text "notice_for_use", default: [], array: true
     t.text "product_declaration", default: [], array: true
     t.text "image_urls", default: [], array: true
-    t.text "contact", default: [], array: true
+    t.text "contacts", default: [], array: true
     t.bigint "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
