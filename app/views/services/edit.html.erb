@@ -4,4 +4,4 @@
 <% if current_user %>
 <%= button_to "刪除", brand_product_service_path(@brand, @product, @service), method: :delete, class: "btn btn-danger", onclick: "return confirm('你確定要刪除嗎？')"%>
 <% end %>
-<%= link_to 'Back', root_path %>
+<%= link_to 'Back', root_path(brand_id: @brand.id , product_id: @product.id) %>

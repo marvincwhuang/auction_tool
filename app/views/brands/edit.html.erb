@@ -6,4 +6,4 @@
 <% if current_user %>
 <%= button_to "刪除", @brand, method: :delete, class: "btn btn-danger", onclick: "return confirm('你確定要刪除嗎？')"%>
 <% end %>
-<%= link_to '返回', root_path, class: "btn btn-primary"%>
+<%= link_to '返回', root_path(brand_id: @brand.id), class: "btn btn-primary"%>
