@@ -1,41 +1,34 @@
 <h1>服務管理頁面</h1>
 <div id="serviceIndexPage" ></div>
-<ul>
-  <% Brand.all.each do |brand| %>
-    <li><h3><a href="#" class="brand_selector"><%= brand.name %></a></h3></li>
-  <% end %>
-</ul>
 
-<% Brand.all.each do |brand| %>
-  <div class="brand_services" id="<%= brand.name %>">
-    <h2><%= brand.name %></h2>
-    <table class="table">
-      <thead>
+<div class="brand_services" id="<%= @brand.name %>">
+  <h2><%= @brand.name %></h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">服務名稱</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @brand.services.each_with_index do |service, key| %>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">服務名稱</th>
-          <th scope="col"></th>
+          <th scope="row"><%= key + 1 %></th>
+          <td><%= service.name %></td>
+          <td>  
+            <div class="btn-group" role="group" style="display: flex;">
+              <%= link_to '編輯', edit_brand_product_service_path(@brand, @product, service), class: "btn btn-info" %>
+              <%= button_to '刪除', brand_product_service_path(@brand, @product, service), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+            </div>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% brand.services.each_with_index do |service, key| %>
-          <tr>
-            <th scope="row"><%= key + 1 %></th>
-            <td><%= service.name %></td>
-            <td>  
-              <div class="btn-group" role="group" style="display: flex;">
-                <%= link_to '編輯', edit_service_path(service), class: "btn btn-info" %>
-                <%= button_to '刪除', service, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-              </div>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-<% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
-<%= link_to '新增服務選項', new_service_path, class: "btn btn-success" %>
+<%= link_to '新增服務選項', new_brand_service_path, class: "btn btn-success" %>
 <%= link_to '回管理主頁', root_path, class: "btn btn-primary" %>

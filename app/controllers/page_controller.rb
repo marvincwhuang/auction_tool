@@ -10,10 +10,6 @@ class PageController < ApplicationController
     end
     @brands = Brand.all.order(:name)
     @products = @current_brand ? @current_brand.products.order(:name) : Product.all.order(:name)
-    @prices = @current_product ? Price.where(product_id: @current_product.id) : []
-    @services = @prices.map do |item|
-      service = Service.find(item.service_id)
-      {name: service.name, yahoo_price: item.yahoo, ruten_price: item.ruten, shoppe_price: item.shopee}
-    end
+    @services = @current_product ? @current_product.services : []
   end
 end

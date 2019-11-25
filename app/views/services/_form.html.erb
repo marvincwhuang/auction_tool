@@ -1,4 +1,4 @@
-<%= form_with(model: service, local: true) do |form| %>
+<%= form_with(model: [brand, product, service], local: true) do |form| %>
   <% if service.errors.any? %>
     <p>新增失敗，請確認：</p>
     <% service.errors.full_messages.each do |message| %>
@@ -9,13 +9,21 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label "品牌名稱" %>
-    <%= form.collection_select :brand_id, Brand.order(:name), :id, :name,{}, {:class=> "form-control"} %>
-  </div>
-
-  <div class="form-group">
     <%= form.label "服務名稱" %>
     <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+   <div class="form-group">
+    <div class="row">
+      <div class="service_item form-check col-md-4" style="padding: 15px;">
+        <%= label_tag( "yahoo 價格") %>
+        <%= text_field_tag "yahoo_price", @yahoo_price, class: "form-control", placeholder: "請輸入yahoo價錢" %>
+        <%= label_tag( "ruten 價格") %>
+        <%= text_field_tag "ruten_price", @ruten_price, class: "form-control", placeholder: "請輸入ruten價錢" %>
+        <%= label_tag( "shopee 價格") %>
+        <%= text_field_tag "shopee_price", @shopee_price, class: "form-control", placeholder: "請輸入shopee價錢" %>
+      </div>
+    </div>
   </div>
 
   <div class="form-group">

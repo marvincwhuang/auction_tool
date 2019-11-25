@@ -28,7 +28,6 @@
 					<div class="col-md-3">
 						<div class="btn-group" role="group">
 							<%= button_to "編輯", edit_brand_path(brand), method: :get, class: "btn btn-info btn-xs"%>
-							<%= button_to "刪除", brand, method: :delete, class: "btn btn-danger btn-xs", onclick: "return confirm('你確定要刪除嗎？')"%>
 						</div>
 					</div>
 					<% else %>
@@ -46,7 +45,9 @@
 		<div class="col-md-4">
 			<h3>
 				商品
-				<%= link_to "+", new_product_path, class: "btn btn-success" %>
+				<% if @current_brand %>
+					<%= link_to "+", new_brand_product_path(@current_brand), class: "btn btn-success" %>
+				<% end %>
 			</h3>
 			<div class="list-group">
         <% @products.each do |product| %>
@@ -59,7 +60,7 @@
 									<div class="btn-group" role="group">
 										<%# <%= button_to "露天html", product_path(product), method: :get, class: "btn btn-success btn-xs"%> 
 										<%= link_to "html", "/products/#{product.id}/templates", method: :index, class: "btn btn-primary btn-xs"%>
-										<%= button_to "編輯", edit_product_path(product), method: :get, class: "btn btn-info btn-xs"%>
+										<%= button_to "編輯", edit_brand_product_path(@current_brand, product), method: :get, class: "btn btn-info btn-xs"%>
 									</div>
 								</div>
 							<% else %>
@@ -74,7 +75,9 @@
 			<div class="col-md-4">
 				<h3>
 					商品規格
-					<%= link_to "+", services_path, class:"btn btn-success" %>
+					<% if @current_brand && @current_product %>
+						<%= link_to "+", new_brand_product_service_path(@current_brand, @current_product), class:"btn btn-success" %>
+					<% end %>
 				</h3>
 				<table class="table">
 					<thead>
@@ -94,6 +97,8 @@
 							<th>
 								shopee價格
 							</th>
+							<th>
+							</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -106,13 +111,16 @@
 								<%= service[:name] %>
 							</td>
 							<td>
-								<%= service[:yahoo_price] %>
+								<%= Price.find_by(product: @current_product, service: service).yahoo if Price.find_by(product: @current_product, service: service) %>
 							</td>
 							<td>
-								<%= service[:ruten_price] %>
+								<%= Price.find_by(product: @current_product, service: service).ruten if Price.find_by(product: @current_product, service: service) %>
 							</td>
 							<td>
-								<%= service[:shoppe_price] %>
+								<%= Price.find_by(product: @current_product, service: service).shopee if Price.find_by(product: @current_product, service: service) %>
+							</td>
+							<td>
+								<%= button_to "編輯", edit_brand_product_service_path(@current_brand, @current_product, service), method: :get, class: "btn btn-info btn-xs"%>
 							</td>
 						</tr>
 						<% end %>

@@ -1,7 +1,7 @@
 <h1>編輯商品</h1>
 <div id="productEditPage"></div>
-<%= render 'form', product: @product %>
+<%= render 'form', brand: @brand, product: @product %>
 <div class="form-group">
-  <%= button_to "刪除", @product, method: :delete, onclick: "return confirm('你確定要刪除嗎？')", class: "btn btn-danger"%>
+  <%= button_to "刪除", brand_product_path, method: :delete, onclick: "return confirm('你確定要刪除嗎？')", class: "btn btn-danger"%>
 </div>
 <%= link_to '返回', root_path, class: "btn btn-primary"%>

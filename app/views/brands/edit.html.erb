@@ -1,5 +1,7 @@
 <h1>編輯品牌名稱</h1>
-
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash #{key}", style: "color:red;" %>
+<% end %>
 <%= render 'form', brand: @brand %>
-
+<%= button_to "刪除", @brand, method: :delete, class: "btn btn-danger", onclick: "return confirm('你確定要刪除嗎？')"%>
 <%= link_to '返回', root_path, class: "btn btn-primary"%>

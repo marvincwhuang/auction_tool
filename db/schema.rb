@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_20_132605) do
+ActiveRecord::Schema.define(version: 2019_11_25_121535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(version: 2019_11_20_132605) do
     t.index ["brand_id"], name: "index_products_on_brand_id"
   end
 
+  create_table "products_services", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "service_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_products_services_on_product_id"
+    t.index ["service_id"], name: "index_products_services_on_service_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.bigint "brand_id", null: false
     t.string "name"
@@ -68,6 +77,7 @@ ActiveRecord::Schema.define(version: 2019_11_20_132605) do
     t.text "notice_for_use", default: [], array: true
     t.text "product_declaration", default: [], array: true
     t.text "image_urls", default: [], array: true
+    t.text "contact", default: [], array: true
     t.bigint "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -77,6 +87,8 @@ ActiveRecord::Schema.define(version: 2019_11_20_132605) do
   add_foreign_key "prices", "products"
   add_foreign_key "prices", "services"
   add_foreign_key "products", "brands"
+  add_foreign_key "products_services", "products"
+  add_foreign_key "products_services", "services"
   add_foreign_key "services", "brands"
   add_foreign_key "templates", "products"
 end

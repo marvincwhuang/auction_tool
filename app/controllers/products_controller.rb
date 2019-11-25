@@ -10,34 +10,26 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @brand = Brand.find(params[:brand_id])
     @product = Product.new
     @services = Service.all
   end
 
   def edit
+    @brand = Brand.find(params[:brand_id])
     @services = Service.all.order("name")
     service_ids = @product.prices.map {|price| price.service_id}
     @current_services = Service.find(service_ids)
   end
 
   def create
+    @brand = Brand.find(params[:brand_id])
     @product = Product.new(product_params)
+    @product.brand = @brand
 
     respond_to do |format|
       if @product.save
-        checked_service_ids = params[:service_ids] || []
-        yahoo_price_hash = params[:yahoo_prices]
-        ruten_price_hash = params[:ruten_prices]
-        shopee_price_hash = params[:shopee_prices]
-        checked_service_ids.each do |service_id|
-          Price.create!(
-            yahoo: yahoo_price_hash[service_id],
-            ruten: ruten_price_hash[service_id],
-            shopee: shopee_price_hash[service_id],
-            service_id: service_id,
-            product_id: @product.id)
-        end
-        format.html { redirect_to root_path, notice: "已成功建立產品-#{@product.name}" }
+        format.html { redirect_to root_path(brand_id: @brand.id, product_id: @product.id), notice: "已成功建立產品-#{@product.name}" }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
@@ -47,23 +39,10 @@ class ProductsController < ApplicationController
   end
 
   def update
+    @brand = Brand.find(params[:brand_id])
     respond_to do |format|
       if @product.update(product_params)        
-        @product.prices.destroy_all
-        checked_service_ids = params[:service_ids] || []
-        yahoo_price_hash = params[:yahoo_prices]
-        ruten_price_hash = params[:ruten_prices]
-        shopee_price_hash = params[:shopee_prices]
-        checked_service_ids.each do |service_id|
-          Price.create!(
-            yahoo: yahoo_price_hash[service_id],
-            ruten: ruten_price_hash[service_id],
-            shopee: shopee_price_hash[service_id],
-            service_id: service_id,
-            product_id: @product.id
-          )
-        end
-        format.html { redirect_to root_path, notice: 'Product was successfully updated.' }
+        format.html { redirect_to root_path(brand_id: @brand.id, product_id: @product.id), notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }

@@ -1,4 +1,4 @@
-<%= form_with(model: product, local: true) do |form| %>
+<%= form_with(model: [brand, product], local: true) do |form| %>
   <% if product.errors.any? %>
     <p>新增失敗，請確認：</p>
     <% product.errors.full_messages.each do |message| %>
@@ -9,45 +9,8 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label "品牌名稱" %>
-    <%= form.collection_select :brand_id, Brand.order(:name), :id, :name,{}, {:class=> "form-control", :id => "brand_selector"} %>
-  </div>
-
-  <div class="form-group">
     <%= form.label "名稱" %>
     <%= form.text_field :name, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label "服務/價錢" %>
-
-    <div class="row">
-      <% if @services && @services.any? %>
-        <% @services.each do |service| %>
-          <% if @current_services && @current_services.include?(service) %>
-            <div brand_id="<%= service.brand.id %>" class="service_item form-check col-md-4" style="padding: 15px;">
-              <%= check_box_tag "service_ids[]", service.id, true,  class: 'radio-checkbox form-check-input' %>
-              <%= label_tag( "#{service.name}") %>
-              <%= text_field_tag "yahoo_prices[#{service.id}]", Price.find_by(service_id: service.id, product_id: product.id).yahoo, class: "form-control", placeholder: "請輸入yahoo價錢" %>
-              <%= text_field_tag "ruten_prices[#{service.id}]", Price.find_by(service_id: service.id, product_id: product.id).ruten, class: "form-control", placeholder: "請輸入ruten價錢" %>
-              <%= text_field_tag "shopee_prices[#{service.id}]", Price.find_by(service_id: service.id, product_id: product.id).shopee, class: "form-control", placeholder: "請輸入shopee價錢" %>
-            </div>
-          <% else %>
-            <div brand_id="<%= service.brand.id %>" class="service_item form-check col-md-4" style="padding: 15px;">
-              <%= check_box_tag "service_ids[]", service.id, false,  class: 'radio-checkbox form-check-input' %>
-              <%= label_tag( "#{service.name}") %>
-              <div id="priceGroup">
-                <%= text_field_tag "yahoo_prices[#{service.id}]", nil, class: "form-control priceGroupFirst", placeholder: "請輸入yahoo價錢" %>
-                <%= text_field_tag "ruten_prices[#{service.id}]", nil, class: "form-control", placeholder: "請輸入ruten價錢" %>
-                <%= text_field_tag "shopee_prices[#{service.id}]", nil, class: "form-control", placeholder: "請輸入shopee價錢" %>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-      <% else %>
-        <p>p.s.沒有可選擇的服務，請至服務管理頁面新增服務</p>
-    <% end%>
-    </div>
   </div>
 
   <div class="form-group">

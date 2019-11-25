@@ -2,6 +2,8 @@ class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
 
   def index
+    @brand = Brand.find(params[:brand_id])
+    @product = Product.find(params[:product_id])
     @services = Service.all.order("brand_id")
   end
 
@@ -10,21 +12,40 @@ class ServicesController < ApplicationController
 
   # GET /services/new
   def new
+    @brand = Brand.find(params[:brand_id])
+    @product = Product.find(params[:product_id])
     @service = Service.new
+    @services = @brand.services
   end
 
   # GET /services/1/edit
   def edit
+    @brand = Brand.find(params[:brand_id])
+    @product = Product.find(params[:product_id])
+    @price = Price.find_by(product_id: @product.id, service_id: @service.id)
+    @yahoo_price = @price ? @price.yahoo : nil
+    @ruten_price = @price ? @price.ruten : nil
+    @shopee_price = @price ? @price.shopee : nil
   end
 
   # POST /services
   # POST /services.json
   def create
+    @brand = Brand.find(params[:brand_id])
+    @product = Product.find(params[:product_id])
     @service = Service.new(service_params)
+    @service.brand = @brand
+    @service.products << @product
 
     respond_to do |format|
       if @service.save
-        format.html { redirect_to services_path, notice: 'Service was successfully created.' }
+        @price = Price.new(product: @product, service: @service)
+        @price.yahoo = params[:yahoo_price]
+        @price.ruten = params[:ruten_price]
+        @price.shopee = params[:shopee_price]
+        @price.save
+        @service.prices << @price
+        format.html { redirect_to root_path(brand_id: @brand.id, product_id: @product.id), notice: 'Service was successfully created.' }
         format.json { render :show, status: :created, location: @service }
       else
         format.html { render :new }
@@ -33,12 +54,17 @@ class ServicesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /services/1
-  # PATCH/PUT /services/1.json
   def update
+    @brand = Brand.find(params[:brand_id])
+    @product = Product.find(params[:product_id])
     respond_to do |format|
       if @service.update(service_params)
-        format.html { redirect_to services_path, notice: 'Service was successfully updated.' }
+        @price = Price.find_or_create_by(product: @product, service: @service)
+        @price.yahoo = params[:yahoo_price] if  params[:yahoo_price] && 
+        @price.ruten = params[:ruten_price] if params[:ruten_price]
+        @price.shopee = params[:shopee_price] if params[:shopee_price]
+        @price.save
+        format.html { redirect_to root_path(brand_id: @brand.id, product_id: @product.id), notice: 'Service was successfully updated.' }
         format.json { render :show, status: :ok, location: @service }
       else
         format.html { render :edit }
@@ -50,14 +76,12 @@ class ServicesController < ApplicationController
   # DELETE /services/1
   # DELETE /services/1.json
   def destroy
-    if @service.destroy
-      respond_to do |format|
-        format.html { redirect_to services_url, notice: 'Service was successfully destroyed.' }
-        format.json { head :no_content }
-      end
-    else
-      puts "error"
+    @product = Product.find(params[:product_id])
+    @product.services.delete(@service)
+    if @service.products.count == 0
+      @service.destroy
     end
+    redirect_to root_path, notice: 'Service was successfully destroyed.'
   end
 
   private

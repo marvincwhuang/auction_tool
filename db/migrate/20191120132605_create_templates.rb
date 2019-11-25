@@ -19,6 +19,7 @@ class CreateTemplates < ActiveRecord::Migration[6.0]
       t.text :notice_for_use, array: true, default: []
       t.text :product_declaration, array: true, default: []
       t.text :image_urls, array: true, default: []
+      t.text :contact, array: true, default: []
       t.references :product, null: true, foreign_key: true, on_delete: :cascade
 
       t.timestamps

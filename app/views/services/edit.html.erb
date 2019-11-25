@@ -1,6 +1,4 @@
-<h1>Editing Service</h1>
-
-<%= render 'form', service: @service %>
-
-<%= link_to 'Show', @service %> |
-<%= link_to 'Back', services_path %>
+<h1>編輯商品規格</h1>
+<%= render 'form', brand: @brand, product: @product, service: @service %>
+<%= button_to "刪除", brand_product_service_path(@brand, @product, @service), method: :delete, class: "btn btn-danger", onclick: "return confirm('你確定要刪除嗎？')"%>
+<%= link_to 'Back', root_path %>
