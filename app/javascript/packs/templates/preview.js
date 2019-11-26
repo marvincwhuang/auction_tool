@@ -224,9 +224,9 @@ function generateShopeeTemplate() {
   const contact = document.getElementsByName("contact")[0].value
   const imageUrls = [...document.getElementsByName("image_urls[]")].map(el => el.value)
   let html = '' +
-    $($("#summernote").summernote("code")).text() + '\n'
-  '產品介紹\n' +
-  productDescription + '\n\n' +
+    $($("#summernote").summernote("code")).text() + '\n' +
+    '產品介紹\n' +
+    productDescription + '\n\n' +
     '適用型號\n' +
     availableSpec +
     '\n\n' +
@@ -236,6 +236,7 @@ function generateShopeeTemplate() {
     '注意事項\n' +
     warning +
     '\n\n'
+
 
   if (gaurantee !== "") {
     let content =
