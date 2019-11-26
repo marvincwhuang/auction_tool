@@ -225,29 +225,29 @@ function generateShopeeTemplate() {
   const imageUrls = [...document.getElementsByName("image_urls[]")].map(el => el.value)
   let html = '' +
     $($("#summernote").summernote("code")).text() + '\n\n' +
-    '產品介紹\n\n' +
+    '產品介紹\n' +
     productDescription + '\n\n' +
-    '適用型號\n\n' +
+    '適用型號\n' +
     availableSpec +
     '\n\n' +
-    '商品說明\n\n' +
+    '商品說明\n' +
     informationItems +
     '\n\n' +
-    '注意事項\n\n' +
+    '注意事項\n' +
     warning +
     '\n\n'
 
 
   if (gaurantee !== "") {
     let content =
-      '商品保固\n\n' +
+      '商品保固\n' +
       gaurantee + '\n\n'
     html += content
   }
 
   if (gaurantee_scope !== "") {
     let content =
-      '保固範圍\n\n' +
+      '保固範圍\n' +
       gaurantee_scope +
       '\n\n'
     html += content
@@ -255,7 +255,7 @@ function generateShopeeTemplate() {
 
   if (notice_for_use !== "") {
     let content =
-      '使用須知' +
+      '使用須知\n' +
       notice_for_use +
       '\n\n'
     html += content
