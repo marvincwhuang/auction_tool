@@ -109,7 +109,7 @@ class TemplatesController < ApplicationController
       @template.product_declaration = @target_template.product_declaration
       @template.image_urls = @target_template.image_urls
       @template.product_id = params[:product_id] if params[:product_id]
-      @template.contacts = @template.contacts
+      @template.contacts = @target_template.contacts
     else
       @product = Product.find(params[:product_id]) if params[:product_id]
       @template = Template.new(template_params)
@@ -183,7 +183,9 @@ class TemplatesController < ApplicationController
     @buy_more_item_image_urls = @template.buy_more_item_image_urls
     @image_urls = @template.image_urls
     @contact = @template.contacts.join("\r\n")
+    puts @contact
     @contacts = @template.contacts
+    puts @contacts
   end
 
   def update

@@ -224,7 +224,7 @@ function generateShopeeTemplate() {
   const contact = document.getElementsByName("contact")[0].value
   const imageUrls = [...document.getElementsByName("image_urls[]")].map(el => el.value)
   let html = '' +
-    $($("#summernote").summernote("code")).text() + '\n' +
+    $($("#summernote").summernote("code")).text() + '\n\n' +
     '產品介紹\n' +
     productDescription + '\n\n' +
     '適用型號\n' +
