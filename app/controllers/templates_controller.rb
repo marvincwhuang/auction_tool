@@ -89,7 +89,7 @@ class TemplatesController < ApplicationController
       puts "copy with #{@target_template}"
       @product = Product.find(params[:product_id]) if params[:product_id]
       @template = Template.new(template_params)
-      @template.template_name = @target_template.template_name
+      @template.template_name = "#{@target_template.template_name} copy"
       @template.product_name_yahoo = @target_template.product_name_yahoo
       @template.product_name_ruten = @target_template.product_name_ruten
       @template.product_name_shopee = @target_template.product_name_shopee
@@ -183,9 +183,7 @@ class TemplatesController < ApplicationController
     @buy_more_item_image_urls = @template.buy_more_item_image_urls
     @image_urls = @template.image_urls
     @contact = @template.contacts.join("\r\n")
-    puts @contact
     @contacts = @template.contacts
-    puts @contacts
   end
 
   def update

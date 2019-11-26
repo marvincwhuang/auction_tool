@@ -4,6 +4,8 @@
   <%= link_to "返回", templates_path, class: 'btn btn-info' %>
 <% end %>
 <h2>HTML預覽和源碼</h2>
+<%= button_to "建立複本", templates_path(template: {id: @template.id}), class: "btn btn-warning" %>
+<hr>
 <%= render 'templates/preview' %>
 <div style="display:none;">
   <%= render 'templates/form', template: @template %>
