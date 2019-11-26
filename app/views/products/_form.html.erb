@@ -29,7 +29,7 @@
 
               <%= label_tag( "#{service.name}") %>
               <% if Price.find_by(service_id: service.id, product_id: @product.id) %>
-                <%= text_field_tag "yahoo_prices[#{service.id}]", Price.find_by(service_id: service.id, product_id: @product.id).yahoo, class: "form-control", placeholder: "請輸入yahoo價錢" %>
+                <%= text_field_tag "yahoo_prices[#{service.id}]", Price.find_by(service_id: service.id, product_id: @product.id).yahoo, id: "priceGroupFirst", class: "form-control", placeholder: "請輸入yahoo價錢" %>
               <% else %>
                 <%= text_field_tag "yahoo_prices[#{service.id}]", nil, class: "form-control", placeholder: "請輸入yahoo價錢" %>
               <% end %>
@@ -50,7 +50,7 @@
             <div brand_id="<%= service.brand.id %>" class="service_item form-check col-md-4" style="padding: 15px;">
               <%= check_box_tag "service_ids[]", service.id, nil,  class: 'radio-checkbox form-check-input' %>
               <%= label_tag( "#{service.name}") %>
-              <%= text_field_tag "yahoo_prices[#{service.id}]", nil, class: "form-control", placeholder: "請輸入yahoo價錢" %>
+              <%= text_field_tag "yahoo_prices[#{service.id}]", nil, id: "priceGroupFirst", class: "form-control", placeholder: "請輸入yahoo價錢" %>
               <%= text_field_tag "ruten_prices[#{service.id}]", nil, class: "form-control", placeholder: "請輸入ruten價錢" %>
               <%= text_field_tag "shopee_prices[#{service.id}]", nil, class: "form-control", placeholder: "請輸入shopee價錢" %>
             </div>
