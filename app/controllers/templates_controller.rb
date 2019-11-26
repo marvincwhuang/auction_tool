@@ -110,6 +110,9 @@ class TemplatesController < ApplicationController
       @template.image_urls = @target_template.image_urls
       @template.product_id = params[:product_id] if params[:product_id]
       @template.contacts = @target_template.contacts
+      @template.save
+      puts @template
+      redirect_to edit_brand_product_template_path(id: @template.id)
     else
       @product = Product.find(params[:product_id]) if params[:product_id]
       @template = Template.new(template_params)
@@ -133,17 +136,17 @@ class TemplatesController < ApplicationController
       @template.image_urls = params[:image_urls]
       @template.product_id = @product.id if params[:product_id]
       @template.contacts = params[:contact].split("\r\n") if params[:contact]
-    end
 
-    respond_to do |format|
-      if @template.save
-        if @product
-          format.html { redirect_to brand_product_templates_path, notice: "已成功建立模板-#{@template.template_name}" }
+      respond_to do |format|
+        if @template.save
+          if @product
+            format.html { redirect_to brand_product_templates_path, notice: "已成功建立模板-#{@template.template_name}" }
+          else
+            format.html { redirect_to templates_path, notice: "已成功建立模板-#{@template.template_name}" }
+          end
         else
-          format.html { redirect_to templates_path, notice: "已成功建立模板-#{@template.template_name}" }
+          format.html { render :new }
         end
-      else
-        format.html { render :new }
       end
     end
   end
