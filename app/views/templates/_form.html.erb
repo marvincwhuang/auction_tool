@@ -21,16 +21,16 @@
     <input class="form-control" maxlength="60" type="text" name="template_name" placeholder="範本標題" value="<%= @template_name %>">
   </div>
   <div class="form-group">
-    <label for="product_name_shopee" class="col-sm-2 form-control-label">商品名稱-Yahoo</label>
-    <input class="form-control" maxlength="60" type="text" name="product_name_yahoo" placeholder="商品名稱-Yahoo" value="<%= @product_name_yahoo %>">
+    <label for="product_name_ruten" class="col-sm-2 form-control-label">商品名稱-Ruten</label>
+    <input id="productNameFirst" class="form-control productName" maxlength="60" type="text" name="product_name_ruten" placeholder="商品名稱-Ruten" value="<%= @product_name_ruten %>">
   </div>
   <div class="form-group">
-    <label for="product_name_ruten" class="col-sm-2 form-control-label">商品名稱-Ruten</label>
-    <input class="form-control" maxlength="60" type="text" name="product_name_ruten" placeholder="商品名稱-Ruten" value="<%= @product_name_ruten %>">
+    <label for="product_name_shopee" class="col-sm-2 form-control-label">商品名稱-Yahoo</label>
+    <input class="form-control productName" maxlength="60" type="text" name="product_name_yahoo" placeholder="商品名稱-Yahoo" value="<%= @product_name_yahoo %>">
   </div>
   <div class="form-group">
     <label for="product_name_shopee" class="col-sm-2 form-control-label">商品名稱-Shopee</label>
-    <input class="form-control" maxlength="60" type="text" name="product_name_shopee" placeholder="商品名稱-Shopee" value="<%= @product_name_shopee %>">
+    <input class="form-control productName" maxlength="60" type="text" name="product_name_shopee" placeholder="商品名稱-Shopee" value="<%= @product_name_shopee %>">
   </div>
   <div class="form-group">
     <textarea type="text" id= "summernote" name="editor_data"><%= @editor_data %></textarea>

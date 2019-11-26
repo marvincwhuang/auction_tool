@@ -2,6 +2,13 @@
   let ImagesCount = document.querySelectorAll(".image_item").length
   const templateForm = document.getElementById('templateForm')
   if (templateForm) {
+    const productNameFirst = document.getElementById('productNameFirst')
+    const productNameList = document.querySelectorAll('.productName')
+    productNameFirst.addEventListener('change', () => {
+      productNameList.forEach(el => {
+        el.value = productNameFirst.value
+      })
+    })
 
     $(document).ready(function () {
       $('#summernote').summernote()
