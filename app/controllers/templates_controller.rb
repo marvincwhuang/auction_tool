@@ -88,7 +88,9 @@ class TemplatesController < ApplicationController
     if @target_template
       @product = Product.find(params[:product_id]) if params[:product_id]
       @template = Template.new(template_params)
-      @template.template_name = "#{@target_template.template_name} copy"
+      
+      # @template.template_name = "#{@target_template.template_name} copy"
+      @template.template_name = get_copy_name(@target_template)
       @template.product_name_yahoo = @target_template.product_name_yahoo
       @template.product_name_ruten = @target_template.product_name_ruten
       @template.product_name_shopee = @target_template.product_name_shopee
@@ -286,5 +288,19 @@ class TemplatesController < ApplicationController
       :template,
       :contacts,
     )
+  end
+
+  def get_copy_name(template)
+    name = template.template_name
+
+    copy_name = "#{name} copy_"
+    postfix = 1
+    copy_name_with_postfix = copy_name + postfix.to_s
+    if !!Template.find_by(template_name: copy_name_with_postfix)
+      postfix += 1
+      copy_name_with_postfix = copy_name + postfix.to_s
+    else
+      copy_name_with_postfix
+    end
   end
 end
