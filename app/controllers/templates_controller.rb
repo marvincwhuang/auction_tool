@@ -86,7 +86,6 @@ class TemplatesController < ApplicationController
   def create
     @target_template = Template.find(params[:template][:id]) if params[:template]
     if @target_template
-      puts "copy with #{@target_template}"
       @product = Product.find(params[:product_id]) if params[:product_id]
       @template = Template.new(template_params)
       @template.template_name = "#{@target_template.template_name} copy"
@@ -110,9 +109,19 @@ class TemplatesController < ApplicationController
       @template.image_urls = @target_template.image_urls
       @template.product_id = params[:product_id] if params[:product_id]
       @template.contacts = @target_template.contacts
-      @template.save
-      puts @template
-      redirect_to edit_brand_product_template_path(id: @template.id)
+      if @template.save
+        if @product
+          redirect_to edit_brand_product_template_path(id: @template.id)
+        else
+          redirect_to edit_template_path(id: @template.id)
+        end
+      else
+        if @product
+          redirect_to brand_product_templates_path, notice: '建立範本失敗，請確認資料是否正確！(可能使用了重複的名字)'
+        else
+          redirect_to templates_path, notice: '建立範本失敗，請確認資料是否正確！(可能使用了重複的名字)'
+        end
+      end
     else
       @product = Product.find(params[:product_id]) if params[:product_id]
       @template = Template.new(template_params)
@@ -137,15 +146,17 @@ class TemplatesController < ApplicationController
       @template.product_id = @product.id if params[:product_id]
       @template.contacts = params[:contact].split("\r\n") if params[:contact]
 
-      respond_to do |format|
-        if @template.save
-          if @product
-            format.html { redirect_to brand_product_templates_path, notice: "已成功建立模板-#{@template.template_name}" }
-          else
-            format.html { redirect_to templates_path, notice: "已成功建立模板-#{@template.template_name}" }
-          end
+      if @template.save
+        if @product
+          redirect_to brand_product_templates_path(id: @template.id), notice: '成功建立範本！'
         else
-          format.html { render :new }
+          redirect_to templates_path(id: @template.id), notice: '成功建立範本！'
+        end
+      else
+        if @product
+          redirect_to brand_product_templates_path, notice: '建立範本失敗，請確認資料是否正確！(可能使用了重複的範本名字)'
+        else
+          redirect_to templates_path, notice: '建立範本失敗，請確認資料是否正確！(可能使用了重複的範本名字)'
         end
       end
     end
@@ -217,7 +228,11 @@ class TemplatesController < ApplicationController
         redirect_to templates_path
       end
     else
-      puts "error"
+      if params[:product_id]
+        redirect_to brand_product_templates_path, notice: '更新範本失敗，請確認資料是否正確！(可能使用了重複的範本名字)'
+      else
+        redirect_to templates_path, notice: '更新範本失敗，請確認資料是否正確！(可能使用了重複的範本名字)'
+      end
     end
   end
 
