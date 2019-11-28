@@ -165,9 +165,6 @@ class TemplatesController < ApplicationController
   end
 
   def edit
-    if params[:in_edit_template]
-      @template = Template.new(params[:in_edit_template].to_unsafe_h)
-    end
     @product = Product.find(params[:product_id]) if params[:product_id]    
     @template_name = @template.template_name
     @product_name_yahoo = @template.product_name_yahoo
@@ -233,12 +230,40 @@ class TemplatesController < ApplicationController
         redirect_to templates_path
       end
     else
-      if params[:product_id]
-        redirect_to edit_brand_product_template_path(in_edit_template: @template.as_json), notice: '更新範本失敗，請確認資料是否正確！(可能使用了重複的範本名字)'
-      else
-        # redirect_to edit_template_path(in_edit_template: @template.as_json), notice: '更新範本失敗，請確認資料是否正確！(可能使用了重複的範本名字)'
-        redirect_to action: :edit, in_edit_template: @template.as_json
-      end
+      @product = Product.find(params[:product_id]) if params[:product_id]   
+      @template_name = params[:template_name]
+      @product_name_yahoo = params[:product_name_yahoo]
+      @product_name_ruten = params[:product_name_ruten]
+      @product_name_shopee = params[:product_name_shopee]
+      @editor_data = params[:editor_data]
+      @product_description = params[:product_description]
+      @available_spec = params[:available_spec]
+      @information_titles = params[:information_titles]
+      @information1_title = @information_titles[0] if @information_titles
+      @information2_title = @information_titles[1] if @information_titles
+      @information3_title = @information_titles[2] if @information_titles
+      @information4_title = @information_titles[3] if @information_titles
+      @information5_title = @information_titles[4] if @information_titles
+      @information6_title = @information_titles[5] if @information_titles
+      @information_contents = params[:information_contents].join
+      @information1_content = @information_contents[0] if @information_titles
+      @information2_content = @information_contents[1] if @information_titles
+      @information3_content = @information_contents[2] if @information_titles
+      @information4_content = @information_contents[3] if @information_titles
+      @information5_content = @information_contents[4] if @information_titles
+      @information6_content = @information_contents[5] if @information_titles
+      @warning = params[:warning]
+      @gaurantee = params[:gaurantee]
+      @gaurantee_scope = params[:gaurantee_scope]
+      @notice_for_use = params[:notice_for_use]
+      @product_declaration = params[:product_declaration]
+      @buy_more_items = params[:buy_more_items]
+      @buy_more_item_urls = params[:buy_more_item_urls]
+      @buy_more_item_image_urls = params[:buy_more_item_image_urls]
+      @image_urls = params[:image_urls]
+      @contact = params[:contacts]
+      flash[:notice] = "更範本失敗，請檢查是否使用了重複範本名字"
+      render :edit
     end
   end
 

@@ -4,9 +4,7 @@
 <% else %>
   <%= link_to "新增範本", new_template_path, class: "btn btn-success" %>
 <% end %>
-	<% flash.each do |key, value| %>
-  <%= content_tag :div, value, class: "flash #{key}", style: "color:red;" %>
-	<% end %>
+
 <table class="table">
   <thead>
     <tr>
