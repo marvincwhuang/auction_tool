@@ -3,6 +3,9 @@
 <% else %>
   <%= link_to "返回", templates_path, class: 'btn btn-info' %>
 <% end %>
+	<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash #{key}", style: "color:red;" %>
+	<% end %>
 <h2>編輯範本</h2>
 <%= render 'templates/preview' %>
 <%= render 'templates/form', template: @template %>

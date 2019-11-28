@@ -165,7 +165,10 @@ class TemplatesController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:product_id]) if params[:product_id]
+    if params[:in_edit_template]
+      @template = Template.new(params[:in_edit_template].to_unsafe_h)
+    end
+    @product = Product.find(params[:product_id]) if params[:product_id]    
     @template_name = @template.template_name
     @product_name_yahoo = @template.product_name_yahoo
     @product_name_ruten = @template.product_name_ruten
@@ -231,9 +234,10 @@ class TemplatesController < ApplicationController
       end
     else
       if params[:product_id]
-        redirect_to brand_product_templates_path, notice: '更新範本失敗，請確認資料是否正確！(可能使用了重複的範本名字)'
+        redirect_to edit_brand_product_template_path(in_edit_template: @template.as_json), notice: '更新範本失敗，請確認資料是否正確！(可能使用了重複的範本名字)'
       else
-        redirect_to templates_path, notice: '更新範本失敗，請確認資料是否正確！(可能使用了重複的範本名字)'
+        # redirect_to edit_template_path(in_edit_template: @template.as_json), notice: '更新範本失敗，請確認資料是否正確！(可能使用了重複的範本名字)'
+        redirect_to action: :edit, in_edit_template: @template.as_json
       end
     end
   end
@@ -291,16 +295,22 @@ class TemplatesController < ApplicationController
   end
 
   def get_copy_name(template)
-    name = template.template_name
+    name = template.template_name.split('_')[0]
+    postfix = template.template_name.split('_')[1] ? template.template_name.split('_')[1].to_i : 1
+    check_name(name, postfix)
+  end
 
-    copy_name = "#{name} copy_"
-    postfix = 1
-    copy_name_with_postfix = copy_name + postfix.to_s
-    if !!Template.find_by(template_name: copy_name_with_postfix)
-      postfix += 1
-      copy_name_with_postfix = copy_name + postfix.to_s
+  def check_name(name, postfix)
+    if name.include?("copy")
+      test_name = name + "_" + postfix.to_s
     else
-      copy_name_with_postfix
+      test_name = name + " copy_" + postfix.to_s 
+    end
+    if !!Template.find_by(template_name: test_name)
+      new_postfix = postfix + 1
+      check_name(name, new_postfix)
+    else
+      test_name
     end
   end
 end
