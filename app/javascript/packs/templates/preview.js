@@ -85,7 +85,7 @@ function generateYahooTemplate() {
     $('#summernote').summernote('code')
   if (productDescription.trim() !== "") {
     let content =
-      generateTitleHtml('產品介紹') +
+      generateTitleHtml('★產品介紹') +
       generateItemHtml(productDescription) +
       genrateSpaceHtml()
     html += content
@@ -93,14 +93,14 @@ function generateYahooTemplate() {
 
   if (availableSpec.trim() !== "") {
     let content =
-      generateTitleHtml('適用型號') +
+      generateTitleHtml('★適用型號') +
       generateItemHtml(availableSpec) +
       genrateSpaceHtml()
     html += content
   }
   if (informationItems.trim() !== "") {
     let content =
-      generateTitleHtml('商品說明') +
+      generateTitleHtml('★商品說明') +
       generateItemHtml(informationItems) +
       genrateSpaceHtml()
     html += content
@@ -108,7 +108,7 @@ function generateYahooTemplate() {
 
   if (buyMoreItems.length > 0) {
     let content =
-      generateTitleHtml('一定要買') +
+      generateTitleHtml('★一定要買') +
       generateProductLinkHtml(buyMoreItems, buyMoreItemUrls) +
       genrateSpaceHtml()
     html += content
@@ -116,7 +116,7 @@ function generateYahooTemplate() {
 
   if (warning.trim() !== "") {
     let content =
-      generateTitleHtml('注意事項') +
+      generateTitleHtml('★注意事項') +
       generateItemHtml(warning) +
       genrateSpaceHtml()
     html += content
@@ -124,7 +124,7 @@ function generateYahooTemplate() {
 
   if (gaurantee.trim() !== "") {
     let content =
-      generateTitleHtml('商品保固') +
+      generateTitleHtml('★商品保固') +
       generateItemHtml(gaurantee) +
       genrateSpaceHtml()
     html += content
@@ -132,7 +132,7 @@ function generateYahooTemplate() {
 
   if (gaurantee_scope.trim() !== "") {
     let content =
-      generateTitleHtml('保固範圍') +
+      generateTitleHtml('★保固範圍') +
       generateItemHtml(gaurantee_scope) +
       genrateSpaceHtml()
     html += content
@@ -140,14 +140,14 @@ function generateYahooTemplate() {
 
   if (notice_for_use.trim() !== "") {
     let content =
-      generateTitleHtml('使用須知') +
+      generateTitleHtml('★使用須知') +
       generateItemHtml(notice_for_use) +
       genrateSpaceHtml()
     html += content
   }
   if (product_declaration.trim() !== "") {
     let content =
-      generateTitleHtml('商品說明') +
+      generateTitleHtml('★商品說明') +
       generateItemHtml(product_declaration) +
       genrateSpaceHtml()
     html += content
