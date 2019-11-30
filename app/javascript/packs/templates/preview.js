@@ -82,25 +82,47 @@ function generateYahooTemplate() {
   const product_declaration = document.getElementsByName("product_declaration")[0].value
   const imageUrls = [...document.getElementsByName("image_urls[]")].map(el => el.value)
   let html = '' +
-    $('#summernote').summernote('code') +
-    generateTitleHtml('產品介紹') +
-    generateItemHtml(productDescription) +
-    genrateSpaceHtml() +
-    generateTitleHtml('適用型號') +
-    generateItemHtml(availableSpec) +
-    genrateSpaceHtml() +
-    generateTitleHtml('商品說明') +
-    generateItemHtml(informationItems) +
-    genrateSpaceHtml() +
-    // generateTitleHtml('一定要買') +
-    `<div><font color="#ff0000" size="5"><b>一定要買</b></font></div>` +
-    generateProductLinkHtml(buyMoreItems, buyMoreItemUrls) +
-    genrateSpaceHtml() +
-    generateTitleHtml('注意事項') +
-    generateItemHtml(warning) +
-    genrateSpaceHtml()
+    $('#summernote').summernote('code')
+  if (productDescription.trim() !== "") {
+    let content =
+      generateTitleHtml('產品介紹') +
+      generateItemHtml(productDescription) +
+      genrateSpaceHtml()
+    html += content
+  }
 
-  if (gaurantee !== "") {
+  if (availableSpec.trim() !== "") {
+    let content =
+      generateTitleHtml('適用型號') +
+      generateItemHtml(availableSpec) +
+      genrateSpaceHtml()
+    html += content
+  }
+  if (informationItems.trim() !== "") {
+    let content =
+      generateTitleHtml('商品說明') +
+      generateItemHtml(informationItems) +
+      genrateSpaceHtml()
+    html += content
+  }
+
+  if (buyMoreItems.length > 0) {
+    let content =
+      generateTitleHtml('一定要買') +
+      generateProductLinkHtml(buyMoreItems, buyMoreItemUrls) +
+      genrateSpaceHtml()
+    html += content
+  }
+
+  if (warning.trim() !== "") {
+    let content =
+      generateTitleHtml('注意事項') +
+      generateItemHtml(warning) +
+      genrateSpaceHtml()
+    html += content
+  }
+
+  if (gaurantee.trim() !== "") {
     let content =
       generateTitleHtml('商品保固') +
       generateItemHtml(gaurantee) +
@@ -108,7 +130,7 @@ function generateYahooTemplate() {
     html += content
   }
 
-  if (gaurantee_scope !== "") {
+  if (gaurantee_scope.trim() !== "") {
     let content =
       generateTitleHtml('保固範圍') +
       generateItemHtml(gaurantee_scope) +
@@ -116,15 +138,14 @@ function generateYahooTemplate() {
     html += content
   }
 
-  if (notice_for_use !== "") {
+  if (notice_for_use.trim() !== "") {
     let content =
       generateTitleHtml('使用須知') +
       generateItemHtml(notice_for_use) +
       genrateSpaceHtml()
     html += content
   }
-
-  if (product_declaration !== "") {
+  if (product_declaration.trim() !== "") {
     let content =
       generateTitleHtml('商品說明') +
       generateItemHtml(product_declaration) +
@@ -132,7 +153,9 @@ function generateYahooTemplate() {
     html += content
   }
 
-  html += generateImageHtml(imageUrls)
+  if (imageUrls.length > 0) {
+    html += generateImageHtml(imageUrls)
+  }
 
   return html
 }
@@ -154,24 +177,47 @@ function generateRutenTemplate() {
   const product_declaration = document.getElementsByName("product_declaration")[0].value
   const imageUrls = [...document.getElementsByName("image_urls[]")].map(el => el.value)
   let html = '' +
-    $('#summernote').summernote('code') +
-    generateTitleHtml2('產品介紹') +
-    generateItemHtml2(productDescription) +
-    genrateSpaceHtml2() +
-    generateTitleHtml2('適用型號') +
-    generateItemHtml2(availableSpec) +
-    genrateSpaceHtml2() +
-    generateTitleHtml2('商品說明') +
-    generateItemHtml2(informationItems) +
-    genrateSpaceHtml2() +
-    `<div style="text-align: center;"><span style="color: #ff0000; font-size: 18pt;" color="#ff0000"><b>★★一定要買★★</b></span></div>` +
-    generateProductLinkHtml2(buyMoreItemImageUrls, buyMoreItemUrls) +
-    genrateSpaceHtml2() +
-    generateTitleHtml2('注意事項') +
-    generateItemHtml2(warning) +
-    genrateSpaceHtml2()
+    $('#summernote').summernote('code')
+  if (productDescription.trim() !== "") {
+    let content =
+      generateTitleHtml2('產品介紹') +
+      generateItemHtml2(productDescription) +
+      genrateSpaceHtml2()
+    html += content
+  }
 
-  if (gaurantee !== "") {
+  if (availableSpec.trim() !== "") {
+    let content =
+      generateTitleHtml2('適用型號') +
+      generateItemHtml2(availableSpec) +
+      genrateSpaceHtml2()
+    html += content
+  }
+  if (informationItems.trim() !== "") {
+    let content =
+      generateTitleHtml2('商品說明') +
+      generateItemHtml2(informationItems) +
+      genrateSpaceHtml2()
+    html += content
+  }
+
+  if (buyMoreItemImageUrls.length > 0) {
+    let content =
+      `<div style="text-align: center;"><span style="color: #ff0000; font-size: 18pt;" color="#ff0000"><b>★★一定要買★★</b></span></div>` +
+      generateProductLinkHtml2(buyMoreItemImageUrls, buyMoreItemUrls) +
+      genrateSpaceHtml2()
+    html += content
+  }
+
+  if (warning.trim() !== "") {
+    let content =
+      generateTitleHtml2('注意事項') +
+      generateItemHtml2(warning) +
+      genrateSpaceHtml2()
+    html += content
+  }
+
+  if (gaurantee.trim() !== "") {
     let content =
       generateTitleHtml2('商品保固') +
       generateItemHtml2(gaurantee) +
@@ -179,7 +225,7 @@ function generateRutenTemplate() {
     html += content
   }
 
-  if (gaurantee_scope !== "") {
+  if (gaurantee_scope.trim() !== "") {
     let content =
       generateTitleHtml2('保固範圍') +
       generateItemHtml2(gaurantee_scope) +
@@ -187,15 +233,14 @@ function generateRutenTemplate() {
     html += content
   }
 
-  if (notice_for_use !== "") {
+  if (notice_for_use.trim() !== "") {
     let content =
       generateTitleHtml2('使用須知') +
       generateItemHtml2(notice_for_use) +
       genrateSpaceHtml2()
     html += content
   }
-
-  if (product_declaration !== "") {
+  if (product_declaration.trim() !== "") {
     let content =
       generateTitleHtml2('商品說明') +
       generateItemHtml2(product_declaration) +
@@ -203,7 +248,9 @@ function generateRutenTemplate() {
     html += content
   }
 
-  html += generateImageHtml2(imageUrls)
+  if (imageUrls.length > 0) {
+    html += generateImageHtml2(imageUrls)
+  }
 
   return html
 }
@@ -224,19 +271,27 @@ function generateShopeeTemplate() {
   const contact = document.getElementsByName("contact")[0].value
   const imageUrls = [...document.getElementsByName("image_urls[]")].map(el => el.value)
   let html = '' +
-    $($("#summernote").summernote("code")).text() + '\n\n' +
-    '產品介紹\n' +
-    productDescription + '\n\n' +
-    '適用型號\n' +
-    availableSpec +
-    '\n\n' +
-    '商品說明\n' +
-    informationItems +
-    '\n\n' +
-    '注意事項\n' +
-    warning +
-    '\n\n'
+    $($("#summernote").summernote("code")).text() + '\n\n'
 
+  if (warning !== "") {
+    let content = '產品介紹\n' + productDescription + '\n\n'
+    html += content
+  }
+
+  if (warning !== "") {
+    let content = '適用型號\n' + availableSpec + '\n\n'
+    html += content
+  }
+
+  if (warning !== "") {
+    let content = '商品說明\n' + informationItems + '\n\n'
+    html += content
+  }
+
+  if (warning !== "") {
+    let content = '注意事項\n' + warning + '\n\n'
+    html += content
+  }
 
   if (gaurantee !== "") {
     let content =
