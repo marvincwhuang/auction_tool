@@ -26,19 +26,28 @@ class TemplatesController < ApplicationController
     if params[:template]
       @target_template = Template.find(params[:template][:id])
       set_data_by_template(@target_template)
+      if @template.save && @product
+        redirect_to edit_brand_product_template_path(id: @template.id)
+      elsif @template.save && !@product
+        redirect_to edit_template_path(id: @template.id)
+      elsif !@template.save && @product
+        redirect_to brand_product_templates_path, notice: '建立範本失敗，請確認資料是否正確！(可能使用了重複的名字)'
+      else
+        redirect_to templates_path, notice: '建立範本失敗，請確認資料是否正確！(可能使用了重複的名字)'
+      end  
     else
+      @template = Template.new(template_params)
       set_data_by_params()
+      if @template.save && @product
+        redirect_to brand_product_templates_path(id: @template.id)
+      elsif @template.save && !@product
+        redirect_to templates_path(id: @template.id)
+      elsif !@template.save && @product
+        redirect_to brand_product_templates_path, notice: '建立範本失敗，請確認資料是否正確！(可能使用了重複的名字)'
+      else
+        redirect_to templates_path, notice: '建立範本失敗，請確認資料是否正確！(可能使用了重複的名字)'
+      end    
     end
-    
-    if @template.save && @product
-      redirect_to edit_brand_product_template_path(id: @template.id)
-    elsif @template.save && !@product
-      redirect_to edit_template_path(id: @template.id)
-    elsif !@template.save && @product
-      redirect_to brand_product_templates_path, notice: '建立範本失敗，請確認資料是否正確！(可能使用了重複的名字)'
-    else
-      redirect_to templates_path, notice: '建立範本失敗，請確認資料是否正確！(可能使用了重複的名字)'
-    end  
   end
 
   def edit
@@ -226,8 +235,8 @@ class TemplatesController < ApplicationController
 
   def set_data_by_params()
     @product = Product.find(params[:product_id]) if params[:product_id]
-    @template = Template.new(template_params)
     @template.template_name = params[:template_name]
+    @template.editor_data = params[:editor_data]
     @template.product_name_yahoo = params[:product_name_yahoo]
     @template.product_name_ruten = params[:product_name_ruten]
     @template.product_name_shopee = params[:product_name_shopee]
