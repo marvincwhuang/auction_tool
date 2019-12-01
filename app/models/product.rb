@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, :uniqueness => {:scope => :brand_id}
   belongs_to :brand
   has_many :prices, :dependent => :delete_all
   has_many :templates, :dependent => :delete_all
