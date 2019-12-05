@@ -1,11 +1,11 @@
 <% if params[:brand_id] && params[:product_id] %>
   <%= link_to "返回", brand_product_templates_path, class: 'btn btn-info' %>
   <h2>HTML預覽和源碼</h2>
-  <%= button_to "建立複本", brand_product_templates_path(template: {id: @template.id}), class: "btn btn-warning" %>
+  <%= button_to "複製這個範本", brand_product_templates_path(template: {id: @template.id}), class: "btn btn-warning" %>
 <% else %>
   <%= link_to "返回", templates_path, class: 'btn btn-info' %>
   <h2>HTML預覽和源碼</h2>
-  <%= button_to "建立複本", templates_path(template: {id: @template.id}), class: "btn btn-warning" %>
+  <%= button_to "複製這個範本", templates_path(template: {id: @template.id}), class: "btn btn-warning" %>
 <% end %>
 
 <hr>

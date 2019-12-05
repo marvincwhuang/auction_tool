@@ -26,7 +26,9 @@
         <td>  
           <div class="btn-group" role="group" style="display:flex">
           <%= link_to '編輯', edit_brand_product_template_path(@brand, @product, template), class: "btn btn-info" %>
-          <%= button_to '刪除', brand_product_template_path(@brand, @product, template), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", onclick: "return confirm('你確定要刪除嗎？')" %>
+          <% if current_user %>
+            <%= button_to '刪除', brand_product_template_path(@brand, @product, template), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", onclick: "return confirm('你確定要刪除嗎？')" %>
+          <% end %>
           </div>
         </td>
       </tr>
@@ -45,7 +47,9 @@
         <td>  
           <div class="btn-group" role="group" style="display:flex">
             <%= link_to '編輯', edit_template_path(template), class: "btn btn-info" %>
-            <%= button_to '刪除', template_path(template), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", onclick: "return confirm('你確定要刪除嗎？')" %>
+            <% if current_user %>
+              <%= button_to '刪除', template_path(template), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger", onclick: "return confirm('你確定要刪除嗎？')" %>
+            <% end %>
           </div>
         </td>
       </tr>

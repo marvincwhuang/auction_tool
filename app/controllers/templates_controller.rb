@@ -258,7 +258,7 @@ class TemplatesController < ApplicationController
     @template.contacts = params[:contact].split("\r\n") if params[:contact]
   end
 
-  def set_data_from_previous_params()
+  def set_data_from_previous_params()    
     @product = Product.find(params[:product_id]) if params[:product_id]   
     @template_name = params[:template_name]
     @product_name_yahoo = params[:product_name_yahoo]
@@ -274,7 +274,7 @@ class TemplatesController < ApplicationController
     @information4_title = @information_titles[3] if @information_titles
     @information5_title = @information_titles[4] if @information_titles
     @information6_title = @information_titles[5] if @information_titles
-    @information_contents = params[:information_contents].join
+    @information_contents = params[:information_contents]
     @information1_content = @information_contents[0] if @information_titles
     @information2_content = @information_contents[1] if @information_titles
     @information3_content = @information_contents[2] if @information_titles
@@ -290,6 +290,6 @@ class TemplatesController < ApplicationController
     @buy_more_item_urls = params[:buy_more_item_urls] || []
     @buy_more_item_image_urls = params[:buy_more_item_image_urls] || []
     @image_urls = params[:image_urls] || []
-    @contact = params[:contacts] || []
+    @contact = params[:contact] || []
   end
 end
