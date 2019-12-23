@@ -270,8 +270,14 @@ function generateShopeeTemplate() {
   const product_declaration = document.getElementsByName("product_declaration")[0].value
   const contact = document.getElementsByName("contact")[0].value
   const imageUrls = [...document.getElementsByName("image_urls[]")].map(el => el.value)
-  let html = '' +
-    $($("#summernote").summernote("code")).text() + '\n\n'
+  summerCodeTextList = $('#summernote').summernote('code').replace(/<\/?[^>]+(>|$)/g, " ").split(" ").filter(el => el.length !== 0)
+
+  let html = ''
+  summerCodeTextList.forEach((text) => {
+    content = text + '\n'
+    html += content
+  })
+  html += '\n'
 
   if (warning !== "") {
     let content = '產品介紹\n' + productDescription + '\n\n'
