@@ -48,9 +48,43 @@
         ImagesCount -= 1
       }
     })
+
+    const template_name_input = document.getElementById('template_name_input')
+    const template_name_input_count = document.getElementById('template_name_input_count');
+    const product_name_ruten_input_count = document.getElementById('product_name_ruten_input_count')
+    const product_name_yahoo_input_count = document.getElementById('product_name_yahoo_input_count')
+    const product_name_yahoo_input = document.getElementById('product_name_yahoo_input')
+    const product_name_shopee_input = document.getElementById('product_name_shopee_input')
+    const product_name_shopee_input_count = document.getElementById('product_name_shopee_input_count')
+    // init 
+    textCounter(template_name_input, template_name_input_count, 60)
+    textCounter(productNameFirst, product_name_ruten_input_count, 60)
+    textCounter(product_name_yahoo_input, product_name_yahoo_input_count, 60)
+    textCounter(product_name_shopee_input, product_name_shopee_input_count, 60)
+
+    template_name_input.addEventListener('keyup', () => {
+      textCounter(template_name_input, template_name_input_count, 60)
+    })
+    productNameFirst.addEventListener('keyup', () => {
+      textCounter(productNameFirst, product_name_ruten_input_count, 60)
+    })
+    product_name_yahoo_input.addEventListener('keyup', () => {
+      textCounter(product_name_yahoo_input, product_name_yahoo_input_count, 60)
+    })
+    product_name_shopee_input.addEventListener('keyup', () => {
+      textCounter(product_name_shopee_input, product_name_shopee_input_count, 60)
+    })
+
   }
 
-
+  function textCounter(field, field2, maxlimit) {
+    if (field.value.length > maxlimit) {
+      field.value = field.value.substring(0, maxlimit);
+      return false;
+    } else {
+      field2.value = maxlimit - field.value.length;
+    }
+  }
 
   function addBuyMoreItem(currentCount) {
     const buyMoreItemsArea = document.getElementById('buyMoreItemsArea')
