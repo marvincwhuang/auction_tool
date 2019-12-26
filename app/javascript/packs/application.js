@@ -38,6 +38,9 @@ window.onload = function () {
   const copySourceCodeYahoo = document.getElementById('copySourceCodeYahoo')
   const copySourceCodeRuten = document.getElementById('copySourceCodeRuten')
   const copySourceCodeShopee = document.getElementById('copySourceCodeShopee')
+  const copyTitleYahoo = document.getElementById('copyTitleYahoo')
+  const copyTitleRuten = document.getElementById('copyTitleRuten')
+  const copyTitleShopee = document.getElementById('copyTitleShopee')
   if (copySourceCodeYahoo) {
     copySourceCodeYahoo.addEventListener('click', () => {
       CopyTextToClipboard('sourceCodeYahoo')
@@ -51,6 +54,21 @@ window.onload = function () {
   if (copySourceCodeShopee) {
     copySourceCodeShopee.addEventListener('click', () => {
       CopyTextToClipboard('sourceCodeShopee')
+    })
+  }
+  if (copyTitleYahoo) {
+    copyTitleYahoo.addEventListener('click', () => {
+      CopyTextToClipboard('titleYahoo')
+    })
+  }
+  if (copyTitleRuten) {
+    copyTitleRuten.addEventListener('click', () => {
+      CopyTextToClipboard('titleRuten')
+    })
+  }
+  if (copyTitleShopee) {
+    copyTitleShopee.addEventListener('click', () => {
+      CopyTextToClipboard('titleShopee')
     })
   }
 

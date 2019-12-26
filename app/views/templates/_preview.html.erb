@@ -4,7 +4,8 @@
 <a href="#" id="removePreview" class="btn">取消預覽</a>
 <div id="preview">
   <div id="previewYahooDiv">
-    <h2>Yahoo HTML</h2>
+    <h2 id="titleYahoo"><%= @template.product_name_yahoo %></h2>
+    <button id="copyTitleYahoo" class="btn btn-success">複製標題</button>
     <div id="previewYahoo"></div>
     <h3>HTML源碼</h3>
     <button id="copySourceCodeYahoo" class="btn btn-success">複製HTML源碼</button>
@@ -12,7 +13,8 @@
     <div id="sourceCodeYahoo"></div>
   </div>
   <div id="previewRutenDiv">
-    <h2>露天 HTML</h2>
+    <h2 id="titleRuten"><%= @template.product_name_ruten %></h2>
+    <button id="copyTitleRuten" class="btn btn-success">複製標題</button>
     <div id="previewRuten"></div>
     <h3>HTML源碼</h3>
     <button id="copySourceCodeRuten" class="btn btn-success">複製HTML源碼</button>
@@ -21,7 +23,8 @@
     
   </div>
   <div id="previewShopeeDiv">
-    <h2>蝦皮 HTML</h2>
+    <h2 id="titleShopee"><%= @template.product_name_shopee %></h2>
+    <button id="copyTitleShopee" class="btn btn-success">複製標題</button>
     <div id="previewShopee" style="display:none"></div>
     <h3>排版</h3>
     <button id="copySourceCodeShopee" class="btn btn-success">複製文字</button>
