@@ -12,4 +12,12 @@ class PageController < ApplicationController
     @products = @current_brand ? @current_brand.products.order(:name) : Product.all.order(:name)
     @services = @current_product ? @current_product.services : []
   end
+
+  def export_data
+    puts "export!"
+    @products = Product.all
+    respond_to do |format|
+      format.xlsx
+    end
+  end
 end

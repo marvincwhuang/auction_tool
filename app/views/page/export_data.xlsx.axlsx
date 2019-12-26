@@ -1,0 +1,9 @@
+# 新增workbook檔案 
+wb = xlsx_package.workbook # 新增worksheet頁面 
+wb.add_worksheet(name: "產品資料") do |sheet| 
+  # 透過add_row先加入標題，再一列一列的填入數據 
+  sheet.add_row %w(id 露天標題 奇摩標題 蝦皮標題 露天價格 奇摩價格 蝦皮價格 ) 
+  @products.each do |product| 
+    sheet.add_row [ product.id ] 
+  end 
+end 
